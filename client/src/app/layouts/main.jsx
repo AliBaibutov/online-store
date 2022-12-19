@@ -1,79 +1,125 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import httpService from "./services/http.service";
 // import { useRoutes } from "react-router";
 // import routes from "./routes";
 // import SideBar from "./components/sideBar";
-import API from "../api";
+// import API from "../api";
+import { useSelector } from "react-redux";
+import { getCategories } from "../store/categories";
+import { getProducts } from "../store/products";
+import { getSubcategories } from "../store/subcategories";
 
 const Main = () => {
-    const [products, setProducts] = useState([]);
-    // const [categories, setCategories] = useState([]);
-    const [subcategories, setSubcategories] = useState([]);
-    useEffect(() => {
-        API.products.fetchAll().then((data) => {
-            setProducts(data);
-        });
-        // API.categories.fetchAll().then((data) => {
-        //     setCategories(data);
-        // });
-        API.subcategories.fetchAll().then((data) => {
-            setSubcategories(data);
-        });
-    }, []);
+    const products = useSelector(getProducts());
+    const subcategories = useSelector(getSubcategories());
+    const categories = useSelector(getCategories());
 
-    const getSubcategoryById = (subcategoryId) => {
-        return subcategories.filter((c) => c._id === subcategoryId);
+    // const [isMouseOver, setIsMouseOver] = useState(false);
+
+    // const toggleMenu = () => {
+    //     setIsMouseOver((prevState) => !prevState);
+    // };
+    console.log(categories);
+    console.log(subcategories);
+
+    // const getSubcategoryName = (id) => {
+    //     const subcategory = useSelector(getSubcategoriesById(id));
+    //     console.log(subcategory);
+    // };
+
+    const getSubcategoryName = (id) => {
+        const subcategory = subcategories.filter((s) => id === s.categoryId);
+        return subcategory;
     };
+
     return (
-        products.length && (
-            <div className="container-fluid">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-2 text-light bg-dark text-light">
-                            <ul className="nav flex-column me-4">
-                                <li className="nav-item">Категории</li>
-                                <li className="nav-item">Link</li>
-                                <li className="nav-item">Link</li>
-                                <li className="nav-item">Disabled</li>
-                            </ul>
+        <div className="my-container">
+            <div className="d-flex">
+                <div className="d-flex flex-column border-dark mb-2 ps-2 me-1 flex-wrap card col-3">
+                    <h4>КАТЕГОРИИ</h4>
+                    {categories.map((c) => (
+                        <div key={c._id} className="mb-2 cursor dropend">
+                            <div
+                                className="text-wrap category-hover"
+                                data-bs-toggle="dropdown"
+                            >
+                                {c.name}
+                            </div>
+                            <div className="dropdown-menu">
+                                {getSubcategoryName(c._id).map((s) => (
+                                    <a
+                                        className="dropdown-item category-hover bg-transparent text-wrap"
+                                        key={s._id}
+                                    >
+                                        {s.name}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                        <div className="d-flex flex-wrap col-10">
-                            {products.map((p) => (
-                                <div
-                                    key={p._id}
-                                    className="d-flex justify-content-end card border-dark m-1"
-                                    style={{ width: "18rem" }}
-                                >
-                                    <div className="img-wrapper d-flex flex-column justify-content-center">
-                                        <img
-                                            src={p.image}
-                                            className="mx-auto"
-                                            alt="..."
-                                        />
-                                    </div>
-                                    <div className="pt-3 px-3">
-                                        {getSubcategoryById(
-                                            p.subcategoryId
-                                        ).map((c) => (
-                                            <span key={c._id}>{c.name}</span>
-                                        ))}
-                                        <div className="product-name-wrapper d-flex align-items-start">
-                                            <h5 className="card-title">
-                                                {p.name}
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <button className="btn btn-dark mb-3 rounded-0">
-                                        В КОРЗИНУ
-                                    </button>
+                    ))}
+                </div>
+
+                <div className={"d-flex flex-wrap p-0 col-9 h-100"}>
+                    {products.map((p) => (
+                        <div
+                            key={p._id}
+                            className="d-flex justify-content-end card border-dark mb-2 mx-1"
+                            style={{ width: "18rem" }}
+                        >
+                            <div className="img-wrapper d-flex flex-column justify-content-center">
+                                <img
+                                    src={p.image}
+                                    className="mx-auto"
+                                    alt="..."
+                                />
+                            </div>
+                            <div className="pt-3 px-3">
+                                <span>
+                                    {getSubcategoryName(p.subcategoryId)}
+                                </span>
+                                <div className="product-name-wrapper d-flex align-items-start">
+                                    <h5 className="card-title">{p.name}</h5>
                                 </div>
-                            ))}
+                                <div className="d-inline-block bg-light text-dark border rounded border-dark mb-3 px-1">
+                                    <h4>{p.price} р.</h4>
+                                </div>
+                            </div>
+                            <button className="btn btn-dark mb-3 rounded-0">
+                                В КОРЗИНУ
+                            </button>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-        )
+        </div>
     );
 };
 
 export default Main;
+
+// <div className="dropdown">
+//                        <button
+//   className="btn btn-secondary dropdown-toggle"
+//         type="button"
+//         data-bs-toggle="dropdown"
+//     >
+//         Dropdown button
+//     </button>
+//     <ul className="dropdown-menu">
+//         <li>
+//             <a className="dropdown-item" href="#">
+//                 Action
+//             </a>
+//         </li>
+//         <li>
+//             <a className="dropdown-item" href="#">
+//                 Another action
+//             </a>
+//         </li>
+//         <li>
+//             <a className="dropdown-item" href="#">
+//                 Something else here
+//             </a>
+//         </li>
+//     </ul>
+// </div>

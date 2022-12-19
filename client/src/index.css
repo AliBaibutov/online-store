@@ -38,10 +38,30 @@ code {
     }
 }
 
+.my-container {
+    margin: 0 80px;
+}
+
 .img-wrapper {
     height: 260px;
 }
 
 .product-name-wrapper {
     height: 70px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.category-hover:hover {
+    font-weight: 600;
 }

@@ -13,7 +13,7 @@ const products = [
         _id: "dKSXHD-OMgSFoSi7N6ckw",
         amount: 50,
         categoryId: "tmAWIMCK6XsJ7FMzBEcUw",
-        subcategoryId: "oaeD6mOAOdx8q-jblEt7B",
+        subcategoryId: "4wtoZN9_He7NdnUeJNcup",
         companyId: "J8IGYnI6Z7o97Fmz-y5pd",
         image: "https://www.muztorg.ru/files/sized/f250x250/7qr/1x1/1vz/vok/wgs/w8o/0ws/oc8/7qr1x11vzvokwgsw8o0wsoc80.jpg",
         name: "FENDER ZUMA",
@@ -178,6 +178,14 @@ const fetchAll = () =>
         }, 2000);
     });
 
+const getProductById = (id) =>
+    new Promise((resolve) => {
+        window.setTimeout(function () {
+            resolve(products.find((p) => p._id === id));
+        }, 2000);
+    });
+
 export default {
-    fetchAll
+    fetchAll,
+    getProductById
 };

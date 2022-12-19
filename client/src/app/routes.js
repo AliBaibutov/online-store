@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router";
 // import { Navigate } from "react-router";
 import Admin from "./layouts/admin";
 import Login from "./layouts/login";
@@ -21,6 +22,10 @@ const routes = [
     {
         path: "product/:productId",
         element: <Product />
+    },
+    {
+        path: "*",
+        element: <Navigate to="/" />
     }
 ];
 
