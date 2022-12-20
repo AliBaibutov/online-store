@@ -42,10 +42,10 @@ export const loadSubcategoriesList = () => async (dispatch, getState) => {
 export const getSubcategories = () => (state) => state.subcategories.entities;
 export const getSubcategoriesLoadingStatus = () => (state) =>
     state.subcategories.isLoading;
-export const getSubcategoriesById = (id) => (state) => {
-    if (state.subcategories.entities) {
-        return state.subcategories.entities.find((s) => id === s.categoryId);
-    }
-};
+// export const getSubcategoriesById = (id) => (state) => {
+//     if (state.subcategories.entities) {
+//         return state.subcategories.entities.find((s) => id === s.categoryId);
+//     }
+// };
 
 export default subcategoriesReducer;

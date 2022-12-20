@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import httpService from "./services/http.service";
 // import { useRoutes } from "react-router";
 // import routes from "./routes";
@@ -14,6 +14,9 @@ const Main = () => {
     const subcategories = useSelector(getSubcategories());
     const categories = useSelector(getCategories());
 
+    const [productsList, setProductsList] = useState(products);
+    // const [subcategoriesList, setSubcategoriesList] = useState(subcategories);
+
     // const [isMouseOver, setIsMouseOver] = useState(false);
 
     // const toggleMenu = () => {
@@ -27,13 +30,19 @@ const Main = () => {
     //     console.log(subcategory);
     // };
 
-    const getSubcategoryName = (id) => {
-        const subcategory = subcategories.filter((s) => id === s.categoryId);
-        return subcategory;
+    const filterSubcategories = (catId) => {
+        return subcategories.filter((s) => catId === s.categoryId);
+    };
+
+    const filterProducts = (subcatId) => {
+        const filteredProducts = products.filter(
+            (p) => p.subcategoryId === subcatId
+        );
+        setProductsList(filteredProducts);
     };
 
     return (
-        <div className="my-container">
+        <div className="my-container h-100">
             <div className="d-flex">
                 <div className="d-flex flex-column border-dark mb-2 ps-2 me-1 flex-wrap card col-3">
                     <h4>КАТЕГОРИИ</h4>
@@ -46,9 +55,10 @@ const Main = () => {
                                 {c.name}
                             </div>
                             <div className="dropdown-menu">
-                                {getSubcategoryName(c._id).map((s) => (
+                                {filterSubcategories(c._id).map((s) => (
                                     <a
                                         className="dropdown-item category-hover bg-transparent text-wrap"
+                                        onClick={() => filterProducts(s._id)}
                                         key={s._id}
                                     >
                                         {s.name}
@@ -60,7 +70,7 @@ const Main = () => {
                 </div>
 
                 <div className={"d-flex flex-wrap p-0 col-9 h-100"}>
-                    {products.map((p) => (
+                    {productsList.map((p) => (
                         <div
                             key={p._id}
                             className="d-flex justify-content-end card border-dark mb-2 mx-1"
@@ -75,7 +85,7 @@ const Main = () => {
                             </div>
                             <div className="pt-3 px-3">
                                 <span>
-                                    {getSubcategoryName(p.subcategoryId)}
+                                    {filterSubcategories(p.subcategoryId)}
                                 </span>
                                 <div className="product-name-wrapper d-flex align-items-start">
                                     <h5 className="card-title">{p.name}</h5>
