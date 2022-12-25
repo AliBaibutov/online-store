@@ -39,7 +39,7 @@ export const loadProductsList = () => async (dispatch, getState) => {
 export const getProducts = () => (state) => state.products.entities;
 export const getProductsLoadingStatus = () => (state) =>
     state.products.isLoading;
-export const getProductsById = (productId) => (state) => {
+export const getProductById = (productId) => (state) => {
     if (state.products.entities) {
         return state.products.entities.find((p) => productId === p._id);
     }
