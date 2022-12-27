@@ -13,20 +13,26 @@ const ProductCard = () => {
 
     return (
         <div className="my-container d-flex justify-content-center">
-            <div className="card col-6">
-                <span>{subcategory.name}</span>
-                <h3>{product.name}</h3>
+            <div className="d-flex flex-column align-items-center col-4 shadow p-3 mb-5 bg-body-tertiary rounded me-3">
+                <span className="text-center">{subcategory.name}</span>
+                <h3 className="text-center">{product.name}</h3>
                 <img
-                    src={product.cardImg}
+                    src={product.image}
                     className="mx-auto img-card"
                     alt="..."
                 />
             </div>
-            <div className="card d-flex flex-column justify-content-center col-3">
-                <h3>{product.price}</h3>
-                <button className="btn btn-dark mb-3 rounded-0">
-                    В КОРЗИНУ
-                </button>
+            <div className="d-flex flex-column justify-content-between col-4 shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div>
+                    <h2>Описание товара</h2>
+                    <p>{product.description}</p>
+                </div>
+                <div>
+                    <h3>{product.price} р.</h3>
+                    <button className="btn btn-dark mb-3 rounded-0">
+                        В КОРЗИНУ
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -47,12 +47,6 @@ code {
     height: 260px;
 }
 
-.img-card {
-    width: 500px;
-    height: 500px;
-    object-fit: contain;
-}
-
 .img-list {
     width: 250px;
     height: 250px;
@@ -77,4 +71,50 @@ code {
 
 .category-hover:hover {
     font-weight: 600;
+}
+
+.img-card {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+
+@media (max-width: 1700px) {
+    .img-card {
+        width: 450px;
+        height: 500px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1565px) {
+    .img-card {
+        width: 400px;
+        height: 500px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1421px) {
+    .img-card {
+        width: 350px;
+        height: 500px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1317px) {
+    .img-card {
+        width: 300px;
+        height: 500px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1112px) {
+    .img-card {
+        width: 280px;
+        height: 500px;
+        object-fit: contain;
+    }
 }

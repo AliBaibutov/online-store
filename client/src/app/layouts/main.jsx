@@ -35,7 +35,7 @@ const Main = () => {
     return (
         <div className="my-container">
             <div className="d-flex">
-                <div className="d-flex border-dark pt-2 mb-2 ps-2 card col-3">
+                <div className="d-flex flex-column pt-2 mb-2 ps-2 col-3 shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h4>КАТЕГОРИИ</h4>
                     {categories.map((c) => (
                         <div key={c._id} className="mb-2 cursor dropend">
