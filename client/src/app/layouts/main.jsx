@@ -28,6 +28,10 @@ const Main = () => {
         setProductsList(filteredProducts);
     };
 
+    const getSubcategoryById = (subcatId) => {
+        return subcategories.find((s) => subcatId === s._id);
+    };
+
     const renderAllProducts = () => {
         setProductsList(products);
     };
@@ -35,7 +39,7 @@ const Main = () => {
     return (
         <div className="my-container">
             <div className="d-flex">
-                <div className="d-flex flex-column pt-2 mb-2 ps-2 col-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div className="d-flex flex-column pt-2 mb-2 ps-2 col-3 shadow p-3 bg-body-tertiary rounded">
                     <h4>КАТЕГОРИИ</h4>
                     {categories.map((c) => (
                         <div key={c._id} className="mb-2 cursor dropend">
@@ -45,10 +49,10 @@ const Main = () => {
                             >
                                 {c.name}
                             </div>
-                            <div className="dropdown-menu">
+                            <div className="dropdown-menu opacity-75">
                                 {filterSubcategories(c._id).map((s) => (
                                     <div
-                                        className="dropdown-item category-hover bg-transparent text-wrap"
+                                        className="dropdown-item category-hover bg-transparent"
                                         onClick={() => filterProducts(s._id)}
                                         key={s._id}
                                     >
@@ -66,47 +70,45 @@ const Main = () => {
                     </div>
                 </div>
 
-                <div
-                    className={
-                        "d-flex justify-content-start flex-wrap ms-1 p-0 col-9"
-                    }
-                >
+                <div className={"d-flex flex-wrap ms-1 p-0 col-9"}>
                     {productsList.map((p) => (
-                        <>
-                            <Link className="nav-link" to={`product/${p._id}`}>
-                                <div
-                                    key={p._id}
-                                    className="d-flex card border-dark mb-2 mx-1 cursor"
-                                    style={{ width: "18rem" }}
-                                >
-                                    <div className="img-wrapper d-flex flex-column justify-content-center">
-                                        <img
-                                            src={p.image}
-                                            className="mx-auto img-list"
-                                            alt="..."
-                                        />
-                                    </div>
-                                    <div className="pt-3 px-3">
-                                        <span>
-                                            {filterSubcategories(
-                                                p.subcategoryId
-                                            )}
-                                        </span>
-                                        <div className="product-name-wrapper d-flex align-items-start">
-                                            <h5 className="card-title">
-                                                {p.name}
-                                            </h5>
-                                        </div>
-                                        <div className="d-inline-block bg-light text-dark border rounded border-dark mb-3 px-1">
-                                            <h4>{p.price} р.</h4>
-                                        </div>
-                                    </div>
-                                    <button className="btn btn-dark mb-3 rounded-0">
-                                        В КОРЗИНУ
-                                    </button>
+                        <Link
+                            className="nav-link"
+                            key={p._id}
+                            to={`product/${p._id}`}
+                        >
+                            <div
+                                className="d-flex card mb-2 mx-1 cursor shadow p-3 bg-body-tertiary rounded"
+                                style={{ width: "18rem" }}
+                            >
+                                <div className="img-wrapper d-flex flex-column justify-content-center">
+                                    <img
+                                        src={p.image}
+                                        className="mx-auto img-list"
+                                        alt="..."
+                                    />
                                 </div>
-                            </Link>
-                        </>
+                                <div className="pt-3">
+                                    <div className="subcat-main">
+                                        {
+                                            getSubcategoryById(p.subcategoryId)
+                                                .name
+                                        }
+                                    </div>
+                                    <div className="product-name-wrapper d-flex align-items-start">
+                                        <h5 className="card-title">{p.name}</h5>
+                                    </div>
+                                    <div className="d-inline-block shadow-lg p-1 mb-5 bg-body text-warning rounded">
+                                        <h4 className="price-text">
+                                            {p.price} р.
+                                        </h4>
+                                    </div>
+                                </div>
+                                <button className="btn btn-dark mb-3 rounded">
+                                    В КОРЗИНУ
+                                </button>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>

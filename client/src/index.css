@@ -79,6 +79,14 @@ code {
     object-fit: contain;
 }
 
+.subcat-main {
+    height: 50px;
+}
+
+.price-text {
+    color: #191970;
+}
+
 @media (max-width: 1700px) {
     .img-card {
         width: 450px;

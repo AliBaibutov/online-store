@@ -9,13 +9,11 @@ const ProductCard = () => {
     const productId = params.productId;
     const product = useSelector(getProductById(productId));
     const subcategory = useSelector(getSubcategoryById(product.subcategoryId));
-    console.log(subcategory);
-
     return (
         <div className="my-container d-flex justify-content-center">
             <div className="d-flex flex-column align-items-center col-4 shadow p-3 mb-5 bg-body-tertiary rounded me-3">
                 <span className="text-center">{subcategory.name}</span>
-                <h3 className="text-center">{product.name}</h3>
+                <h3 className="text-center mb-4">{product.name}</h3>
                 <img
                     src={product.image}
                     className="mx-auto img-card"
