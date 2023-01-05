@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import API from "../api";
+// import API from "../api";
+import companyService from "../services/company.service";
 // import professionService from "../services/profession.service";
 
 const productsSlice = createSlice({
@@ -30,7 +31,7 @@ const { productsRequested, productsReceived, productsRequestFailed } = actions;
 export const loadProductsList = () => async (dispatch, getState) => {
     dispatch(productsRequested());
     try {
-        const content = await API.products.fetchAll();
+        const { content } = await companyService.fetchAll();
         dispatch(productsReceived(content));
     } catch (error) {
         dispatch(productsRequestFailed(error.message));

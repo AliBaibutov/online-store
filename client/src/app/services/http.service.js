@@ -10,21 +10,21 @@ const http = axios.create({
 
 http.interceptors.request.use(
     async function (config) {
-        if (configFile.isFireBase) {
-            const containSlash = /\/$/gi.test(config.url);
-            config.url =
-                (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
-            //     const expiresDate = localStorageService.getTokenExpiresDate();
-            //     const refreshToken = localStorageService.getRefreshToken();
-            //     if (refreshToken && expiresDate < Date.now()) {
-            //         const data = await authService.refresh();
-            //         localStorageService.setTokens({
-            //             refreshToken: data.refresh_token,
-            //             idToken: data.id_token,
-            //             expiresIn: data.expires_id,
-            //             localId: data.user_id
-            //         });
-        }
+        //         if (configFile.isFireBase) {
+        //             const containSlash = /\/$/gi.test(config.url);
+        //             config.url =
+        //                 (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
+        //     const expiresDate = localStorageService.getTokenExpiresDate();
+        //     const refreshToken = localStorageService.getRefreshToken();
+        //     if (refreshToken && expiresDate < Date.now()) {
+        //         const data = await authService.refresh();
+        //         localStorageService.setTokens({
+        //             refreshToken: data.refresh_token,
+        //             idToken: data.id_token,
+        //             expiresIn: data.expires_id,
+        //             localId: data.user_id
+        //         });
+        // }
         //     const accessToken = localStorageService.getAccessToken();
         //     if (accessToken) {
         //         config.params = { ...config.params, auth: accessToken };
@@ -36,18 +36,16 @@ http.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-function transformData(data) {
-    return data && !data._id
-        ? Object.keys(data).map((key) => ({
-              ...data[key]
-          }))
-        : data;
-}
+// function transformData(data) {
+//     return data && !data._id
+//         ? Object.keys(data).map((key) => ({
+//               ...data[key]
+//           }))
+//         : data;
+// }
 http.interceptors.response.use(
     (res) => {
-        if (configFile.isFireBase) {
-            res.data = { content: transformData(res.data) };
-        }
+        res.data = { content: res.data };
         return res;
     },
     function (error) {

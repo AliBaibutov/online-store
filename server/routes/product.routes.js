@@ -13,4 +13,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/addProduct", async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    const existingProduct = await Product.findOne({ name });
+
+    if (existingProduct) {
+      return res.status(400).json({
+        error: {
+          message: "EMAIL_EXISTS",
+          code: 400,
+        },
+      });
+    }
+
+    await Product.create(req.body);
+
+    res.status(201).send();
+  } catch (error) {
+    res.status(500).json({
+      message: "На сервере произошла ошибка. Попробуйте позже",
+    });
+  }
+});
+
 module.exports = router;

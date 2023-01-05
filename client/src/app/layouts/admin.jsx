@@ -1,7 +1,13 @@
 import React from "react";
+import TextAreaField from "../components/form/textAreaField";
 
 const Admin = () => {
-    return <h1>Admin</h1>;
+    return (
+        <div className="my-container">
+            <form>
+                <TextAreaField />
+            </form>
+        </div>
+    );
 };
-
 export default Admin;

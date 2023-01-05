@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import API from "../api";
-
+// import API from "../api";
+import categoryService from "../services/category.service";
 const categoriesSlice = createSlice({
     name: "categories",
     initialState: {
@@ -13,6 +13,7 @@ const categoriesSlice = createSlice({
             state.isLoading = true;
         },
         categoriesReceived: (state, action) => {
+            console.log(action);
             state.entities = action.payload;
             state.isLoading = false;
         },
@@ -30,7 +31,8 @@ const { categoriesRequested, categoriesReceived, categoriesRequestFailed } =
 export const loadCategoriesList = () => async (dispatch, getState) => {
     dispatch(categoriesRequested());
     try {
-        const content = await API.categories.fetchAll();
+        const { content } = await categoryService.fetchAll();
+        console.log(content);
         dispatch(categoriesReceived(content));
     } catch (error) {
         dispatch(categoriesRequestFailed(error.message));
@@ -41,7 +43,7 @@ export const getCategoriesLoadingStatus = () => (state) =>
     state.categories.isLoading;
 export const getCategoriesById = (categoryId) => (state) => {
     if (state.categories.entities) {
-        return state.categories.entities.find((p) => categoryId === p._id);
+        return state.categories.entities.find((c) => categoryId === c._id);
     }
 };
 

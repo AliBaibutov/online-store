@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "jquery": "^3.6.2",
-    "popper.js": "^1.16.1"
-  }
-}

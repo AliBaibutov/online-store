@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import API from "../api";
+// import API from "../api";
+import subcategoryService from "../services/subcategory.service";
 
 const subcategoriesSlice = createSlice({
     name: "subcategories",
@@ -33,7 +34,7 @@ const {
 export const loadSubcategoriesList = () => async (dispatch, getState) => {
     dispatch(subcategoriesRequested());
     try {
-        const content = await API.subcategories.fetchAll();
+        const { content } = await subcategoryService.fetchAll();
         dispatch(subcategoriesReceived(content));
     } catch (error) {
         dispatch(subcategoriesRequestFailed(error.message));

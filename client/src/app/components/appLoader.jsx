@@ -19,9 +19,9 @@ const AppLoader = ({ children }) => {
     const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(loadCategoriesList());
         dispatch(loadProductsList());
         dispatch(loadSubcategoriesList());
-        dispatch(loadCategoriesList());
     }, []);
     if (categoriesLoadingStatus) {
         return "Loading...";
