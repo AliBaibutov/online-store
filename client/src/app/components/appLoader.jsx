@@ -1,29 +1,36 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProductsList } from "../store/products";
+import { getProductsLoadingStatus, loadProductsList } from "../store/products";
 import {
     // getSubcategoriesLoadingStatus,
     loadSubcategoriesList
 } from "../store/subcategories";
 import {
-    getCategoriesLoadingStatus,
+    // getCategoriesLoadingStatus,
     loadCategoriesList
 } from "../store/categories";
+import {
+    // getCompaniesLoadingStatus,
+    loadCompaniesList
+} from "../store/companies";
 
 const AppLoader = ({ children }) => {
-    // const productsLoadingStatus = useSelector(getProductsLoadingStatus());
+    const productsLoadingStatus = useSelector(getProductsLoadingStatus());
     // const subcategoriesLoadingStatus = useSelector(
     //     getSubcategoriesLoadingStatus()
     // );
-    const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
+    // const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
+    // const companiesLoadingStatus = useSelector(getCompaniesLoadingStatus());
+
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(loadCompaniesList());
         dispatch(loadCategoriesList());
-        dispatch(loadProductsList());
         dispatch(loadSubcategoriesList());
+        dispatch(loadProductsList());
     }, []);
-    if (categoriesLoadingStatus) {
+    if (productsLoadingStatus) {
         return "Loading...";
     }
 

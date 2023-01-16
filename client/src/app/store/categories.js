@@ -13,7 +13,6 @@ const categoriesSlice = createSlice({
             state.isLoading = true;
         },
         categoriesReceived: (state, action) => {
-            console.log(action);
             state.entities = action.payload;
             state.isLoading = false;
         },
@@ -32,7 +31,6 @@ export const loadCategoriesList = () => async (dispatch, getState) => {
     dispatch(categoriesRequested());
     try {
         const { content } = await categoryService.fetchAll();
-        console.log(content);
         dispatch(categoriesReceived(content));
     } catch (error) {
         dispatch(categoriesRequestFailed(error.message));

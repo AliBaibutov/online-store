@@ -1,87 +1,87 @@
 [
   {
     "_id": "oaeD6mOAOdx8q-jblEt7B",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Гитары"
+    "name": "Гитары",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "4wtoZN9_He7NdnUeJNcup",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Укулеле"
+    "name": "Укулеле",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "43yXlUCYxF_v9vAyJFoO_",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Скрипки"
+    "name": "Скрипки",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "HlulCIifnIsEMudSN-9sd",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Альты"
+    "name": "Альты",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "CrLGR2Pkuj7lEESa1zB3B",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Виолончели"
+    "name": "Виолончели",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "ovK9iyAWWYAMxdcHf9fsW",
-    "categoryId": "tmAWIMCK6XsJ7FMzBEcUw",
-    "name": "Контрабасы"
+    "name": "Контрабасы",
+    "catName": "Струнные инструменты"
   },
   {
     "_id": "auBAfYvQCKnFeHRrxOeYJ",
-    "categoryId": "Tf8pliJyfW4mRW9zP5Kzk",
-    "name": "Синтезаторы"
+    "name": "Синтезаторы",
+    "catName": "Клавишные инструменты"
   },
   {
     "_id": "9A5c1xx-7rHmN3Ijb53il",
-    "categoryId": "Tf8pliJyfW4mRW9zP5Kzk",
-    "name": "Цифровые пианино"
+    "name": "Цифровые пианино",
+    "catName": "Клавишные инструменты"
   },
   {
     "_id": "V4fge7qVnI98aAikn78Y8",
-    "categoryId": "Tf8pliJyfW4mRW9zP5Kzk",
-    "name": "Акустические клавишные инструменты"
+    "name": "Акустические клавишные инструменты",
+    "catName": "Клавишные инструменты"
   },
   {
     "_id": "bW8zntiRgEiQ2J05ADhSf",
-    "categoryId": "b4-IGaV7zT8X66R3AXwQK",
-    "name": "Ударные установки"
+    "name": "Ударные установки",
+    "catName": "Ударные инструменты"
   },
   {
     "_id": "6eCUh5DRDAZ5w2KJqPvjN",
-    "categoryId": "b4-IGaV7zT8X66R3AXwQK",
-    "name": "Малые барабаны"
+    "name": "Малые барабаны",
+    "catName": "Ударные инструменты"
   },
   {
     "_id": "kCd2omUytLM0Bzyud2ZEt",
-    "categoryId": "b4-IGaV7zT8X66R3AXwQK",
-    "name": "Том-томы"
+    "name": "Том-томы",
+    "catName": "Ударные инструменты"
   },
   {
     "_id": "dI9__zXV2zhMLMGI9fivc",
-    "categoryId": "b4-IGaV7zT8X66R3AXwQK",
-    "name": "Бас-барабаны"
+    "name": "Бас-барабаны",
+    "catName": "Ударные инструменты"
   },
   {
     "_id": "O-GrGFDXu246g8GfFl3r8",
-    "categoryId": "pEqVOZoiySSl1a4cTOBwQ",
-    "name": "Флейты"
+    "name": "Флейты",
+    "catName": "Духовые инструменты"
   },
   {
     "_id": "QULR2reTjQjzqCLwy6nVp",
-    "categoryId": "pEqVOZoiySSl1a4cTOBwQ",
-    "name": "Саксфоны"
+    "name": "Саксфоны",
+    "catName": "Духовые инструменты"
   },
   {
     "_id": "IJIRe2bVE3nkPKRHPZDnb",
-    "categoryId": "pEqVOZoiySSl1a4cTOBwQ",
-    "name": "Кларнеты"
+    "name": "Кларнеты",
+    "catName": "Духовые инструменты"
   },
   {
     "_id": "LW58uw0WVa_2dhvoox2Xb",
-    "categoryId": "pEqVOZoiySSl1a4cTOBwQ",
-    "name": "Трубы"
+    "name": "Трубы",
+    "catName": "Духовые инструменты"
   }
 ]

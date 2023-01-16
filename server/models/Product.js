@@ -8,6 +8,7 @@ const schema = new Schema(
     companyId: { type: Schema.Types.ObjectId, ref: "Company" },
     image: { type: String },
     name: { type: String },
+    description: { type: String },
     price: Number,
   },
   {

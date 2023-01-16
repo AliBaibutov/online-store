@@ -13,7 +13,6 @@ const companiesSlice = createSlice({
             state.isLoading = true;
         },
         companiesReceived: (state, action) => {
-            console.log(action);
             state.entities = action.payload;
             state.isLoading = false;
         },
@@ -32,7 +31,6 @@ export const loadCompaniesList = () => async (dispatch, getState) => {
     dispatch(companiesRequested());
     try {
         const { content } = await companyService.fetchAll();
-        console.log(content);
         dispatch(companiesReceived(content));
     } catch (error) {
         dispatch(companiesRequestFailed(error.message));
