@@ -1,49 +1,96 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SelectField from "../components/form/selectField";
 import TextAreaField from "../components/form/textAreaField";
 import TextField from "../components/form/textField";
 import { getCategories } from "../store/categories";
 import { getCompanies } from "../store/companies";
+import {
+    createProduct,
+    getProducts
+    // getProductsLoadingStatus,
+    // loadProductsList
+    // loadProductsList
+} from "../store/products";
 import { getSubcategories } from "../store/subcategories";
 
-const Admin = () => {
-    // const dispatch = useDispatch();
-    const [data, setData] = useState({});
+const initialData = {
+    amount: "",
+    categoryId: "",
+    subcategoryId: "",
+    companyId: "",
+    image: "",
+    name: "",
+    price: "",
+    description: ""
+};
 
-    const [isLoading, setIsLoading] = useState();
+const Admin = () => {
+    const dispatch = useDispatch();
+
+    // dispatch(loadProductsList());
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const companies = useSelector(getCompanies());
     // const companiesLoading = useSelector(getCompaniesLoadingStatus());
-    const companiesList = companies.map((c) => ({
+    const companiesList = companies?.map((c) => ({
         label: c.name,
         value: c._id
     }));
 
     const categories = useSelector(getCategories());
-    const categoriesList = categories.map((c) => ({
+    const categoriesList = categories?.map((c) => ({
         label: c.name,
         value: c._id
     }));
 
     const subcategories = useSelector(getSubcategories());
-    const subcategoriesList = subcategories.map((c) => ({
+    const subcategoriesList = subcategories?.map((c) => ({
         label: c.name,
         value: c._id
     }));
+
+    const products = useSelector(getProducts());
+    // const productsLoading = useSelector(getProductsLoadingStatus());
+
+    const category = (catId) => {
+        console.log(categories.find((c) => c._id === catId));
+        return categories.find((c) => c._id === catId);
+    };
+
+    const subcategory = (subcatId) => {
+        console.log(subcategories?.find((c) => c._id === subcatId));
+        return subcategories?.find((c) => c._id === subcatId);
+    };
+
+    const company = (compId) => {
+        console.log(companies.find((c) => c._id === compId));
+        return companies.find((c) => c._id === compId);
+    };
+    console.log(products);
+    const [data, setData] = useState(initialData);
     // const [errors, setErrors] = useState({});
+    const clearForm = () => {
+        setData(initialData);
+        // setErrors({});
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(data);
         // const isValid = validate();
         // if (!isValid) return;
-        // dispatch(
-        //     updateUser({
-        //         ...data,
-        //         qualities: data.qualities.map((q) => q.value)
-        //     })
-        // );
+        dispatch(
+            createProduct({
+                ...data,
+                amount: Number(data.amount),
+                price: Number(data.price)
+            })
+        );
+        console.log(products);
+        // dispatch(loadProductsList());
+        clearForm();
     };
     // function getQualitiesListByIds(qualitiesIds) {
     //     const qualitiesArray = [];
@@ -102,7 +149,6 @@ const Admin = () => {
             ...prevState,
             [target.name]: target.value
         }));
-        console.log(data);
     };
     // const validate = () => {
     //     const errors = validator(data, validatorConfig);
@@ -110,69 +156,121 @@ const Admin = () => {
     //     return Object.keys(errors).length === 0;
     // };
     // const isValid = Object.keys(errors).length === 0;
-    return (
-        data && (
-            <div className="my-container">
+    return !isLoading ? (
+        <div className="my-container">
+            <div className="d-flex justify-content-between mt-3">
                 <div className="d-flex flex-column col-3">
-                    {!isLoading && companiesList.length > 0 ? (
-                        <form onSubmit={handleSubmit}>
-                            <TextField
-                                label="Название модели"
-                                name="name"
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                label="Количество"
-                                name="amount"
-                                onChange={handleChange}
-                            />
-                            <SelectField
-                                label="Выберите производителя"
-                                name="company"
-                                defaultOption="Choose..."
-                                options={companiesList}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                label="Ссылка на изображение инструмента"
-                                name="image"
-                                onChange={handleChange}
-                            />
-                            <SelectField
-                                label="Выберите категорию"
-                                name="category"
-                                defaultOption="Choose..."
-                                options={categoriesList}
-                                onChange={handleChange}
-                            />
-                            <SelectField
-                                label="Выберите подкатегорию"
-                                name="subcategory"
-                                defaultOption="Choose..."
-                                options={subcategoriesList}
-                                onChange={handleChange}
-                            />
-                            <TextAreaField
-                                value={data.description || ""}
-                                onChange={handleChange}
-                                name="description"
-                                label="Описание товара"
-                                // error={errors.content}
-                            />
-                            <button
-                                type="submit"
-                                // disabled={!isValid}
-                                className="btn btn-primary w-100 mx-auto"
-                            >
-                                Обновить
-                            </button>
-                        </form>
-                    ) : (
-                        "Loading..."
-                    )}
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            label="Нименование"
+                            name="name"
+                            onChange={handleChange}
+                            value={data.name}
+                        />
+                        <SelectField
+                            label="Производитель"
+                            name="companyId"
+                            defaultOption="Выберите производителя"
+                            options={companiesList ?? []}
+                            onChange={handleChange}
+                            value={data.companyId}
+                        />
+                        <SelectField
+                            label="Категория"
+                            name="categoryId"
+                            defaultOption="Выберите категорию"
+                            options={categoriesList ?? []}
+                            onChange={handleChange}
+                            value={data.categoryId}
+                        />
+                        <SelectField
+                            label="Подкатегория"
+                            name="subcategoryId"
+                            defaultOption="Выберите подкатегорию"
+                            options={subcategoriesList ?? []}
+                            onChange={handleChange}
+                            value={data.subcategoryId}
+                        />
+                        <TextField
+                            label="Ссылка на изображение инструмента"
+                            name="image"
+                            onChange={handleChange}
+                            value={data.image}
+                        />
+                        <TextAreaField
+                            value={data.description}
+                            onChange={handleChange}
+                            name="description"
+                            label="Описание товара"
+                            // error={errors.content}
+                        />
+                        <TextField
+                            label="Количество"
+                            name="amount"
+                            onChange={handleChange}
+                            value={data.amount}
+                        />
+                        <TextField
+                            label="Цена (руб)"
+                            name="price"
+                            onChange={handleChange}
+                            value={data.price}
+                        />
+                        <button
+                            type="submit"
+                            // disabled={!isValid}
+                            className="btn btn-primary w-100 mx-auto"
+                        >
+                            Обновить
+                        </button>
+                    </form>
+                </div>
+                <div className="col-8">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">Наименование</th>
+                                <th scope="col">Производитель</th>
+                                <th scope="col">Категория</th>
+                                <th scope="col">Подкатегория</th>
+                                <th scope="col">Изображение</th>
+                                <th scope="col">Описание</th>
+                                <th scope="col">Количество</th>
+                                <th scope="col">Цена</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-group-divider">
+                            {products.map((p, index) => (
+                                <tr key={p._id}>
+                                    <th scope="row">{index + 1 ?? ""}</th>
+                                    <td>{p.name}</td>
+                                    <td>
+                                        {company(p.companyId).name ?? ""}
+                                        {/* {p.companyId} */}
+                                    </td>
+                                    <td>
+                                        {category(p.categoryId).name ?? ""}
+                                        {/* {p.categoryId} */}
+                                    </td>
+                                    <td>
+                                        {subcategory(p.subcategoryId).name ??
+                                            ""}
+                                        {/* {p.subcategoryId} */}
+                                    </td>
+                                    <td>{p.image}</td>
+                                    <td>{p.description}</td>
+                                    <td>{p.amount}</td>
+                                    <td>{p.price}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        )
+        </div>
+    ) : (
+        "Loading..."
     );
 };
 export default Admin;

@@ -25,9 +25,9 @@ const AppLoader = ({ children }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadCompaniesList());
         dispatch(loadCategoriesList());
         dispatch(loadSubcategoriesList());
+        dispatch(loadCompaniesList());
         dispatch(loadProductsList());
     }, []);
     if (productsLoadingStatus) {

@@ -3,9 +3,9 @@ const { Schema, model } = require("mongoose");
 const schema = new Schema(
   {
     amount: Number,
-    categoryId: { type: Schema.Types.ObjectId, ref: "Category" },
-    subcategoryId: { type: Schema.Types.ObjectId, ref: "Subcategory" },
-    companyId: { type: Schema.Types.ObjectId, ref: "Company" },
+    categoryId: { type: String },
+    subcategoryId: { type: String },
+    companyId: { type: String },
     image: { type: String },
     name: { type: String },
     description: { type: String },

@@ -12,8 +12,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
-
-router.post("/addProduct", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name } = req.body;
 
@@ -22,7 +21,7 @@ router.post("/addProduct", async (req, res) => {
     if (existingProduct) {
       return res.status(400).json({
         error: {
-          message: "EMAIL_EXISTS",
+          message: "PRODUCT_EXISTS",
           code: 400,
         },
       });
