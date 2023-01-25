@@ -7,10 +7,8 @@ import { getCategories } from "../store/categories";
 import { getCompanies } from "../store/companies";
 import {
     createProduct,
-    getProducts
-    // getProductsLoadingStatus,
-    // loadProductsList
-    // loadProductsList
+    getProducts,
+    getProductsLoadingStatus
 } from "../store/products";
 import { getSubcategories } from "../store/subcategories";
 
@@ -27,10 +25,11 @@ const initialData = {
 
 const Admin = () => {
     const dispatch = useDispatch();
-
-    // dispatch(loadProductsList());
-
+    const [data, setData] = useState(initialData);
     const [isLoading, setIsLoading] = useState(true);
+
+    const products = useSelector(getProducts());
+    const productsLoading = useSelector(getProductsLoadingStatus());
 
     const companies = useSelector(getCompanies());
     // const companiesLoading = useSelector(getCompaniesLoadingStatus());
@@ -51,25 +50,21 @@ const Admin = () => {
         value: c._id
     }));
 
-    const products = useSelector(getProducts());
-    // const productsLoading = useSelector(getProductsLoadingStatus());
-
     const category = (catId) => {
-        console.log(categories.find((c) => c._id === catId));
+        // console.log(categories.find((c) => c._id === catId));
         return categories.find((c) => c._id === catId);
     };
 
     const subcategory = (subcatId) => {
-        console.log(subcategories?.find((c) => c._id === subcatId));
-        return subcategories?.find((c) => c._id === subcatId);
+        // console.log(subcategories?.find((c) => c._id === subcatId));
+        return subcategories.find((c) => c._id === subcatId);
     };
 
     const company = (compId) => {
-        console.log(companies.find((c) => c._id === compId));
+        // console.log(companies.find((c) => c._id === compId));
         return companies.find((c) => c._id === compId);
     };
-    console.log(products);
-    const [data, setData] = useState(initialData);
+
     // const [errors, setErrors] = useState({});
     const clearForm = () => {
         setData(initialData);
@@ -219,9 +214,9 @@ const Admin = () => {
                         <button
                             type="submit"
                             // disabled={!isValid}
-                            className="btn btn-primary w-100 mx-auto"
+                            className="btn btn-dark w-100 mx-auto"
                         >
-                            Обновить
+                            Добавить
                         </button>
                     </form>
                 </div>
@@ -240,31 +235,45 @@ const Admin = () => {
                                 <th scope="col">Цена</th>
                             </tr>
                         </thead>
-                        <tbody className="table-group-divider">
-                            {products.map((p, index) => (
-                                <tr key={p._id}>
-                                    <th scope="row">{index + 1 ?? ""}</th>
-                                    <td>{p.name}</td>
-                                    <td>
-                                        {company(p.companyId).name ?? ""}
-                                        {/* {p.companyId} */}
-                                    </td>
-                                    <td>
-                                        {category(p.categoryId).name ?? ""}
-                                        {/* {p.categoryId} */}
-                                    </td>
-                                    <td>
-                                        {subcategory(p.subcategoryId).name ??
-                                            ""}
-                                        {/* {p.subcategoryId} */}
-                                    </td>
-                                    <td>{p.image}</td>
-                                    <td>{p.description}</td>
-                                    <td>{p.amount}</td>
-                                    <td>{p.price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        {products?.length > 0 && (
+                            <tbody className="table-group-divider">
+                                {!productsLoading
+                                    ? products.map((p, index) => (
+                                          <tr key={p._id}>
+                                              <th scope="row">
+                                                  {index + 1 ?? ""}
+                                              </th>
+                                              <td>{p.name}</td>
+                                              <td className="td-company">
+                                                  {company(p.companyId)?.name ??
+                                                      ""}
+                                                  {/* {p.companyId} */}
+                                              </td>
+                                              <td>
+                                                  {category(p.categoryId)
+                                                      ?.name ?? ""}
+                                                  {/* {p.categoryId} */}
+                                              </td>
+                                              <td>
+                                                  {subcategory(p.subcategoryId)
+                                                      ?.name ?? ""}
+                                                  {/* {p.subcategoryId} */}
+                                              </td>
+                                              <td className="td-img">
+                                                  {p.image}
+                                              </td>
+                                              <td className="td-description">
+                                                  {p.description}
+                                              </td>
+                                              <td>{p.amount}</td>
+                                              <td className="td-price">
+                                                  {p.price} руб
+                                              </td>
+                                          </tr>
+                                      ))
+                                    : "Loading..."}
+                            </tbody>
+                        )}
                     </table>
                 </div>
             </div>

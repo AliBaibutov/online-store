@@ -26,10 +26,9 @@ router.post("/", async (req, res) => {
         },
       });
     }
+    const newProduct = await Product.create(req.body);
 
-    await Product.create(req.body);
-
-    res.status(201).send();
+    res.status(201).send(newProduct);
   } catch (error) {
     res.status(500).json({
       message: "На сервере произошла ошибка. Попробуйте позже",

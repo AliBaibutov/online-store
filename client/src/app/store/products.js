@@ -53,7 +53,7 @@ export const loadProductsList = () => async (dispatch, getState) => {
 export const createProduct = (payload) => async (dispatch) => {
     dispatch(addProductRequested(payload));
     try {
-        const content = await productService.create(payload);
+        const { content } = await productService.create(payload);
 
         console.log(content);
         dispatch(productCreated(content));

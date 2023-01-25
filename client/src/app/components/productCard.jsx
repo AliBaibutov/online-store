@@ -26,8 +26,8 @@ const ProductCard = () => {
                     <p>{product.description}</p>
                 </div>
                 <div>
-                    <h3>{product.price} р.</h3>
-                    <button className="btn btn-dark mb-3 rounded-0">
+                    <h3 className="price-text">{product.price} </h3>
+                    <button className="btn btn-dark mb-3 rounded">
                         В КОРЗИНУ
                     </button>
                 </div>

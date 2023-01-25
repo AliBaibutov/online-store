@@ -87,6 +87,34 @@ code {
     color: #191970;
 }
 
+.price-text:after {
+    content: "\20BD";
+}
+
+td {
+    overflow-wrap: break-word;
+}
+
+.td-img {
+    max-width: 100px;
+}
+
+.td-company {
+    max-width: 50px;
+}
+
+.td-price {
+    width: 100px;
+}
+
+.td-description {
+    width: 400px;
+}
+
+.search-string {
+    max-width: 1176px;
+}
+
 @media (max-width: 1700px) {
     .img-card {
         width: 450px;
