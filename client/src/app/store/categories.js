@@ -27,7 +27,7 @@ const { reducer: categoriesReducer, actions } = categoriesSlice;
 const { categoriesRequested, categoriesReceived, categoriesRequestFailed } =
     actions;
 
-export const loadCategoriesList = () => async (dispatch, getState) => {
+export const loadCategoriesList = () => async (dispatch) => {
     dispatch(categoriesRequested());
     try {
         const { content } = await categoryService.fetchAll();

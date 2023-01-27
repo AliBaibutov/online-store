@@ -41,7 +41,7 @@ const {
 
 const addProductRequested = createAction("products/addProductRequested");
 
-export const loadProductsList = () => async (dispatch, getState) => {
+export const loadProductsList = () => async (dispatch) => {
     dispatch(productsRequested());
     try {
         const { content } = await productService.fetchAll();

@@ -73,11 +73,15 @@ code {
     font-weight: 600;
 }
 
-.img-card {
+.card-img {
     width: 500px;
     height: 500px;
     object-fit: contain;
 }
+
+/* .card-space-between {
+    margin-right: 37.8125px;
+} */
 
 .subcat-main {
     height: 50px;
@@ -111,11 +115,15 @@ td {
     width: 400px;
 }
 
-.search-string {
+/* .search-string {
     max-width: 1176px;
+} */
+
+.sort-button {
+    border-color: #ced4da;
 }
 
-@media (max-width: 1700px) {
+/* @media (max-width: 1700px) {
     .img-card {
         width: 450px;
         height: 500px;
@@ -153,4 +161,4 @@ td {
         height: 500px;
         object-fit: contain;
     }
-}
+} */

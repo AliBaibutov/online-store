@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import _ from "lodash";
 // import httpService from "./services/http.service";
 // import { useRoutes } from "react-router";
 // import routes from "./routes";
@@ -12,6 +13,7 @@ import {
     getSubcategories,
     getSubcategoriesLoadingStatus
 } from "../store/subcategories";
+import Bag from "../components/bag";
 
 const Main = () => {
     const products = useSelector(getProducts());
@@ -25,9 +27,13 @@ const Main = () => {
 
     const [searchQuery, setSearchQuery] = useState("");
     const [productsList, setProductsList] = useState(products);
+    const [sortBy, setSortBy] = useState();
 
     const handleSearchQuery = ({ target }) => {
         setSearchQuery(target.value);
+    };
+    const handleSort = (path, order) => {
+        setSortBy({ path, order });
     };
 
     function searchUsers(data) {
@@ -43,6 +49,12 @@ const Main = () => {
     }
 
     const searchedProducts = searchUsers(productsList);
+
+    const sortedProducts = _.orderBy(
+        searchedProducts,
+        [sortBy?.path],
+        [sortBy?.order]
+    );
 
     const filterSubcategories = (catName) => {
         return subcategories.filter((s) => catName === s.catName);
@@ -63,13 +75,39 @@ const Main = () => {
         setProductsList(products);
     };
 
+    const [amountInBag, setAmountInBag] = useState(0);
+    const bagProductsList = [];
+    const handleBtnName = ({ target }) => {
+        const btnDark = "btn btn-dark mb-3 rounded";
+        const btnLight = "btn btn-success mb-3 rounded border border-secondary";
+        target.textContent =
+            target.textContent === "В КОРЗИНУ" ? "В КОРЗИНЕ" : "В КОРЗИНЕ";
+        if (target.textContent === "В КОРЗИНУ") {
+            target.className = btnDark;
+        } else {
+            target.className = btnLight;
+        }
+        const productId = target.id;
+
+        const product = products.find((p) => p._id === productId);
+        console.log(product);
+        bagProductsList.push(product);
+
+        console.log(bagProductsList);
+        // localStorage.setItem(
+        //     "bagProductsList",
+        //     JSON.stringify(bagProductsList)
+        // );
+        setAmountInBag((prevstate) => prevstate + 1);
+    };
+
     return (
         <div className="my-container">
             {!productsLoadingStatus &&
                 !subcategoriesLoadingStatus &&
                 !categoriesLoadingStatus && (
-                    <div className="d-flex">
-                        <div className="d-flex flex-column pt-2 mb-2 ps-2 col-3 shadow p-3 bg-body-tertiary rounded">
+                    <div className="d-flex justify-content-center">
+                        <div className="d-flex flex-column pt-2 mb-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
                             <h4>КАТЕГОРИИ</h4>
                             {categories.map((c) => (
                                 <div
@@ -106,23 +144,49 @@ const Main = () => {
                                 Все товары
                             </div>
                         </div>
-                        <div className="d-flex flex-column col-9">
-                            <form className="ms-2 search-string input-group mb-3">
+                        <div className="col-9 ps-3">
+                            <form className="input-group mb-2">
                                 <input
                                     className="w-100 mx-auto form-control rounded"
                                     name="searchQuery"
-                                    placeholder="Search..."
+                                    placeholder="Введите наименование товара..."
                                     type="text"
                                     aria-describedby="basic-addon1"
                                     value={searchQuery}
                                     onChange={handleSearchQuery}
                                 />
                             </form>
-                            <div className="d-flex flex-wrap ms-1 p-0">
-                                {searchedProducts.map((p) => (
+                            <div>Сортировка по:</div>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-success border sort-button btn-sm text-reset me-2"
+                                        onClick={() =>
+                                            handleSort("price", "desc")
+                                        }
+                                    >
+                                        убыванию цены
+                                        <i className="bi bi-arrow-down-square-fill ms-1"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-success border sort-button btn-sm text-reset"
+                                        onClick={() =>
+                                            handleSort("price", "asc")
+                                        }
+                                    >
+                                        возрастанию цены
+                                        <i className="bi bi-arrow-up-square-fill ms-1"></i>
+                                    </button>
+                                </div>
+                                <Bag amount={amountInBag} />
+                            </div>
+                            <div className="d-flex justify-content-between flex-wrap p-0 mt-2 gap-4">
+                                {sortedProducts.map((p) => (
                                     <div
                                         key={p._id}
-                                        className="d-flex card mb-2 mx-1 cursor shadow p-3 bg-body-tertiary rounded"
+                                        className="card cursor shadow p-3 bg-body-tertiary rounded"
                                         style={{ width: "18rem" }}
                                     >
                                         <Link
@@ -156,7 +220,11 @@ const Main = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <button className="btn btn-dark mb-3 rounded">
+                                        <button
+                                            className="btn btn-dark mb-3 rounded"
+                                            onClick={handleBtnName}
+                                            id={p._id}
+                                        >
                                             В КОРЗИНУ
                                         </button>
                                     </div>

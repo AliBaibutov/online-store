@@ -31,7 +31,7 @@ const {
     subcategoriesRequestFailed
 } = actions;
 
-export const loadSubcategoriesList = () => async (dispatch, getState) => {
+export const loadSubcategoriesList = () => async (dispatch) => {
     dispatch(subcategoriesRequested());
     try {
         const { content } = await subcategoryService.fetchAll();

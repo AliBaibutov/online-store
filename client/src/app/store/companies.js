@@ -27,7 +27,7 @@ const { reducer: companiesReducer, actions } = companiesSlice;
 const { companiesRequested, companiesReceived, companiesRequestFailed } =
     actions;
 
-export const loadCompaniesList = () => async (dispatch, getState) => {
+export const loadCompaniesList = () => async (dispatch) => {
     dispatch(companiesRequested());
     try {
         const { content } = await companyService.fetchAll();
