@@ -5,7 +5,7 @@ import _ from "lodash";
 // import routes from "./routes";
 // import SideBar from "./components/sideBar";
 // import API from "../api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories, getCategoriesLoadingStatus } from "../store/categories";
 import { getProducts, getProductsLoadingStatus } from "../store/products";
@@ -14,8 +14,10 @@ import {
     getSubcategoriesLoadingStatus
 } from "../store/subcategories";
 import Bag from "../components/bag";
+import { createBagProduct } from "../store/bagProducts";
 
 const Main = () => {
+    const dispatch = useDispatch();
     const products = useSelector(getProducts());
     const subcategories = useSelector(getSubcategories());
     const categories = useSelector(getCategories());
@@ -28,6 +30,7 @@ const Main = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [productsList, setProductsList] = useState(products);
     const [sortBy, setSortBy] = useState();
+    // const [amountInBag, setAmountInBag] = useState(0);
 
     const handleSearchQuery = ({ target }) => {
         setSearchQuery(target.value);
@@ -75,11 +78,12 @@ const Main = () => {
         setProductsList(products);
     };
 
-    const [amountInBag, setAmountInBag] = useState(0);
-    const bagProductsList = [];
     const handleBtnName = ({ target }) => {
         const btnDark = "btn btn-dark mb-3 rounded";
         const btnLight = "btn btn-success mb-3 rounded border border-secondary";
+        // target.textContent === "В КОРЗИНУ"
+        //     ? setAmountInBag((prevState) => prevState + 1)
+        //     : setAmountInBag((prevState) => prevState);
         target.textContent =
             target.textContent === "В КОРЗИНУ" ? "В КОРЗИНЕ" : "В КОРЗИНЕ";
         if (target.textContent === "В КОРЗИНУ") {
@@ -87,18 +91,27 @@ const Main = () => {
         } else {
             target.className = btnLight;
         }
+
         const productId = target.id;
 
         const product = products.find((p) => p._id === productId);
-        console.log(product);
-        bagProductsList.push(product);
 
-        console.log(bagProductsList);
+        dispatch(createBagProduct(product));
+        // console.log("product: ", product);
+        // bagProductsList.push(product);
+        // const filteredProducts = _.uniq(bagProductsList);
+
+        // console.log("filteredProducts: ", filteredProducts);
         // localStorage.setItem(
-        //     "bagProductsList",
-        //     JSON.stringify(bagProductsList)
+        //     "filteredProducts",
+        //     JSON.stringify(filteredProducts)
         // );
-        setAmountInBag((prevstate) => prevstate + 1);
+        // const bagProductsFromStorage = JSON.parse(
+        //     localStorage.getItem("filteredProducts")
+        // );
+        // console.log("bagProductsFromStorage: ", bagProductsFromStorage);
+        // const numberOfProducts = bagProductsFromStorage.length;
+        // console.log("numberOfProducts: ", numberOfProducts);
     };
 
     return (
@@ -180,7 +193,7 @@ const Main = () => {
                                         <i className="bi bi-arrow-up-square-fill ms-1"></i>
                                     </button>
                                 </div>
-                                <Bag amount={amountInBag} />
+                                <Bag />
                             </div>
                             <div className="d-flex justify-content-between flex-wrap p-0 mt-2 gap-4">
                                 {sortedProducts.map((p) => (
@@ -209,9 +222,7 @@ const Main = () => {
                                                     }
                                                 </div>
                                                 <div className="product-name-wrapper d-flex align-items-start">
-                                                    <h5 className="card-title">
-                                                        {p.name}
-                                                    </h5>
+                                                    <h5>{p.name}</h5>
                                                 </div>
                                                 <div className="d-inline-block shadow-lg p-1 mb-5 bg-body text-warning rounded">
                                                     <h4 className="price-text">

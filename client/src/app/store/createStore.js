@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import bagProductsReducer from "./bagProducts";
 import categoriesReducer from "./categories";
 import companiesReducer from "./companies";
 import productsReducer from "./products";
@@ -8,7 +9,8 @@ const rootReducer = combineReducers({
     products: productsReducer,
     companies: companiesReducer,
     subcategories: subcategoriesReducer,
-    categories: categoriesReducer
+    categories: categoriesReducer,
+    bagProducts: bagProductsReducer
 });
 
 export function createStore() {
