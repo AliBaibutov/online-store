@@ -5,9 +5,8 @@ import { getBagProducts } from "../store/bagProducts";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 
-const Bag = () => {
+const BagIcon = () => {
     const productsInBag = useSelector(getBagProducts());
-    console.log(productsInBag);
     const productsWithoutDuplicate = _.uniq(productsInBag);
     const numberOfProducts = productsWithoutDuplicate.length;
     const [amount, setAmount] = useState(0);
@@ -33,8 +32,8 @@ const Bag = () => {
     );
 };
 
-Bag.propTypes = {
+BagIcon.propTypes = {
     amount: PropTypes.number
 };
 
-export default Bag;
+export default BagIcon;

@@ -123,6 +123,14 @@ td {
     border-color: #ced4da;
 }
 
+.amount-button {
+    min-width: 30px;
+}
+
+.bag-product-name {
+    width: 300px;
+}
+
 /* @media (max-width: 1700px) {
     .img-card {
         width: 450px;

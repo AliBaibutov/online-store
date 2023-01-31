@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import _ from "lodash";
+
 // import httpService from "./services/http.service";
 // import { useRoutes } from "react-router";
 // import routes from "./routes";
 // import SideBar from "./components/sideBar";
 // import API from "../api";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories, getCategoriesLoadingStatus } from "../store/categories";
 import { getProducts, getProductsLoadingStatus } from "../store/products";
@@ -13,11 +14,10 @@ import {
     getSubcategories,
     getSubcategoriesLoadingStatus
 } from "../store/subcategories";
-import Bag from "../components/bag";
-import { createBagProduct } from "../store/bagProducts";
+import ToBagButton from "../components/toBagButton";
+import BagIcon from "../components/bagIcon";
 
 const Main = () => {
-    const dispatch = useDispatch();
     const products = useSelector(getProducts());
     const subcategories = useSelector(getSubcategories());
     const categories = useSelector(getCategories());
@@ -76,42 +76,6 @@ const Main = () => {
 
     const renderAllProducts = () => {
         setProductsList(products);
-    };
-
-    const handleBtnName = ({ target }) => {
-        const btnDark = "btn btn-dark mb-3 rounded";
-        const btnLight = "btn btn-success mb-3 rounded border border-secondary";
-        // target.textContent === "В КОРЗИНУ"
-        //     ? setAmountInBag((prevState) => prevState + 1)
-        //     : setAmountInBag((prevState) => prevState);
-        target.textContent =
-            target.textContent === "В КОРЗИНУ" ? "В КОРЗИНЕ" : "В КОРЗИНЕ";
-        if (target.textContent === "В КОРЗИНУ") {
-            target.className = btnDark;
-        } else {
-            target.className = btnLight;
-        }
-
-        const productId = target.id;
-
-        const product = products.find((p) => p._id === productId);
-
-        dispatch(createBagProduct(product));
-        // console.log("product: ", product);
-        // bagProductsList.push(product);
-        // const filteredProducts = _.uniq(bagProductsList);
-
-        // console.log("filteredProducts: ", filteredProducts);
-        // localStorage.setItem(
-        //     "filteredProducts",
-        //     JSON.stringify(filteredProducts)
-        // );
-        // const bagProductsFromStorage = JSON.parse(
-        //     localStorage.getItem("filteredProducts")
-        // );
-        // console.log("bagProductsFromStorage: ", bagProductsFromStorage);
-        // const numberOfProducts = bagProductsFromStorage.length;
-        // console.log("numberOfProducts: ", numberOfProducts);
     };
 
     return (
@@ -193,7 +157,7 @@ const Main = () => {
                                         <i className="bi bi-arrow-up-square-fill ms-1"></i>
                                     </button>
                                 </div>
-                                <Bag />
+                                <BagIcon />
                             </div>
                             <div className="d-flex justify-content-between flex-wrap p-0 mt-2 gap-4">
                                 {sortedProducts.map((p) => (
@@ -231,13 +195,10 @@ const Main = () => {
                                                 </div>
                                             </div>
                                         </Link>
-                                        <button
-                                            className="btn btn-dark mb-3 rounded"
-                                            onClick={handleBtnName}
+                                        <ToBagButton
                                             id={p._id}
-                                        >
-                                            В КОРЗИНУ
-                                        </button>
+                                            products={sortedProducts}
+                                        />
                                     </div>
                                 ))}
                             </div>
