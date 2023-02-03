@@ -30,7 +30,6 @@ const Main = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [productsList, setProductsList] = useState(products);
     const [sortBy, setSortBy] = useState();
-    // const [amountInBag, setAmountInBag] = useState(0);
 
     const handleSearchQuery = ({ target }) => {
         setSearchQuery(target.value);
@@ -39,8 +38,8 @@ const Main = () => {
         setSortBy({ path, order });
     };
 
-    function searchUsers(data) {
-        const searchedUsers = searchQuery
+    function searchProducts(data) {
+        const searchedProducts = searchQuery
             ? data.filter(
                   (user) =>
                       user.name
@@ -48,10 +47,10 @@ const Main = () => {
                           .indexOf(searchQuery.toLowerCase()) !== -1
               )
             : data;
-        return searchedUsers;
+        return searchedProducts;
     }
 
-    const searchedProducts = searchUsers(productsList);
+    const searchedProducts = searchProducts(productsList);
 
     const sortedProducts = _.orderBy(
         searchedProducts,
@@ -75,6 +74,7 @@ const Main = () => {
     };
 
     const renderAllProducts = () => {
+        setSearchQuery("");
         setProductsList(products);
     };
 
@@ -84,7 +84,7 @@ const Main = () => {
                 !subcategoriesLoadingStatus &&
                 !categoriesLoadingStatus && (
                     <div className="d-flex justify-content-center">
-                        <div className="d-flex flex-column pt-2 mb-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
+                        <div className="d-flex flex-column pt-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
                             <h4>КАТЕГОРИИ</h4>
                             {categories.map((c) => (
                                 <div
@@ -138,7 +138,7 @@ const Main = () => {
                                 <div>
                                     <button
                                         type="button"
-                                        className="btn btn-outline-success border sort-button btn-sm text-reset me-2"
+                                        className="btn btn-outline-dark border sort-button btn-sm me-2"
                                         onClick={() =>
                                             handleSort("price", "desc")
                                         }
@@ -148,7 +148,7 @@ const Main = () => {
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-outline-success border sort-button btn-sm text-reset"
+                                        className="btn btn-outline-dark border sort-button btn-sm"
                                         onClick={() =>
                                             handleSort("price", "asc")
                                         }

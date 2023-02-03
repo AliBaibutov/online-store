@@ -7,16 +7,21 @@ import { Link } from "react-router-dom";
 
 const BagIcon = () => {
     const productsInBag = useSelector(getBagProducts());
-    const productsWithoutDuplicate = _.uniq(productsInBag);
-    const numberOfProducts = productsWithoutDuplicate.length;
+    const numberOfProducts = productsInBag ? productsInBag?.length : 0;
     const [amount, setAmount] = useState(0);
+
+    const totalPrice = productsInBag
+        ? productsInBag?.reduce((acc, p) => {
+              return (acc += p.price);
+          }, 0)
+        : 0;
 
     useEffect(() => {
         setAmount(numberOfProducts);
-    }, [productsInBag]);
+    }, [numberOfProducts]);
     return (
         <div>
-            <Link className="nav-link" to={"bag"}>
+            <Link className="nav-link" to={"/bag"}>
                 <button type="button" className="btn position-relative">
                     <h3>
                         <i className="bi bi-cart3"></i>
@@ -26,7 +31,7 @@ const BagIcon = () => {
                         <span className="visually-hidden">unread messages</span>
                     </span>
                 </button>
-                <b>0 р.</b>
+                <b>{totalPrice} р.</b>
             </Link>
         </div>
     );

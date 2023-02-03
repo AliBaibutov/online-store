@@ -16,17 +16,32 @@ const bagProductsSlice = createSlice({
                 state.entities = [];
             }
             state.entities.push(action.payload);
+        },
+        bagProductRemoved: (state, action) => {
+            if (!Array.isArray(state.entities)) {
+                state.entities = [];
+            }
+            state.entities = state.entities.filter(
+                (p) => p._id !== action.payload
+            );
         }
     }
 });
 
 const { reducer: bagProductsReducer, actions } = bagProductsSlice;
-const { bagProductCreated } = actions;
+const { bagProductCreated, bagProductRemoved } = actions;
 
 export const createBagProduct = (payload) => (dispatch) => {
+    console.log(payload);
     dispatch(bagProductCreated(payload));
 };
+
+export const removeBagProduct = (productId) => (dispatch) => {
+    dispatch(bagProductRemoved(productId));
+};
+
 export const getBagProducts = () => (state) => state.bagProducts.entities;
+
 // export const getProductsLoadingStatus = () => (state) =>
 //     state.products.isLoading;
 // export const getProductById = (productId) => (state) => {

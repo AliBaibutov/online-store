@@ -33,9 +33,6 @@ const ProductCard = () => {
                         <div>
                             <h3 className="price-text">{product.price} </h3>
                             <ToBagButton id={productId} products={product} />
-                            {/* <button className="btn btn-dark mb-3 rounded">
-                                В КОРЗИНУ
-                            </button> */}
                         </div>
                     </div>
                 </div>

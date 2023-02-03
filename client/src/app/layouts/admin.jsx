@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SelectField from "../components/form/selectField";
 import TextAreaField from "../components/form/textAreaField";
 import TextField from "../components/form/textField";
+import Loader from "../components/loader";
 import { getCategories } from "../store/categories";
 import { getCompanies } from "../store/companies";
 import {
@@ -237,41 +238,43 @@ const Admin = () => {
                         </thead>
                         {products?.length > 0 && (
                             <tbody className="table-group-divider">
-                                {!productsLoading
-                                    ? products.map((p, index) => (
-                                          <tr key={p._id}>
-                                              <th scope="row">
-                                                  {index + 1 ?? ""}
-                                              </th>
-                                              <td>{p.name}</td>
-                                              <td className="td-company">
-                                                  {company(p.companyId)?.name ??
-                                                      ""}
-                                                  {/* {p.companyId} */}
-                                              </td>
-                                              <td>
-                                                  {category(p.categoryId)
-                                                      ?.name ?? ""}
-                                                  {/* {p.categoryId} */}
-                                              </td>
-                                              <td>
-                                                  {subcategory(p.subcategoryId)
-                                                      ?.name ?? ""}
-                                                  {/* {p.subcategoryId} */}
-                                              </td>
-                                              <td className="td-img">
-                                                  {p.image}
-                                              </td>
-                                              <td className="td-description">
-                                                  {p.description}
-                                              </td>
-                                              <td>{p.amount}</td>
-                                              <td className="td-price">
-                                                  {p.price} руб
-                                              </td>
-                                          </tr>
-                                      ))
-                                    : "Loading..."}
+                                {!productsLoading ? (
+                                    products.map((p, index) => (
+                                        <tr key={p._id}>
+                                            <th scope="row">
+                                                {index + 1 ?? ""}
+                                            </th>
+                                            <td>{p.name}</td>
+                                            <td className="td-company">
+                                                {company(p.companyId)?.name ??
+                                                    ""}
+                                                {/* {p.companyId} */}
+                                            </td>
+                                            <td>
+                                                {category(p.categoryId)?.name ??
+                                                    ""}
+                                                {/* {p.categoryId} */}
+                                            </td>
+                                            <td>
+                                                {subcategory(p.subcategoryId)
+                                                    ?.name ?? ""}
+                                                {/* {p.subcategoryId} */}
+                                            </td>
+                                            <td className="td-img">
+                                                {p.image}
+                                            </td>
+                                            <td className="td-description">
+                                                {p.description}
+                                            </td>
+                                            <td>{p.amount}</td>
+                                            <td className="td-price">
+                                                {p.price} руб
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <Loader />
+                                )}
                             </tbody>
                         )}
                     </table>
@@ -279,7 +282,7 @@ const Admin = () => {
             </div>
         </div>
     ) : (
-        "Loading..."
+        <Loader />
     );
 };
 export default Admin;

@@ -43,6 +43,11 @@ code {
     min-height: 100vh;
 }
 
+.header-container {
+    margin: 0 80px;
+    padding: 20px 0;
+}
+
 .img-wrapper {
     height: 260px;
 }
@@ -59,10 +64,6 @@ code {
 
 .cursor {
     cursor: pointer;
-}
-
-.vh-100 {
-    height: 100vh;
 }
 
 .h-100 {

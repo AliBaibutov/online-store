@@ -8,7 +8,6 @@ const ToBagButton = ({ id, products }) => {
     const dispatch = useDispatch();
 
     const productsInBag = useSelector(getBagProducts());
-    const productsWithoutDuplicate = _.uniq(productsInBag);
 
     const handleBtnName = ({ target }) => {
         const btnDark = "btn btn-dark mb-3 rounded";
@@ -30,12 +29,13 @@ const ToBagButton = ({ id, products }) => {
         dispatch(createBagProduct(product));
     };
 
-    return productsWithoutDuplicate.length > 0 ? (
-        productsWithoutDuplicate.find((bp) => bp._id === id) ? (
+    return productsInBag?.length > 0 ? (
+        productsInBag.find((bp) => bp._id === id) ? (
             <button
                 className="btn btn-success mb-3 rounded border border-secondary"
                 onClick={handleBtnName}
                 id={id}
+                disabled
             >
                 В КОРЗИНЕ
             </button>
