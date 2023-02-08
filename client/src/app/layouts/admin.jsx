@@ -8,8 +8,11 @@ import { getCategories } from "../store/categories";
 import { getCompanies } from "../store/companies";
 import {
     createProduct,
+    // getProductById,
     getProducts,
-    getProductsLoadingStatus
+    getProductsLoadingStatus,
+    removeProduct,
+    updateProduct
 } from "../store/products";
 import { getSubcategories } from "../store/subcategories";
 
@@ -72,22 +75,52 @@ const Admin = () => {
         // setErrors({});
     };
 
+    const getEditableProduct = (id) => {
+        const foundProduct = products.find((p) => p._id === id);
+        return foundProduct;
+    };
+
+    const handleRemoveProduct = (id) => {
+        dispatch(removeProduct(id));
+    };
+    // const editableProduct = useSelector(
+    //     getProductById("63ce74e86c53e908e4e8d697")
+    // );
+    // console.log(editableProduct);
+    const handleEditProduct = (id) => {
+        const editableProduct = getEditableProduct(id);
+        localStorage.setItem("productId", id);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "instant"
+        });
+        setData(editableProduct);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
+        const productId = localStorage.getItem("productId");
         // const isValid = validate();
         // if (!isValid) return;
-        dispatch(
-            createProduct({
-                ...data,
-                amount: Number(data.amount),
-                price: Number(data.price)
-            })
-        );
-        console.log(products);
-        // dispatch(loadProductsList());
+        productId
+            ? dispatch(
+                  updateProduct({
+                      ...data,
+                      amount: Number(data.amount),
+                      price: Number(data.price)
+                  })
+              )
+            : dispatch(
+                  createProduct({
+                      ...data,
+                      amount: Number(data.amount),
+                      price: Number(data.price)
+                  })
+              );
         clearForm();
     };
+
     // function getQualitiesListByIds(qualitiesIds) {
     //     const qualitiesArray = [];
     //     for (const qualId of qualitiesIds) {
@@ -217,7 +250,7 @@ const Admin = () => {
                             // disabled={!isValid}
                             className="btn btn-dark w-100 mx-auto"
                         >
-                            Добавить
+                            Добавить / Сохранить изменения
                         </button>
                     </form>
                 </div>
@@ -269,6 +302,28 @@ const Admin = () => {
                                             <td>{p.amount}</td>
                                             <td className="td-price">
                                                 {p.price} руб
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-outline-success btn-sm"
+                                                    onClick={() =>
+                                                        handleEditProduct(p._id)
+                                                    }
+                                                >
+                                                    <i className="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-outline-danger btn-sm"
+                                                    onClick={() =>
+                                                        handleRemoveProduct(
+                                                            p._id
+                                                        )
+                                                    }
+                                                >
+                                                    <i className="bi bi-trash-fill"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     ))

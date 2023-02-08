@@ -1,9 +1,12 @@
 import _ from "lodash";
-import React, { useState } from "react";
+import React from "react";
+// import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    createBagProduct,
+    decrementTotalValue,
+    // createBagProduct,
     getBagProducts,
+    incrementTotalValue,
     removeBagProduct
 } from "../store/bagProducts";
 import BagIcon from "./bagIcon";
@@ -11,24 +14,28 @@ import BagIcon from "./bagIcon";
 const BagPage = () => {
     const dispatch = useDispatch();
     const productsInBag = useSelector(getBagProducts());
-    const [amount, setAmount] = useState(1);
+    // const [amount, setAmount] = useState(1);
 
     const handleRemove = (id) => {
         dispatch(removeBagProduct(id));
     };
 
-    const handleCreateProduct = (id) => {
-        const product = productsInBag.find((p) => p._id === id);
-        const currentProductArr = productsInBag.reduce((acc, p) => {
-            if (p._id === id) {
-                acc.push(p);
-            }
-            return acc;
-        }, []);
-        const amountOfCurrentProduct = currentProductArr.length;
-        setAmount(amountOfCurrentProduct);
-        dispatch(createBagProduct(product));
-    };
+    // const handleCreateProduct = (id) => {
+    //     const product = productsInBag.find((p) => p._id === id);
+    //     // const currentProductArr = productsInBag.reduce(
+    //     //     (acc, p) => {
+    //     //         if (p._id === id) {
+    //     //             acc.push(p);
+    //     //         }
+    //     //         console.log(acc);
+    //     //         return acc;
+    //     //     },
+    //     //     [product]
+    //     // );
+    //     // const amountOfCurrentProduct = currentProductArr.length;
+    //     // setAmount(amountOfCurrentProduct);
+    //     dispatch(createBagProduct(product));
+    // };
 
     return (
         <div className="my-container">
@@ -52,20 +59,30 @@ const BagPage = () => {
                             <div className="d-flex flex-column align-items-start bag-product-name">
                                 <h5>{p.name}</h5>
                             </div>
-                            <div>
-                                <button className="btn btn-outline-dark btn-sm m-2 amount-button">
+                            <div className="mt-15px">
+                                <button
+                                    className="btn btn-outline-dark btn m-2 amount-button"
+                                    onClick={() =>
+                                        dispatch(decrementTotalValue(p._id))
+                                    }
+                                >
                                     -
                                 </button>
-                                {amount}
+                                {p.total}
                                 <button
-                                    className="btn btn-outline-dark btn-sm m-2 amount-button"
-                                    onClick={() => handleCreateProduct(p._id)}
+                                    className="btn btn-outline-dark btn m-2 amount-button"
+                                    onClick={() =>
+                                        dispatch(incrementTotalValue(p._id))
+                                    }
                                 >
                                     +
                                 </button>
+                                <div className="text-secondary text-center">
+                                    {p.price} р. за шт.
+                                </div>
                             </div>
-                            <div>
-                                <h5>{p.price} р.</h5>
+                            <div className="bag-product-price d-flex justify-content-center">
+                                <h5>{p.price * p.total} р.</h5>
                             </div>
                             <div>
                                 <button

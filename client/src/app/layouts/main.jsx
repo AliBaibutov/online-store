@@ -159,18 +159,18 @@ const Main = () => {
                                 </div>
                                 <BagIcon />
                             </div>
-                            <div className="d-flex justify-content-between flex-wrap p-0 mt-2 gap-4">
+                            <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
                                 {sortedProducts.map((p) => (
                                     <div
                                         key={p._id}
-                                        className="card cursor shadow p-3 bg-body-tertiary rounded"
-                                        style={{ width: "18rem" }}
+                                        className="d-flex flex-shrink-1 card cursor shadow p-3 bg-body-tertiary rounded card-width"
+                                        // style={{ width: "18rem" }}
                                     >
                                         <Link
                                             className="nav-link"
                                             to={`product/${p._id}`}
                                         >
-                                            <div className="img-wrapper d-flex flex-column justify-content-center">
+                                            <div className="img-wrapper d-flex align-items-center justify-content-center">
                                                 <img
                                                     src={p.image}
                                                     className="mx-auto img-list"

@@ -26,7 +26,7 @@ const ToBagButton = ({ id, products }) => {
             ? products.find((p) => p._id === productId)
             : products;
 
-        dispatch(createBagProduct(product));
+        dispatch(createBagProduct({ ...product, total: 1 }));
     };
 
     return productsInBag?.length > 0 ? (

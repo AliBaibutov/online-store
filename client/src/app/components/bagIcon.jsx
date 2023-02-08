@@ -12,7 +12,7 @@ const BagIcon = () => {
 
     const totalPrice = productsInBag
         ? productsInBag?.reduce((acc, p) => {
-              return (acc += p.price);
+              return (acc += p.price * p.total);
           }, 0)
         : 0;
 

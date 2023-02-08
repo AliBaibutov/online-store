@@ -27,6 +27,16 @@ const productsSlice = createSlice({
                 state.entities = [];
             }
             state.entities.push(action.payload);
+        },
+        productUpdated: (state, action) => {
+            state.entities[
+                state.entities.findIndex((p) => p._id === action.payload._id)
+            ] = action.payload;
+        },
+        productRemoved: (state, action) => {
+            state.entities = state.entities.filter(
+                (p) => p._id !== action.payload
+            );
         }
     }
 });
@@ -36,10 +46,15 @@ const {
     productsRequested,
     productsReceived,
     productsRequestFailed,
-    productCreated
+    productCreated,
+    productUpdated,
+    productRemoved
 } = actions;
 
 const addProductRequested = createAction("products/addProductRequested");
+const removeProductRequested = createAction("products/removeProductRequested");
+const productUpdateRequested = createAction("products/productUpdateRequested");
+const productUpdateFailed = createAction("products/productUpdateFailed");
 
 export const loadProductsList = () => async (dispatch) => {
     dispatch(productsRequested());
@@ -50,20 +65,46 @@ export const loadProductsList = () => async (dispatch) => {
         dispatch(productsRequestFailed(error.message));
     }
 };
+
 export const createProduct = (payload) => async (dispatch) => {
     dispatch(addProductRequested(payload));
     try {
         const { content } = await productService.create(payload);
 
-        console.log(content);
         dispatch(productCreated(content));
     } catch (error) {
         dispatch(productsRequestFailed(error.message));
     }
 };
+
+export const updateProduct = (payload) => async (dispatch) => {
+    dispatch(productUpdateRequested());
+    try {
+        const { content } = await productService.update(payload);
+        localStorage.setItem("productId", "");
+        dispatch(productUpdated(content));
+    } catch (error) {
+        dispatch(productUpdateFailed(error.message));
+    }
+};
+
+export const removeProduct = (productId) => async (dispatch) => {
+    dispatch(removeProductRequested());
+    try {
+        const { content } = await productService.remove(productId);
+        if (!content) {
+            dispatch(productRemoved(productId));
+        }
+    } catch (error) {
+        dispatch(productsRequestFailed(error.message));
+    }
+};
+
 export const getProducts = () => (state) => state.products.entities;
+
 export const getProductsLoadingStatus = () => (state) =>
     state.products.isLoading;
+
 export const getProductById = (productId) => (state) => {
     if (state.products.entities) {
         return state.products.entities.find((p) => productId === p._id);
