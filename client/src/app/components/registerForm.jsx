@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { signUp } from "../store/users";
+import { useDispatch } from "react-redux";
 import { validator } from "../utils/validator";
 import TextField from "./form/textField";
-// import { signUp } from "../../store/users";
+// import PropTypes from "prop-types";
 
 const RegisterForm = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [data, setData] = useState({
         name: "",
         surname: "",
@@ -13,6 +14,8 @@ const RegisterForm = () => {
         password: "",
         isAdmin: false
     });
+    const regModalRef = useRef();
+
     const [errors, setErrors] = useState({});
 
     const handleChange = (target) => {
@@ -73,57 +76,93 @@ const RegisterForm = () => {
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
+
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        console.log(data);
-        // const newData = {
-        //     ...data,
-        //     qualities: data.qualities.map((q) => q.value)
-        // };
-        // dispatch(signUp(newData));
+        const newData = {
+            ...data
+        };
+        // regModalRef.current.style.cssText = "display: none";
+        // document.body.removeAttribute("style");
+        // document.body.removeAttribute("class");
+        // const modalBackdrop = document.getElementsByClassName(
+        //     "modal-backdrop fade show"
+        // );
+        // modalBackdrop[0].removeAttribute("class");
+
+        dispatch(signUp(newData));
     };
     return (
-        <form onSubmit={handleSubmit}>
-            <TextField
-                label="Имя"
-                name="name"
-                value={data.name}
-                onChange={handleChange}
-                error={errors.name}
-            />
-            <TextField
-                label="Фамилия"
-                name="surname"
-                value={data.surname}
-                onChange={handleChange}
-                error={errors.surname}
-            />
-            <TextField
-                label="Электронная почта"
-                name="email"
-                value={data.email}
-                onChange={handleChange}
-                error={errors.email}
-            />
-            <TextField
-                label="Пароль"
-                type="password"
-                name="password"
-                value={data.password}
-                onChange={handleChange}
-                error={errors.password}
-            />
-            <button
-                type="submit"
-                disabled={!isValid}
-                className="btn btn-dark opacity-100 text-white w-100 mx-auto"
-            >
-                Зарегистрироваться
-            </button>
-        </form>
+        <div
+            className="modal fade"
+            id="registerModal"
+            tabIndex="-1"
+            aria-labelledby="registerModalLabel"
+            aria-hidden="true"
+            ref={regModalRef}
+        >
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h1
+                            className="modal-title fs-5"
+                            id="registerModalLabel"
+                        >
+                            Регистрация
+                        </h1>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div className="modal-body">
+                        <form onSubmit={handleSubmit}>
+                            <TextField
+                                label="Имя"
+                                name="name"
+                                value={data.name}
+                                onChange={handleChange}
+                                error={errors.name}
+                            />
+                            <TextField
+                                label="Фамилия"
+                                name="surname"
+                                value={data.surname || ""}
+                                onChange={handleChange}
+                                error={errors.surname}
+                            />
+                            <TextField
+                                label="Электронная почта"
+                                name="email"
+                                value={data.email}
+                                onChange={handleChange}
+                                error={errors.email}
+                            />
+                            <TextField
+                                label="Пароль"
+                                type="password"
+                                name="password"
+                                value={data.password}
+                                onChange={handleChange}
+                                error={errors.password}
+                            />
+                            <button
+                                type="submit"
+                                disabled={!isValid}
+                                className="btn btn-dark opacity-100 text-white w-100 mx-auto"
+                            >
+                                Зарегистрироваться
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

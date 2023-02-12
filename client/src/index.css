@@ -53,6 +53,7 @@ code {
 }
 
 .img-list {
+    width: 250px;
     max-width: 250px;
     max-height: 250px;
     object-fit: contain;
@@ -160,6 +161,16 @@ td {
 
 .amount-button {
     min-width: 38px;
+}
+
+.link {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul,
+li {
+    list-style: none;
 }
 
 .bag-product-name {

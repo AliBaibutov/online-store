@@ -81,7 +81,7 @@ export const updateProduct = (payload) => async (dispatch) => {
     dispatch(productUpdateRequested());
     try {
         const { content } = await productService.update(payload);
-        localStorage.setItem("productId", "");
+        localStorage.removeItem("productId");
         dispatch(productUpdated(content));
     } catch (error) {
         dispatch(productUpdateFailed(error.message));

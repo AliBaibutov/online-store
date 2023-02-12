@@ -66,7 +66,7 @@ const Admin = () => {
 
     const company = (compId) => {
         // console.log(companies.find((c) => c._id === compId));
-        return companies.find((c) => c._id === compId);
+        return companies?.find((c) => c._id === compId);
     };
 
     // const [errors, setErrors] = useState({});

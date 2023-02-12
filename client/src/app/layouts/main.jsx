@@ -16,6 +16,8 @@ import {
 } from "../store/subcategories";
 import ToBagButton from "../components/toBagButton";
 import BagIcon from "../components/bagIcon";
+import Pagination from "../components/pagination";
+import { paginate } from "../utils/paginate";
 
 const Main = () => {
     const products = useSelector(getProducts());
@@ -58,6 +60,27 @@ const Main = () => {
         [sortBy?.order]
     );
 
+    const count = sortedProducts.length;
+    const pageSize = 8;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handlePageChange = (pageIndex) => {
+        setCurrentPage(pageIndex);
+    };
+
+    const handleIncrementPage = (pagesLength) => {
+        setCurrentPage((prevState) =>
+            prevState < pagesLength ? prevState + 1 : prevState
+        );
+    };
+    const handleDecrementPage = () => {
+        setCurrentPage((prevState) =>
+            prevState > 1 ? prevState - 1 : prevState
+        );
+    };
+
+    const productCrop = paginate(sortedProducts, currentPage, pageSize);
+
     const filterSubcategories = (catName) => {
         return subcategories.filter((s) => catName === s.catName);
     };
@@ -83,127 +106,139 @@ const Main = () => {
             {!productsLoadingStatus &&
                 !subcategoriesLoadingStatus &&
                 !categoriesLoadingStatus && (
-                    <div className="d-flex justify-content-center">
-                        <div className="d-flex flex-column pt-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
-                            <h4>КАТЕГОРИИ</h4>
-                            {categories.map((c) => (
-                                <div
-                                    key={c._id}
-                                    className="mb-2 cursor dropend"
-                                >
+                    <>
+                        <div className="d-flex justify-content-center">
+                            <div className="d-flex flex-column pt-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
+                                <h4>КАТЕГОРИИ</h4>
+                                {categories.map((c) => (
                                     <div
-                                        className="text-wrap category-hover"
-                                        data-bs-toggle="dropdown"
+                                        key={c._id}
+                                        className="mb-2 cursor dropend"
                                     >
-                                        {c.name}
-                                    </div>
-                                    <div className="dropdown-menu opacity-75">
-                                        {filterSubcategories(c.name).map(
-                                            (s) => (
-                                                <div
-                                                    className="dropdown-item category-hover bg-transparent"
-                                                    onClick={() =>
-                                                        filterProducts(s._id)
-                                                    }
-                                                    key={s._id}
-                                                >
-                                                    {s.name}
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                            <div
-                                className="category-hover bg-transparent cursor text-wrap"
-                                onClick={renderAllProducts}
-                            >
-                                Все товары
-                            </div>
-                        </div>
-                        <div className="col-9 ps-3">
-                            <form className="input-group mb-2">
-                                <input
-                                    className="w-100 mx-auto form-control rounded"
-                                    name="searchQuery"
-                                    placeholder="Введите наименование товара..."
-                                    type="text"
-                                    aria-describedby="basic-addon1"
-                                    value={searchQuery}
-                                    onChange={handleSearchQuery}
-                                />
-                            </form>
-                            <div>Сортировка по:</div>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-dark border sort-button btn-sm me-2"
-                                        onClick={() =>
-                                            handleSort("price", "desc")
-                                        }
-                                    >
-                                        убыванию цены
-                                        <i className="bi bi-arrow-down-square-fill ms-1"></i>
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-dark border sort-button btn-sm"
-                                        onClick={() =>
-                                            handleSort("price", "asc")
-                                        }
-                                    >
-                                        возрастанию цены
-                                        <i className="bi bi-arrow-up-square-fill ms-1"></i>
-                                    </button>
-                                </div>
-                                <BagIcon />
-                            </div>
-                            <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
-                                {sortedProducts.map((p) => (
-                                    <div
-                                        key={p._id}
-                                        className="d-flex flex-shrink-1 card cursor shadow p-3 bg-body-tertiary rounded card-width"
-                                        // style={{ width: "18rem" }}
-                                    >
-                                        <Link
-                                            className="nav-link"
-                                            to={`product/${p._id}`}
+                                        <div
+                                            className="text-wrap category-hover"
+                                            data-bs-toggle="dropdown"
                                         >
-                                            <div className="img-wrapper d-flex align-items-center justify-content-center">
-                                                <img
-                                                    src={p.image}
-                                                    className="mx-auto img-list"
-                                                    alt="..."
-                                                />
-                                            </div>
-                                            <div className="pt-3">
-                                                <div className="subcat-main">
-                                                    {
-                                                        getSubcategoryById(
-                                                            p.subcategoryId
-                                                        ).name
-                                                    }
-                                                </div>
-                                                <div className="product-name-wrapper d-flex align-items-start">
-                                                    <h5>{p.name}</h5>
-                                                </div>
-                                                <div className="d-inline-block shadow-lg p-1 mb-5 bg-body text-warning rounded">
-                                                    <h4 className="price-text">
-                                                        {p.price}{" "}
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                        <ToBagButton
-                                            id={p._id}
-                                            products={sortedProducts}
-                                        />
+                                            {c.name}
+                                        </div>
+                                        <div className="dropdown-menu opacity-75">
+                                            {filterSubcategories(c.name).map(
+                                                (s) => (
+                                                    <div
+                                                        className="dropdown-item category-hover bg-transparent"
+                                                        onClick={() =>
+                                                            filterProducts(
+                                                                s._id
+                                                            )
+                                                        }
+                                                        key={s._id}
+                                                    >
+                                                        {s.name}
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
                                     </div>
                                 ))}
+                                <div
+                                    className="category-hover bg-transparent cursor text-wrap"
+                                    onClick={renderAllProducts}
+                                >
+                                    Все товары
+                                </div>
+                            </div>
+                            <div className="col-9 ps-3">
+                                <form className="input-group mb-2">
+                                    <input
+                                        className="w-100 mx-auto form-control rounded"
+                                        name="searchQuery"
+                                        placeholder="Введите наименование товара..."
+                                        type="text"
+                                        aria-describedby="basic-addon1"
+                                        value={searchQuery}
+                                        onChange={handleSearchQuery}
+                                    />
+                                </form>
+                                <div>Сортировка по:</div>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-dark border sort-button btn-sm me-2"
+                                            onClick={() =>
+                                                handleSort("price", "desc")
+                                            }
+                                        >
+                                            убыванию цены
+                                            <i className="bi bi-arrow-down-square-fill ms-1"></i>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-dark border sort-button btn-sm"
+                                            onClick={() =>
+                                                handleSort("price", "asc")
+                                            }
+                                        >
+                                            возрастанию цены
+                                            <i className="bi bi-arrow-up-square-fill ms-1"></i>
+                                        </button>
+                                    </div>
+                                    <BagIcon />
+                                </div>
+                                <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
+                                    {productCrop.map((p) => (
+                                        <div
+                                            key={p._id}
+                                            className="d-flex flex-shrink-1 card cursor shadow p-3 bg-body-tertiary rounded card-width"
+                                            // style={{ width: "18rem" }}
+                                        >
+                                            <Link
+                                                className="nav-link"
+                                                to={`product/${p._id}`}
+                                            >
+                                                <div className="img-wrapper d-flex align-items-center justify-content-center">
+                                                    <img
+                                                        src={p.image}
+                                                        className="mx-auto img-list"
+                                                        alt="..."
+                                                    />
+                                                </div>
+                                                <div className="pt-3">
+                                                    <div className="subcat-main">
+                                                        {
+                                                            getSubcategoryById(
+                                                                p.subcategoryId
+                                                            ).name
+                                                        }
+                                                    </div>
+                                                    <div className="product-name-wrapper d-flex align-items-start">
+                                                        <h5>{p.name}</h5>
+                                                    </div>
+                                                    <div className="d-inline-block shadow-lg p-1 mb-5 bg-body text-warning rounded">
+                                                        <h4 className="price-text">
+                                                            {p.price}{" "}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            <ToBagButton
+                                                id={p._id}
+                                                products={sortedProducts}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                                <Pagination
+                                    itemsCount={count}
+                                    pageSize={pageSize}
+                                    onPageChange={handlePageChange}
+                                    onIncrementPage={handleIncrementPage}
+                                    onDecrementPage={handleDecrementPage}
+                                    currentPage={currentPage}
+                                />
                             </div>
                         </div>
-                    </div>
+                    </>
                 )}
         </div>
     );

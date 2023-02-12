@@ -61,7 +61,7 @@ const BagPage = () => {
                             </div>
                             <div className="mt-15px">
                                 <button
-                                    className="btn btn-outline-dark btn m-2 amount-button"
+                                    className="btn btn-outline-dark rounded-3 m-2 amount-button"
                                     onClick={() =>
                                         dispatch(decrementTotalValue(p._id))
                                     }
@@ -70,7 +70,7 @@ const BagPage = () => {
                                 </button>
                                 {p.total}
                                 <button
-                                    className="btn btn-outline-dark btn m-2 amount-button"
+                                    className="btn btn-outline-dark rounded-3 m-2 amount-button"
                                     onClick={() =>
                                         dispatch(incrementTotalValue(p._id))
                                     }
@@ -86,7 +86,7 @@ const BagPage = () => {
                             </div>
                             <div>
                                 <button
-                                    className="btn btn-outline-danger"
+                                    className="btn btn-outline-danger rounded-3"
                                     onClick={() => handleRemove(p._id)}
                                 >
                                     <i className="bi bi-trash-fill"></i>
