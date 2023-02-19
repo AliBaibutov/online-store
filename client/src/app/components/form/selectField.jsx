@@ -14,7 +14,7 @@ const SelectField = ({
         onChange({ name: target.name, value: target.value });
     };
     const getInputClasses = () => {
-        return "form-select" + (error ? " is-invalid" : "");
+        return "form-select" + (error ? " is-invalid" : " is-valid");
     };
 
     const optionsArray =
@@ -44,7 +44,11 @@ const SelectField = ({
                         </option>
                     ))}
             </select>
-            {error && <div className="invalid-feedback">{error}</div>}
+            {error ? (
+                <div className="invalid-feedback">{error}</div>
+            ) : (
+                <div className="valid-feedback"></div>
+            )}
         </div>
     );
 };

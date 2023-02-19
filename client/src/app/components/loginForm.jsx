@@ -1,17 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAuthErrors, logIn } from "../store/users";
 import { validator } from "../utils/validator";
 import TextField from "./form/textField";
-// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
-    // const history = useHistory();
     const [data, setData] = useState({
         email: "",
         password: ""
     });
-    const logModalRef = useRef();
 
     const loginError = useSelector(getAuthErrors());
     const dispatch = useDispatch();
@@ -43,27 +40,10 @@ const LoginForm = () => {
     };
     const isValid = Object.keys(errors).length === 0;
 
-    // const handleHide = () => {
-    //     const hide = document.querySelector(".show");
-    //     hide.className = "modal-backdrop fade show";
-    //     console.log(hide);
-    //     document.body.append(hide);
-    //     console.log(document.body);
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        // logModalRef.current.style.cssText = "display: none";
-        // console.log(logModalRef.current);
-        // document.body.removeAttribute("style");
-        // document.body.removeAttribute("class");
-        // const modalBackdrop = document.getElementsByClassName(
-        //     "modal-backdrop fade show"
-        // );
-        // // console.log(modalBackdrop[0]);
-        // modalBackdrop[0].className = "show";
         dispatch(logIn({ payload: data }));
     };
     return (
@@ -73,7 +53,6 @@ const LoginForm = () => {
             tabIndex="-1"
             aria-labelledby="loginModalLabel"
             aria-hidden="true"
-            ref={logModalRef}
         >
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
@@ -86,7 +65,6 @@ const LoginForm = () => {
                             className="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
-                            // onClick={handleHide}
                         ></button>
                     </div>
                     <div className="modal-body">
@@ -113,6 +91,8 @@ const LoginForm = () => {
                                 type="submit"
                                 disabled={!isValid}
                                 className="btn btn-dark opacity-100 w-100 mx-auto"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
                             >
                                 Войти
                             </button>

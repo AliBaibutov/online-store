@@ -30,6 +30,16 @@ export function validator(data, config) {
                 statusValidate = data.length < config.value;
                 break;
             }
+            case "isNumber": {
+                const numRegExp = /^\d+$/g;
+                statusValidate = !numRegExp.test(data);
+                break;
+            }
+            case "isNotNullNumber": {
+                const numRegExp = /[0]+/g;
+                statusValidate = numRegExp.test(data);
+                break;
+            }
 
             default:
                 break;

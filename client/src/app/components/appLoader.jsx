@@ -16,6 +16,7 @@ import {
 } from "../store/companies";
 import Loader from "./loader";
 import { loadUsersList } from "../store/users";
+import { loadBagList } from "../store/bag";
 
 const AppLoader = ({ children }) => {
     const productsLoadingStatus = useSelector(getProductsLoadingStatus());
@@ -32,6 +33,7 @@ const AppLoader = ({ children }) => {
         dispatch(loadCompaniesList());
         dispatch(loadProductsList());
         dispatch(loadUsersList());
+        dispatch(loadBagList());
     }, []);
     if (productsLoadingStatus) {
         return <Loader />;

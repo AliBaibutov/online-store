@@ -10,7 +10,6 @@ const NavProfile = () => {
         dispatch(loadUsersList());
     }, []);
     const currentUser = useSelector(getCurrentUserData());
-    console.log(currentUser);
     const [isOpen, setOpen] = useState(false);
     const toggleMenu = () => {
         setOpen((prevState) => !prevState);
@@ -32,17 +31,7 @@ const NavProfile = () => {
             </div>
             <div className="dropdown" onClick={toggleMenu}>
                 <div className="btn btn-dark dropdown-toggle d-flex">
-                    <div className="me-2">
-                        {/* <h5> */}
-                        {currentUser.name}
-                        {/* </h5> */}
-                    </div>
-                    {/* <img
-                    src={currentUser.image}
-                    alt=""
-                    className="img-responsive rounded-circle"
-                    height="40"
-                /> */}
+                    <div className="me-2">{currentUser.name}</div>
                     <h5>
                         <i className="bi bi-person-circle"></i>
                     </h5>

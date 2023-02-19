@@ -3,6 +3,8 @@ import _ from "lodash";
 // import API from "../api";
 // import professionService from "../services/profession.service";
 
+// ==== Корзина для работы с неавторизованными пользователями ====
+
 const bagProductsSlice = createSlice({
     name: "bagProducts",
     initialState: {

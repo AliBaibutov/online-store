@@ -1,11 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
-
-// import httpService from "./services/http.service";
-// import { useRoutes } from "react-router";
-// import routes from "./routes";
-// import SideBar from "./components/sideBar";
-// import API from "../api";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories, getCategoriesLoadingStatus } from "../store/categories";
@@ -14,10 +8,13 @@ import {
     getSubcategories,
     getSubcategoriesLoadingStatus
 } from "../store/subcategories";
-import ToBagButton from "../components/toBagButton";
-import BagIcon from "../components/bagIcon";
 import Pagination from "../components/pagination";
 import { paginate } from "../utils/paginate";
+import { getIsLoggedIn } from "../store/users";
+import BagIconForAuthUser from "../components/bagIconForAuthUser";
+import BagIconForGuest from "../components/bagIconForGuest";
+import ToBagBtnForAuthUser from "../components/toBagBtnForAuthUser";
+import ToBagBtnForGuest from "../components/toBagBtnForGuest";
 
 const Main = () => {
     const products = useSelector(getProducts());
@@ -28,6 +25,7 @@ const Main = () => {
         getSubcategoriesLoadingStatus()
     );
     const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
+    const isLoggedIn = useSelector(getIsLoggedIn());
 
     const [searchQuery, setSearchQuery] = useState("");
     const [productsList, setProductsList] = useState(products);
@@ -43,8 +41,8 @@ const Main = () => {
     function searchProducts(data) {
         const searchedProducts = searchQuery
             ? data.filter(
-                  (user) =>
-                      user.name
+                  (p) =>
+                      p.name
                           .toLowerCase()
                           .indexOf(searchQuery.toLowerCase()) !== -1
               )
@@ -59,6 +57,12 @@ const Main = () => {
         [sortBy?.path],
         [sortBy?.order]
     );
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [productsList, searchQuery]);
+
+    console.log(sortedProducts);
 
     const count = sortedProducts.length;
     const pageSize = 8;
@@ -80,13 +84,15 @@ const Main = () => {
     };
 
     const productCrop = paginate(sortedProducts, currentPage, pageSize);
+    console.log(sortedProducts);
+    console.log(productCrop);
 
     const filterSubcategories = (catName) => {
         return subcategories.filter((s) => catName === s.catName);
     };
 
     const filterProducts = (subcatId) => {
-        const filteredProducts = products.filter(
+        const filteredProducts = sortedProducts.filter(
             (p) => p.subcategoryId === subcatId
         );
         setProductsList(filteredProducts);
@@ -183,14 +189,17 @@ const Main = () => {
                                             <i className="bi bi-arrow-up-square-fill ms-1"></i>
                                         </button>
                                     </div>
-                                    <BagIcon />
+                                    {isLoggedIn ? (
+                                        <BagIconForAuthUser />
+                                    ) : (
+                                        <BagIconForGuest />
+                                    )}
                                 </div>
                                 <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
                                     {productCrop.map((p) => (
                                         <div
                                             key={p._id}
                                             className="d-flex flex-shrink-1 card cursor shadow p-3 bg-body-tertiary rounded card-width"
-                                            // style={{ width: "18rem" }}
                                         >
                                             <Link
                                                 className="nav-link"
@@ -221,10 +230,17 @@ const Main = () => {
                                                     </div>
                                                 </div>
                                             </Link>
-                                            <ToBagButton
-                                                id={p._id}
-                                                products={sortedProducts}
-                                            />
+                                            {isLoggedIn ? (
+                                                <ToBagBtnForAuthUser
+                                                    id={p._id}
+                                                    products={productCrop}
+                                                />
+                                            ) : (
+                                                <ToBagBtnForGuest
+                                                    id={p._id}
+                                                    products={productCrop}
+                                                />
+                                            )}
                                         </div>
                                     ))}
                                 </div>

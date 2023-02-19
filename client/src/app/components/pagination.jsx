@@ -11,8 +11,8 @@ const Pagination = ({
     currentPage
 }) => {
     const pageCount = Math.ceil(itemsCount / pageSize);
-    if (pageCount === 1) return null;
     const pages = _.range(1, pageCount + 1);
+    if (pageCount <= 1) return null;
     return (
         <nav className="d-flex justify-content-center mt-3">
             <ul className="mb-0 p-0 d-flex border ">

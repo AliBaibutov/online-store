@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signUp } from "../store/users";
 import { useDispatch } from "react-redux";
 import { validator } from "../utils/validator";
 import TextField from "./form/textField";
-// import PropTypes from "prop-types";
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const RegisterForm = () => {
         password: "",
         isAdmin: false
     });
-    const regModalRef = useRef();
 
     const [errors, setErrors] = useState({});
 
@@ -54,17 +52,6 @@ const RegisterForm = () => {
                 message: "Пароль должен состоять минимум из 8 символов",
                 value: 8
             }
-        },
-        profession: {
-            isRequired: {
-                message: "Обязательно выберите вашу профессию"
-            }
-        },
-        licence: {
-            isRequired: {
-                message:
-                    "Вы не сможете использовать наш сервис без подтверждения лицензионного соглашения"
-            }
         }
     };
     useEffect(() => {
@@ -85,13 +72,6 @@ const RegisterForm = () => {
         const newData = {
             ...data
         };
-        // regModalRef.current.style.cssText = "display: none";
-        // document.body.removeAttribute("style");
-        // document.body.removeAttribute("class");
-        // const modalBackdrop = document.getElementsByClassName(
-        //     "modal-backdrop fade show"
-        // );
-        // modalBackdrop[0].removeAttribute("class");
 
         dispatch(signUp(newData));
     };
@@ -102,7 +82,6 @@ const RegisterForm = () => {
             tabIndex="-1"
             aria-labelledby="registerModalLabel"
             aria-hidden="true"
-            ref={regModalRef}
         >
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
@@ -155,6 +134,8 @@ const RegisterForm = () => {
                                 type="submit"
                                 disabled={!isValid}
                                 className="btn btn-dark opacity-100 text-white w-100 mx-auto"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
                             >
                                 Зарегистрироваться
                             </button>

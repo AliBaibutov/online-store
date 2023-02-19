@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
 import userService from "../services/user.service";
@@ -45,16 +45,39 @@ const usersSlice = createSlice({
         authRequestFailed: (state, action) => {
             state.error = action.payload;
         },
-        // userCreated: (state, action) => {
-        //     if (!Array.isArray(state.entities)) {
-        //         state.entities = [];
-        //     }
-        //     state.entities.push(action.payload);
-        // },
-        // userUpdated: (state, action) => {
-        //     state.entities[
-        //         state.entities.findIndex((u) => u._id === action.payload._id)
-        //     ] = action.payload;
+        bagProductAdded: (state, action) => {
+            // state.entities.map((u) =>
+            //     u._id === state.auth.userId ? u.bag.push(action.payload) : u
+            // );
+            state.entities[
+                state.entities.findIndex((u) => u._id === state.auth.userId)
+            ].bag.push(action.payload);
+        },
+        userUpdated: (state, action) => {
+            state.entities[
+                state.entities.findIndex((u) => u._id === action.payload._id)
+            ] = action.payload;
+        },
+        totalIncProdChanged: (state, action) => {
+            state.entities.map((u) =>
+                u._id === state.auth.userId
+                    ? u.bag.map((p) =>
+                          p._id === action.payload ? (p.total += 1) : p.total
+                      )
+                    : null
+            );
+            // state.entities.bag.map((p) =>
+            //     p._id === action.payload ? (p.total += 1) : p.total
+            // );
+        },
+        // totalDecProdChanged: (state, action) => {
+        //     state.entities.bag.map((p) =>
+        //         p._id === action.payload
+        //             ? p.total === 1
+        //                 ? p.total
+        //                 : (p.total -= 1)
+        //             : p.total
+        //     );
         // },
         userLoggedOut: (state) => {
             state.entities = null;
@@ -76,12 +99,15 @@ const {
     authRequestSuccess,
     authRequestFailed,
     userLoggedOut,
-    authRequested
-    // userUpdated
+    authRequested,
+    userUpdated,
+    bagProductAdded,
+    totalIncProdChanged
+    // totalDecProdChanged
 } = actions;
 
-// const userUpdateRequested = createAction("users/userUpdateRequested");
-// const userUpdateFailed = createAction("users/userUpdateFailed");
+const userUpdateRequested = createAction("users/userUpdateRequested");
+const userUpdateFailed = createAction("users/userUpdateFailed");
 
 export const logIn =
     ({ payload }) =>
@@ -119,16 +145,43 @@ export const logOut = () => (dispatch) => {
     dispatch(userLoggedOut());
 };
 
-// export const updateUser = (payload) => async (dispatch) => {
+// export const addToBag = (payload) => async (dispatch, getState) => {
+//     dispatch(bagProductAdded(payload));
+//     const foundUser = getState().users.entities.find(
+//         (u) => u._id === getState().users.auth.userId
+//     );
+//     console.log(foundUser);
 //     dispatch(userUpdateRequested());
 //     try {
-//         const { content } = await userService.update(payload);
+//         const { content } = await userService.update(foundUser);
 //         dispatch(userUpdated(content));
-//         history.push(`/users/${content._id}`);
+//         // history.push(`/users/${content._id}`);
 //     } catch (error) {
 //         dispatch(userUpdateFailed(error.message));
 //     }
 // };
+export const addToBag = (payload) => async (dispatch) => {
+    console.log(payload);
+    dispatch(bagProductAdded(payload));
+};
+
+export const updateUser = (payload) => async (dispatch, getState) => {
+    const foundUser = getState().users.entities.find(
+        (u) => u._id === getState().users.auth.userId
+    );
+    console.log(foundUser);
+    dispatch(userUpdateRequested());
+    try {
+        const { content } = payload
+            ? await userService.update(payload)
+            : await userService.update(foundUser);
+        console.log(foundUser);
+        dispatch(userUpdated(content));
+        // history.push(`/users/${content._id}`);
+    } catch (error) {
+        dispatch(userUpdateFailed(error.message));
+    }
+};
 
 export const loadUsersList = () => async (dispatch) => {
     dispatch(usersRequested());
@@ -157,5 +210,13 @@ export const getCurrentUserData = () => (state) =>
         : null;
 export const getAuthErrors = () => (state) => state.users.error;
 export const getDataUpdatingStatus = () => (state) => state.users.dataUpdated;
+
+export const incTotalValue = (productId) => (dispatch) => {
+    dispatch(totalIncProdChanged(productId));
+};
+
+// export const decTotalValue = (productId) => (dispatch) => {
+//     dispatch(totalDecProdChanged(productId));
+// };
 
 export default usersReducer;

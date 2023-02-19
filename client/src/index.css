@@ -46,6 +46,7 @@ code {
 .header-container {
     margin: 0 80px;
     padding: 20px 0;
+    max-height: 120px;
 }
 
 .img-wrapper {
@@ -91,6 +92,10 @@ code {
     flex: 0 1 23.6%;
 }
 
+.card-total-bag {
+    min-width: 250px;
+}
+
 @media (max-width: 1880px) {
     .card-width {
         min-width: 270px;
@@ -128,6 +133,10 @@ code {
 }
 
 .price-text:after {
+    content: "\20BD";
+}
+
+.price-text-bag:after {
     content: "\20BD";
 }
 

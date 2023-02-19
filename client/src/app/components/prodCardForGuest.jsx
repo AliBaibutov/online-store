@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getProductById } from "../store/products";
 import { getSubcategoryById } from "../store/subcategories";
-import BagIcon from "./bagIcon";
-import ToBagButton from "./toBagButton";
+import BagIconForGuest from "./bagIconForGuest";
+import ToBagBtnForGuest from "./toBagBtnForGuest";
 
-const ProductCard = () => {
+const ProdCardForGuest = () => {
     const params = useParams();
     const productId = params.productId;
     const product = useSelector(getProductById(productId));
@@ -14,7 +14,7 @@ const ProductCard = () => {
     return (
         <div className="my-container">
             <div className="d-flex flex-column align-items-end">
-                <BagIcon />
+                <BagIconForGuest />
                 <div className="d-flex col-12 justify-content-center">
                     <div className="d-flex flex-column align-items-center col-4 shadow p-3 mb-5 bg-body-tertiary rounded me-3">
                         <span className="text-center">{subcategory.name}</span>
@@ -32,7 +32,10 @@ const ProductCard = () => {
                         </div>
                         <div>
                             <h3 className="price-text">{product.price} </h3>
-                            <ToBagButton id={productId} products={product} />
+                            <ToBagBtnForGuest
+                                id={productId}
+                                products={product}
+                            />
                         </div>
                     </div>
                 </div>
@@ -41,4 +44,4 @@ const ProductCard = () => {
     );
 };
 
-export default ProductCard;
+export default ProdCardForGuest;
