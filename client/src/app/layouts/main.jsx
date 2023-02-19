@@ -113,7 +113,7 @@ const Main = () => {
                 !subcategoriesLoadingStatus &&
                 !categoriesLoadingStatus && (
                     <>
-                        <div className="d-flex justify-content-center">
+                        <div className="d-flex h-100 justify-content-center">
                             <div className="d-flex flex-column pt-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
                                 <h4>КАТЕГОРИИ</h4>
                                 {categories.map((c) => (

@@ -16,7 +16,7 @@ const ProdCardForAuthUser = () => {
             <div className="d-flex flex-column align-items-end">
                 <BagIconForAuthUser />
                 <div className="d-flex col-12 justify-content-center">
-                    <div className="d-flex flex-column align-items-center col-4 shadow p-3 mb-5 bg-body-tertiary rounded me-3">
+                    <div className="d-flex flex-column align-items-center col-4 shadow p-3 bg-body-tertiary rounded me-3">
                         <span className="text-center">{subcategory.name}</span>
                         <h3 className="text-center mb-4">{product.name}</h3>
                         <img
@@ -25,7 +25,7 @@ const ProdCardForAuthUser = () => {
                             alt="..."
                         />
                     </div>
-                    <div className="d-flex flex-column justify-content-between col-4 shadow p-3 mb-5 bg-body-tertiary rounded">
+                    <div className="d-flex flex-column justify-content-between col-4 shadow p-3 bg-body-tertiary rounded">
                         <div>
                             <h2>Описание товара</h2>
                             <p>{product.description}</p>

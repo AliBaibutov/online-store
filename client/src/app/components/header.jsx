@@ -14,7 +14,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="bg-dark text-light mb-4">
+            <div className="bg-dark text-light mb-4 fix-header">
                 <div className="header-container d-flex justify-content-between align-items-center">
                     <Link to="/">
                         <img src={logo} alt="logo" />
