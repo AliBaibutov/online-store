@@ -12,7 +12,7 @@ const App = () => {
         <AppLoader>
             <Wrapper>
                 <Header />
-                <div>{elements}</div>
+                {elements}
                 <Footer />
             </Wrapper>
         </AppLoader>
