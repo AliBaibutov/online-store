@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getProductById } from "../store/products";
@@ -6,7 +7,7 @@ import { getSubcategoryById } from "../store/subcategories";
 import BagIconForGuest from "./bagIconForGuest";
 import ToBagBtnForGuest from "./toBagBtnForGuest";
 
-const ProdCardForGuest = () => {
+const ProdCardForGuest = ({ bgBagIcon, btnInBagColor }) => {
     const params = useParams();
     const productId = params.productId;
     const product = useSelector(getProductById(productId));
@@ -14,7 +15,7 @@ const ProdCardForGuest = () => {
     return (
         <div className="my-container">
             <div className="d-flex flex-column align-items-end">
-                <BagIconForGuest />
+                <BagIconForGuest bgBagIcon={bgBagIcon} />
                 <div className="d-flex col-12 justify-content-center">
                     <div className="d-flex flex-column align-items-center col-4 shadow p-3 bg-body-tertiary rounded me-3">
                         <span className="text-center">{subcategory.name}</span>
@@ -35,6 +36,7 @@ const ProdCardForGuest = () => {
                             <ToBagBtnForGuest
                                 id={productId}
                                 products={product}
+                                btnInBagColor={btnInBagColor}
                             />
                         </div>
                     </div>
@@ -42,6 +44,11 @@ const ProdCardForGuest = () => {
             </div>
         </div>
     );
+};
+
+ProdCardForGuest.propTypes = {
+    bgBagIcon: PropTypes.string,
+    btnInBagColor: PropTypes.string
 };
 
 export default ProdCardForGuest;

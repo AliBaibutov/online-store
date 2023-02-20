@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { getBagProducts } from "../store/bagProducts";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 
-const BagIconForGuest = () => {
+const BagIconForGuest = ({ bgBagIcon }) => {
     const productsInBag = useSelector(getBagProducts());
     const numberOfProducts = productsInBag ? productsInBag?.length : 0;
 
@@ -20,7 +21,9 @@ const BagIconForGuest = () => {
                     <h3>
                         <i className="bi bi-cart3"></i>
                     </h3>
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    <span
+                        className={`position-absolute top-0 start-100 translate-middle badge rounded-pill ${bgBagIcon}`}
+                    >
                         {numberOfProducts}
                         <span className="visually-hidden">unread messages</span>
                     </span>
@@ -29,6 +32,10 @@ const BagIconForGuest = () => {
             </Link>
         </div>
     );
+};
+
+BagIconForGuest.propTypes = {
+    bgBagIcon: PropTypes.string
 };
 
 export default BagIconForGuest;

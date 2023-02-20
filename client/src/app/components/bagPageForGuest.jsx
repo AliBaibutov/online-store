@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +12,7 @@ import OrderingCard from "./orderingCard";
 import BagIconForGuest from "./bagIconForGuest";
 import IncDecBtns from "./incDecBtns";
 
-const BagPageForGuest = () => {
+const BagPageForGuest = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
     const dispatch = useDispatch();
     const productsInBag = useSelector(getBagProducts());
     const handleRemove = (id) => {
@@ -38,7 +39,7 @@ const BagPageForGuest = () => {
                 <h1>Корзина</h1>
             </div>
             <div className="text-end">
-                <BagIconForGuest />
+                <BagIconForGuest bgBagIcon={bgBagIcon} />
             </div>
             {productsInBag?.length ? (
                 productsInBag.map((p) => (
@@ -63,6 +64,7 @@ const BagPageForGuest = () => {
                                 productId={p._id}
                                 total={p.total}
                                 price={p.price}
+                                btnOutlineColor={btnOutlineColor}
                             />
                             <div className="bag-product-price d-flex justify-content-center">
                                 <h5>{p.price * p.total} р.</h5>
@@ -81,9 +83,16 @@ const BagPageForGuest = () => {
             ) : (
                 <h3 className="text-center">Корзина пуста</h3>
             )}
-            <OrderingCard total={totalPrice} />
+            <OrderingCard total={totalPrice} bg={bg} btnColor={btnColor} />
         </div>
     );
+};
+
+BagPageForGuest.propTypes = {
+    bg: PropTypes.string,
+    bgBagIcon: PropTypes.string,
+    btnColor: PropTypes.string,
+    btnOutlineColor: PropTypes.string
 };
 
 export default BagPageForGuest;

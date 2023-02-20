@@ -8,7 +8,9 @@ const Pagination = ({
     onPageChange,
     onIncrementPage,
     onDecrementPage,
-    currentPage
+    currentPage,
+    bg,
+    btnColor
 }) => {
     const pageCount = Math.ceil(itemsCount / pageSize);
     const pages = _.range(1, pageCount + 1);
@@ -24,15 +26,15 @@ const Pagination = ({
                 {pages.map((page) => (
                     <li
                         className={
-                            "border-end" +
-                            (page === currentPage ? " bg-dark" : "")
+                            "border-end " +
+                            (page === currentPage ? `${bg}` : "")
                         }
                         key={"page_" + page}
                     >
                         <button
                             className={
-                                "btn border border-white border-0 rounded-0" +
-                                (page === currentPage ? " btn-dark" : "")
+                                "btn border border-white border-0 rounded-0 " +
+                                (page === currentPage ? `${btnColor}` : "")
                             }
                             href="#"
                             onClick={() => onPageChange(page)}
@@ -60,7 +62,9 @@ Pagination.propTypes = {
     onPageChange: PropTypes.func,
     onIncrementPage: PropTypes.func,
     onDecrementPage: PropTypes.func,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    bg: PropTypes.string,
+    btnColor: PropTypes.string
 };
 
 export default Pagination;

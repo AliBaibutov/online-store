@@ -5,10 +5,17 @@ import telegram from "../../imgs/telegram.png";
 import youtube from "../../imgs/youtube.png";
 import vk from "../../imgs/vk.png";
 import dzen from "../../imgs/dzen.png";
+import { useSelector } from "react-redux";
+import { getSwitchStatus } from "../store/theme";
+import useTheme from "./hooks/useTheme";
 
 const Footer = () => {
+    const status = useSelector(getSwitchStatus());
+
+    const { bg } = useTheme(status);
+
     return (
-        <div className="bg-dark text-light mt-4">
+        <div className={`${bg} text-light mt-4`}>
             <div className="footer-container d-flex justify-content-between">
                 <div className="d-flex flex-column justify-content-center footer-element">
                     <Link to="/">

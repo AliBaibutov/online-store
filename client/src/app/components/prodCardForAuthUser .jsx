@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getProductById } from "../store/products";
@@ -6,7 +7,7 @@ import { getSubcategoryById } from "../store/subcategories";
 import BagIconForAuthUser from "./bagIconForAuthUser";
 import ToBagBtnForAuthUser from "./toBagBtnForAuthUser";
 
-const ProdCardForAuthUser = () => {
+const ProdCardForAuthUser = ({ bgBagIcon, btnInBagColor }) => {
     const params = useParams();
     const productId = params.productId;
     const product = useSelector(getProductById(productId));
@@ -14,7 +15,7 @@ const ProdCardForAuthUser = () => {
     return (
         <div className="my-container">
             <div className="d-flex flex-column align-items-end">
-                <BagIconForAuthUser />
+                <BagIconForAuthUser bgBagIcon={bgBagIcon} />
                 <div className="d-flex col-12 justify-content-center">
                     <div className="d-flex flex-column align-items-center col-4 shadow p-3 bg-body-tertiary rounded me-3">
                         <span className="text-center">{subcategory.name}</span>
@@ -35,6 +36,7 @@ const ProdCardForAuthUser = () => {
                             <ToBagBtnForAuthUser
                                 id={productId}
                                 products={product}
+                                btnInBagColor={btnInBagColor}
                             />
                         </div>
                     </div>
@@ -42,6 +44,11 @@ const ProdCardForAuthUser = () => {
             </div>
         </div>
     );
+};
+
+ProdCardForAuthUser.propTypes = {
+    bgBagIcon: PropTypes.string,
+    btnInBagColor: PropTypes.string
 };
 
 export default ProdCardForAuthUser;

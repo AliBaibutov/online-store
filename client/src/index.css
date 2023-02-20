@@ -204,6 +204,10 @@ li {
     list-style: none;
 }
 
+a {
+    color: #fff;
+}
+
 .bag-product-name {
     width: 300px;
 }
@@ -214,6 +218,10 @@ li {
 
 .mt-15px {
     margin-top: 15px;
+}
+
+.btn-green {
+    background-color: #08d45a;
 }
 
 /* @media (max-width: 1700px) {

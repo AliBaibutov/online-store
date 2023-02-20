@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { createBagProduct, getBagProducts } from "../store/bagProducts";
 
-const ToBagBtnForGuest = ({ id, products }) => {
+const ToBagBtnForGuest = ({ id, products, btnColor, btnInBagColor }) => {
     const dispatch = useDispatch();
     const productsInBag = useSelector(getBagProducts());
 
@@ -21,7 +21,7 @@ const ToBagBtnForGuest = ({ id, products }) => {
     return productsInBag?.length > 0 ? (
         productsInBag.find((bp) => bp._id === id) ? (
             <button
-                className="btn btn-success mb-3 rounded border border-secondary"
+                className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
                 id={id}
                 disabled
             >
@@ -29,7 +29,7 @@ const ToBagBtnForGuest = ({ id, products }) => {
             </button>
         ) : (
             <button
-                className="btn btn-dark mb-3 rounded"
+                className={`btn ${btnColor} mb-3 rounded`}
                 onClick={handleBtnName}
                 id={id}
             >
@@ -38,7 +38,7 @@ const ToBagBtnForGuest = ({ id, products }) => {
         )
     ) : (
         <button
-            className="btn btn-dark mb-3 rounded"
+            className={`btn ${btnColor} mb-3 rounded`}
             onClick={handleBtnName}
             id={id}
         >
@@ -49,6 +49,8 @@ const ToBagBtnForGuest = ({ id, products }) => {
 
 ToBagBtnForGuest.propTypes = {
     id: PropTypes.string,
+    btnColor: PropTypes.string,
+    btnInBagColor: PropTypes.string,
     products: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 

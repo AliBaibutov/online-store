@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import SelectField from "../components/form/selectField";
 import TextAreaField from "../components/form/textAreaField";
@@ -16,6 +17,8 @@ import {
     updateProduct
 } from "../store/products";
 import { getSubcategories } from "../store/subcategories";
+import { getSwitchStatus } from "../store/theme";
+import useTheme from "../components/hooks/useTheme";
 
 const initialData = {
     amount: "",
@@ -29,6 +32,8 @@ const initialData = {
 };
 
 const Admin = () => {
+    const status = useSelector(getSwitchStatus());
+    const { btnColor } = useTheme(status);
     const dispatch = useDispatch();
     const [data, setData] = useState(initialData);
     const [isLoading, setIsLoading] = useState(true);
@@ -121,34 +126,6 @@ const Admin = () => {
               );
         clearForm();
     };
-
-    // function getQualitiesListByIds(qualitiesIds) {
-    //     const qualitiesArray = [];
-    //     for (const qualId of qualitiesIds) {
-    //         for (const quality of qualities) {
-    //             if (quality._id === qualId) {
-    //                 qualitiesArray.push(quality);
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return qualitiesArray;
-    // }
-    // const transformData = (data) => {
-    //     const result = getQualitiesListByIds(data).map((qual) => ({
-    //         label: qual.name,
-    //         value: qual._id
-    //     }));
-    //     return result;
-    // };
-    // useEffect(() => {
-    //     if (!professionLoading && !qualitiesLoading && currentUser && !data) {
-    //         setData({
-    //             ...currentUser,
-    //             qualities: transformData(currentUser.qualities)
-    //         });
-    //     }
-    // }, [professionLoading, qualitiesLoading, currentUser, data]);
 
     useEffect(() => {
         if (data && isLoading) {
@@ -283,7 +260,7 @@ const Admin = () => {
                         <button
                             type="submit"
                             disabled={!isValid}
-                            className="btn btn-dark w-100 mx-auto"
+                            className={`btn ${btnColor} w-100 mx-auto`}
                         >
                             Добавить / Сохранить изменения
                         </button>
@@ -375,4 +352,9 @@ const Admin = () => {
         <Loader />
     );
 };
+
+Admin.propTypes = {
+    btnColor: PropTypes.string
+};
+
 export default Admin;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUserData, updateUser } from "../store/users";
@@ -6,7 +7,7 @@ import OrderingCard from "./orderingCard";
 import BagIconForAuthUser from "./bagIconForAuthUser";
 import IncDecBtns from "./incDecBtns";
 
-const BagPageForAuthUser = () => {
+const BagPageForAuthUser = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getCurrentUserData());
     const bag = currentUser?.bag;
@@ -57,7 +58,7 @@ const BagPageForAuthUser = () => {
                 <h1>Корзина</h1>
             </div>
             <div className="text-end">
-                <BagIconForAuthUser />
+                <BagIconForAuthUser bgBagIcon={bgBagIcon} />
             </div>
             {bag?.length ? (
                 bag.map((p) => (
@@ -82,6 +83,7 @@ const BagPageForAuthUser = () => {
                                 productId={p._id}
                                 total={p.total}
                                 price={p.price}
+                                btnOutlineColor={btnOutlineColor}
                             />
                             <div className="bag-product-price d-flex justify-content-center">
                                 <h5>{p.price * p.total} р.</h5>
@@ -100,9 +102,20 @@ const BagPageForAuthUser = () => {
             ) : (
                 <h3 className="text-center">Корзина пуста</h3>
             )}
-            <OrderingCard total={totalPriceForAuth} />
+            <OrderingCard
+                total={totalPriceForAuth}
+                bg={bg}
+                btnColor={btnColor}
+            />
         </div>
     );
+};
+
+BagPageForAuthUser.propTypes = {
+    bg: PropTypes.string,
+    bgBagIcon: PropTypes.string,
+    btnColor: PropTypes.string,
+    btnOutlineColor: PropTypes.string
 };
 
 export default BagPageForAuthUser;

@@ -15,6 +15,8 @@ import BagIconForAuthUser from "../components/bagIconForAuthUser";
 import BagIconForGuest from "../components/bagIconForGuest";
 import ToBagBtnForAuthUser from "../components/toBagBtnForAuthUser";
 import ToBagBtnForGuest from "../components/toBagBtnForGuest";
+import useTheme from "../components/hooks/useTheme";
+import { getSwitchStatus } from "../store/theme";
 
 const Main = () => {
     const products = useSelector(getProducts());
@@ -107,6 +109,9 @@ const Main = () => {
         setProductsList(products);
     };
 
+    const status = useSelector(getSwitchStatus());
+    const { btnColor, btnInBagColor, bg, bgBagIcon } = useTheme(status);
+
     return (
         <div className="my-container">
             {!productsLoadingStatus &&
@@ -170,7 +175,7 @@ const Main = () => {
                                     <div>
                                         <button
                                             type="button"
-                                            className="btn btn-outline-dark border sort-button btn-sm me-2"
+                                            className={`btn btn-outline-dark border sort-button btn-sm me-2`}
                                             onClick={() =>
                                                 handleSort("price", "desc")
                                             }
@@ -180,7 +185,7 @@ const Main = () => {
                                         </button>
                                         <button
                                             type="button"
-                                            className="btn btn-outline-dark border sort-button btn-sm"
+                                            className={`btn btn-outline-dark border sort-button btn-sm`}
                                             onClick={() =>
                                                 handleSort("price", "asc")
                                             }
@@ -190,9 +195,13 @@ const Main = () => {
                                         </button>
                                     </div>
                                     {isLoggedIn ? (
-                                        <BagIconForAuthUser />
+                                        <BagIconForAuthUser
+                                            bgBagIcon={bgBagIcon}
+                                        />
                                     ) : (
-                                        <BagIconForGuest />
+                                        <BagIconForGuest
+                                            bgBagIcon={bgBagIcon}
+                                        />
                                     )}
                                 </div>
                                 <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
@@ -234,11 +243,19 @@ const Main = () => {
                                                 <ToBagBtnForAuthUser
                                                     id={p._id}
                                                     products={productCrop}
+                                                    btnColor={btnColor}
+                                                    btnInBagColor={
+                                                        btnInBagColor
+                                                    }
                                                 />
                                             ) : (
                                                 <ToBagBtnForGuest
                                                     id={p._id}
                                                     products={productCrop}
+                                                    btnColor={btnColor}
+                                                    btnInBagColor={
+                                                        btnInBagColor
+                                                    }
                                                 />
                                             )}
                                         </div>
@@ -251,6 +268,8 @@ const Main = () => {
                                     onIncrementPage={handleIncrementPage}
                                     onDecrementPage={handleDecrementPage}
                                     currentPage={currentPage}
+                                    bg={bg}
+                                    btnColor={btnColor}
                                 />
                             </div>
                         </div>

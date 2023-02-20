@@ -6,26 +6,33 @@ import logo from "../../imgs/logo.png";
 import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "../store/users";
 import NavProfile from "./navProfile";
+import { getSwitchStatus } from "../store/theme";
+import useTheme from "./hooks/useTheme";
+import Switch from "./switch";
 // import RegisterModalWrapper from "./registerModalWrapper";
 // import LoginModalWrapper from "./loginModalWrapper";
 
 const Header = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
+    const status = useSelector(getSwitchStatus());
+
+    const { bg, bgSwitch, btnColor } = useTheme(status);
 
     return (
         <>
-            <div className="bg-dark text-light mb-4 fix-header">
+            <div className={`${bg} text-light mb-4 fix-header`}>
                 <div className="header-container d-flex justify-content-between align-items-center">
                     <Link to="/">
                         <img src={logo} alt="logo" />
                     </Link>
                     {isLoggedIn ? (
-                        <NavProfile />
+                        <NavProfile bgSwitch={bgSwitch} btnColor={btnColor} />
                     ) : (
-                        <div className="d-flex">
+                        <div className="d-flex align-items-center">
+                            <Switch bgSwitch={bgSwitch} />
                             <div>
                                 <button
-                                    className="btn btn-dark"
+                                    className={`btn ${btnColor}`}
                                     data-bs-toggle="modal"
                                     data-bs-target="#registerModal"
                                 >
@@ -37,7 +44,7 @@ const Header = () => {
                             </div>
                             <div>
                                 <button
-                                    className="btn btn-dark"
+                                    className={`btn ${btnColor}`}
                                     data-bs-toggle="modal"
                                     data-bs-target="#loginModal"
                                 >

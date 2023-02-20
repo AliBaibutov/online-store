@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCurrentUserData, loadUsersList } from "../store/users";
 import Loader from "./loader";
+import Switch from "./switch";
 
-const NavProfile = () => {
+const NavProfile = ({ bgSwitch, btnColor }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUsersList());
@@ -17,10 +19,13 @@ const NavProfile = () => {
     if (!currentUser) return <Loader />;
     return (
         <div className="d-flex align-items-center">
+            <Switch bgSwitch={bgSwitch} />
             <div>
                 {currentUser.isAdmin ? (
                     <Link className="link" to={"/admin"}>
-                        <button className="btn btn-dark d-flex">
+                        <button
+                            className={`btn ${btnColor} d-flex align-items-center`}
+                        >
                             <div className="me-2">Админ-панель</div>
                             <h5>
                                 <i className="bi bi-journal-richtext"></i>
@@ -30,7 +35,9 @@ const NavProfile = () => {
                 ) : null}
             </div>
             <div className="dropdown" onClick={toggleMenu}>
-                <div className="btn btn-dark dropdown-toggle d-flex">
+                <div
+                    className={`btn ${btnColor} dropdown-toggle d-flex align-items-center`}
+                >
                     <div className="me-2">{currentUser.name}</div>
                     <h5>
                         <i className="bi bi-person-circle"></i>
@@ -46,6 +53,11 @@ const NavProfile = () => {
             </div>
         </div>
     );
+};
+
+NavProfile.propTypes = {
+    bgSwitch: PropTypes.string,
+    btnColor: PropTypes.string
 };
 
 export default NavProfile;

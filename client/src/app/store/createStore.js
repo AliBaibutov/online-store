@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import bagReducer from "./bag";
 import bagProductsReducer from "./bagProducts";
 import categoriesReducer from "./categories";
 import companiesReducer from "./companies";
 import productsReducer from "./products";
 import subcategoriesReducer from "./subcategories";
+import themeReducer from "./theme";
 import usersReducer from "./users";
 
 const rootReducer = combineReducers({
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     categories: categoriesReducer,
     bagProducts: bagProductsReducer,
     users: usersReducer,
-    bag: bagReducer
+    theme: themeReducer
 });
 
 export function createStore() {

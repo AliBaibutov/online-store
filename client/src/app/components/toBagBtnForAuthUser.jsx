@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBag, getCurrentUserData, updateUser } from "../store/users";
 
-const ToBagBtnForAuthUser = ({ id, products }) => {
+const ToBagBtnForAuthUser = ({ id, products, btnColor, btnInBagColor }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getCurrentUserData());
 
@@ -21,7 +21,7 @@ const ToBagBtnForAuthUser = ({ id, products }) => {
     return currentUser?.bag.length > 0 ? (
         currentUser?.bag.find((bp) => bp._id === id) ? (
             <button
-                className="btn btn-success mb-3 rounded border border-secondary"
+                className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
                 id={id}
                 disabled
             >
@@ -29,7 +29,7 @@ const ToBagBtnForAuthUser = ({ id, products }) => {
             </button>
         ) : (
             <button
-                className="btn btn-dark mb-3 rounded"
+                className={`btn ${btnColor} mb-3 rounded`}
                 onClick={handleBtnName}
                 id={id}
             >
@@ -38,7 +38,7 @@ const ToBagBtnForAuthUser = ({ id, products }) => {
         )
     ) : (
         <button
-            className="btn btn-dark mb-3 rounded"
+            className={`btn ${btnColor} mb-3 rounded`}
             onClick={handleBtnName}
             id={id}
         >
@@ -49,6 +49,8 @@ const ToBagBtnForAuthUser = ({ id, products }) => {
 
 ToBagBtnForAuthUser.propTypes = {
     id: PropTypes.string,
+    btnColor: PropTypes.string,
+    btnInBagColor: PropTypes.string,
     products: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 

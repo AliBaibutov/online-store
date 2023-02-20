@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import { getCurrentUserData } from "../store/users";
 
-const BagIconForAuthUser = () => {
+const BagIconForAuthUser = ({ bgBagIcon }) => {
     const currentUser = useSelector(getCurrentUserData());
     const bag = currentUser?.bag;
     const amountForAuth = bag?.length;
@@ -22,7 +23,9 @@ const BagIconForAuthUser = () => {
                     <h3>
                         <i className="bi bi-cart3"></i>
                     </h3>
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    <span
+                        className={`position-absolute top-0 start-100 translate-middle badge rounded-pill ${bgBagIcon}`}
+                    >
                         {amountForAuth}
                         <span className="visually-hidden">unread messages</span>
                     </span>
@@ -31,6 +34,10 @@ const BagIconForAuthUser = () => {
             </Link>
         </div>
     );
+};
+
+BagIconForAuthUser.propTypes = {
+    bgBagIcon: PropTypes.string
 };
 
 export default BagIconForAuthUser;
