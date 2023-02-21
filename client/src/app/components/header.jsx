@@ -9,8 +9,6 @@ import NavProfile from "./navProfile";
 import { getSwitchStatus } from "../store/theme";
 import useTheme from "./hooks/useTheme";
 import Switch from "./switch";
-// import RegisterModalWrapper from "./registerModalWrapper";
-// import LoginModalWrapper from "./loginModalWrapper";
 
 const Header = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
@@ -58,8 +56,8 @@ const Header = () => {
                     )}
                 </div>
             </div>
-            <RegisterForm />
-            <LoginForm />
+            <RegisterForm btnColor={btnColor} />
+            <LoginForm btnColor={btnColor} />
         </>
     );
 };

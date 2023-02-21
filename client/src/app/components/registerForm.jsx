@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { signUp } from "../store/users";
 import { useDispatch } from "react-redux";
 import { validator } from "../utils/validator";
 import TextField from "./form/textField";
 
-const RegisterForm = () => {
+const RegisterForm = ({ btnColor }) => {
     const dispatch = useDispatch();
     const [data, setData] = useState({
         name: "",
@@ -133,7 +134,7 @@ const RegisterForm = () => {
                             <button
                                 type="submit"
                                 disabled={!isValid}
-                                className="btn btn-dark opacity-100 text-white w-100 mx-auto"
+                                className={`btn ${btnColor} opacity-100 w-100 mx-auto`}
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                             >
@@ -145,6 +146,10 @@ const RegisterForm = () => {
             </div>
         </div>
     );
+};
+
+RegisterForm.propTypes = {
+    btnColor: PropTypes.string
 };
 
 export default RegisterForm;

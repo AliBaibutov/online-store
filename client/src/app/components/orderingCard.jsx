@@ -23,8 +23,8 @@ const OrderingCard = ({ total, bg, btnColor }) => {
 
 OrderingCard.propTypes = {
     total: PropTypes.number,
-    bg: PropTypes.number,
-    btnColor: PropTypes.number
+    bg: PropTypes.string,
+    btnColor: PropTypes.string
 };
 
 export default OrderingCard;

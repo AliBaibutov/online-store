@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from "lodash";
-// import API from "../api";
-// import professionService from "../services/profession.service";
 
 // ==== Корзина для работы с неавторизованными пользователями ====
 
@@ -9,8 +7,6 @@ const bagProductsSlice = createSlice({
     name: "bagProducts",
     initialState: {
         entities: null
-        // isLoading: true,
-        // error: null
     },
     reducers: {
         bagProductCreated: (state, action) => {
@@ -69,13 +65,5 @@ export const incrementTotalValue = (productId) => (dispatch) => {
 export const decrementTotalValue = (productId) => (dispatch) => {
     dispatch(totalDecrementProductChanged(productId));
 };
-
-// export const getProductsLoadingStatus = () => (state) =>
-//     state.products.isLoading;
-// export const getProductById = (productId) => (state) => {
-//     if (state.products.entities) {
-//         return state.products.entities.find((p) => productId === p._id);
-//     }
-// };
 
 export default bagProductsReducer;

@@ -10,7 +10,6 @@ import { getCategories } from "../store/categories";
 import { getCompanies } from "../store/companies";
 import {
     createProduct,
-    // getProductById,
     getProducts,
     getProductsLoadingStatus,
     removeProduct,
@@ -44,7 +43,6 @@ const Admin = () => {
     const productsLoading = useSelector(getProductsLoadingStatus());
 
     const companies = useSelector(getCompanies());
-    // const companiesLoading = useSelector(getCompaniesLoadingStatus());
     const companiesList = companies?.map((c) => ({
         label: c.name,
         value: c._id
@@ -63,17 +61,14 @@ const Admin = () => {
     }));
 
     const category = (catId) => {
-        // console.log(categories.find((c) => c._id === catId));
         return categories.find((c) => c._id === catId);
     };
 
     const subcategory = (subcatId) => {
-        // console.log(subcategories?.find((c) => c._id === subcatId));
         return subcategories.find((c) => c._id === subcatId);
     };
 
     const company = (compId) => {
-        // console.log(companies.find((c) => c._id === compId));
         return companies?.find((c) => c._id === compId);
     };
 
@@ -293,17 +288,14 @@ const Admin = () => {
                                             <td className="td-company">
                                                 {company(p.companyId)?.name ??
                                                     ""}
-                                                {/* {p.companyId} */}
                                             </td>
                                             <td>
                                                 {category(p.categoryId)?.name ??
                                                     ""}
-                                                {/* {p.categoryId} */}
                                             </td>
                                             <td>
                                                 {subcategory(p.subcategoryId)
                                                     ?.name ?? ""}
-                                                {/* {p.subcategoryId} */}
                                             </td>
                                             <td className="td-img">
                                                 {p.image}

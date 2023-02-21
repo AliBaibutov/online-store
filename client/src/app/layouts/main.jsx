@@ -64,8 +64,6 @@ const Main = () => {
         setCurrentPage(1);
     }, [productsList, searchQuery]);
 
-    console.log(sortedProducts);
-
     const count = sortedProducts.length;
     const pageSize = 8;
     const [currentPage, setCurrentPage] = useState(1);
@@ -86,8 +84,6 @@ const Main = () => {
     };
 
     const productCrop = paginate(sortedProducts, currentPage, pageSize);
-    console.log(sortedProducts);
-    console.log(productCrop);
 
     const filterSubcategories = (catName) => {
         return subcategories.filter((s) => catName === s.catName);

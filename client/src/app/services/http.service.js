@@ -50,13 +50,6 @@ http.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-// function transformData(data) {
-//     return data && !data._id
-//         ? Object.keys(data).map((key) => ({
-//               ...data[key]
-//           }))
-//         : data;
-// }
 http.interceptors.response.use(
     (res) => {
         res.data = { content: res.data };
@@ -69,7 +62,6 @@ http.interceptors.response.use(
             error.response.status < 500;
 
         if (!expectedErrors) {
-            console.log(error);
             toast.error("Something was wrong. Try it later");
         }
         return Promise.reject(error);

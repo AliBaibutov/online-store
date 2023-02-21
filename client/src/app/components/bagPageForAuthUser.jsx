@@ -6,6 +6,7 @@ import { getCurrentUserData, updateUser } from "../store/users";
 import OrderingCard from "./orderingCard";
 import BagIconForAuthUser from "./bagIconForAuthUser";
 import IncDecBtns from "./incDecBtns";
+import { Link } from "react-router-dom";
 
 const BagPageForAuthUser = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
     const dispatch = useDispatch();
@@ -67,15 +68,22 @@ const BagPageForAuthUser = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
                         className="d-flex flex-column border-bottom"
                     >
                         <div className="d-flex justify-content-center gap-5 align-items-center">
-                            <div className="d-flex flex-column align-items-center justify-content-center img-wrapper text-center">
-                                <img
-                                    src={p.image}
-                                    className="mx-auto img-list"
-                                    alt="..."
-                                />
-                            </div>
+                            <Link className="nav-link" to={`/product/${p._id}`}>
+                                <div className="d-flex flex-column align-items-center justify-content-center img-wrapper text-center">
+                                    <img
+                                        src={p.image}
+                                        className="mx-auto img-list"
+                                        alt="..."
+                                    />
+                                </div>
+                            </Link>
                             <div className="d-flex flex-column align-items-start bag-product-name">
-                                <h5>{p.name}</h5>
+                                <Link
+                                    className="nav-link"
+                                    to={`/product/${p._id}`}
+                                >
+                                    <h5>{p.name}</h5>
+                                </Link>
                             </div>
                             <IncDecBtns
                                 onDecrement={handleDecrement}

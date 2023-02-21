@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { getAuthErrors, logIn } from "../store/users";
 import { validator } from "../utils/validator";
 import TextField from "./form/textField";
 import { useDispatch, useSelector } from "react-redux";
 
-const LoginForm = () => {
+const LoginForm = ({ btnColor }) => {
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -90,7 +91,7 @@ const LoginForm = () => {
                             <button
                                 type="submit"
                                 disabled={!isValid}
-                                className="btn btn-dark opacity-100 w-100 mx-auto"
+                                className={`btn ${btnColor} opacity-100 w-100 mx-auto`}
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                             >
@@ -102,6 +103,10 @@ const LoginForm = () => {
             </div>
         </div>
     );
+};
+
+LoginForm.propTypes = {
+    btnColor: PropTypes.string
 };
 
 export default LoginForm;

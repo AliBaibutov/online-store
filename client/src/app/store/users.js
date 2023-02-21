@@ -46,9 +46,6 @@ const usersSlice = createSlice({
             state.error = action.payload;
         },
         bagProductAdded: (state, action) => {
-            // state.entities.map((u) =>
-            //     u._id === state.auth.userId ? u.bag.push(action.payload) : u
-            // );
             state.entities[
                 state.entities.findIndex((u) => u._id === state.auth.userId)
             ].bag.push(action.payload);
@@ -66,19 +63,7 @@ const usersSlice = createSlice({
                       )
                     : null
             );
-            // state.entities.bag.map((p) =>
-            //     p._id === action.payload ? (p.total += 1) : p.total
-            // );
         },
-        // totalDecProdChanged: (state, action) => {
-        //     state.entities.bag.map((p) =>
-        //         p._id === action.payload
-        //             ? p.total === 1
-        //                 ? p.total
-        //                 : (p.total -= 1)
-        //             : p.total
-        //     );
-        // },
         userLoggedOut: (state) => {
             state.entities = null;
             state.isLoggedIn = false;
@@ -103,7 +88,6 @@ const {
     userUpdated,
     bagProductAdded,
     totalIncProdChanged
-    // totalDecProdChanged
 } = actions;
 
 const userUpdateRequested = createAction("users/userUpdateRequested");
@@ -145,23 +129,7 @@ export const logOut = () => (dispatch) => {
     dispatch(userLoggedOut());
 };
 
-// export const addToBag = (payload) => async (dispatch, getState) => {
-//     dispatch(bagProductAdded(payload));
-//     const foundUser = getState().users.entities.find(
-//         (u) => u._id === getState().users.auth.userId
-//     );
-//     console.log(foundUser);
-//     dispatch(userUpdateRequested());
-//     try {
-//         const { content } = await userService.update(foundUser);
-//         dispatch(userUpdated(content));
-//         // history.push(`/users/${content._id}`);
-//     } catch (error) {
-//         dispatch(userUpdateFailed(error.message));
-//     }
-// };
 export const addToBag = (payload) => async (dispatch) => {
-    console.log(payload);
     dispatch(bagProductAdded(payload));
 };
 
@@ -169,15 +137,12 @@ export const updateUser = (payload) => async (dispatch, getState) => {
     const foundUser = getState().users.entities.find(
         (u) => u._id === getState().users.auth.userId
     );
-    console.log(foundUser);
     dispatch(userUpdateRequested());
     try {
         const { content } = payload
             ? await userService.update(payload)
             : await userService.update(foundUser);
-        console.log(foundUser);
         dispatch(userUpdated(content));
-        // history.push(`/users/${content._id}`);
     } catch (error) {
         dispatch(userUpdateFailed(error.message));
     }
@@ -192,12 +157,6 @@ export const loadUsersList = () => async (dispatch) => {
         dispatch(usersRequestFailed(error.message));
     }
 };
-
-// export const getUserById = (userId) => (state) => {
-//     if (state.users.entities) {
-//         return state.users.entities.find((u) => u._id === userId);
-//     }
-// };
 
 export const getUsersList = () => (state) => state.users.entities;
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
@@ -214,9 +173,5 @@ export const getDataUpdatingStatus = () => (state) => state.users.dataUpdated;
 export const incTotalValue = (productId) => (dispatch) => {
     dispatch(totalIncProdChanged(productId));
 };
-
-// export const decTotalValue = (productId) => (dispatch) => {
-//     dispatch(totalDecProdChanged(productId));
-// };
 
 export default usersReducer;

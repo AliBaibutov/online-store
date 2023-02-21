@@ -7,7 +7,7 @@ import { getSubcategoryById } from "../store/subcategories";
 import BagIconForGuest from "./bagIconForGuest";
 import ToBagBtnForGuest from "./toBagBtnForGuest";
 
-const ProdCardForGuest = ({ bgBagIcon, btnInBagColor }) => {
+const ProdCardForGuest = ({ bgBagIcon, btnInBagColor, btnColor }) => {
     const params = useParams();
     const productId = params.productId;
     const product = useSelector(getProductById(productId));
@@ -16,7 +16,7 @@ const ProdCardForGuest = ({ bgBagIcon, btnInBagColor }) => {
         <div className="my-container">
             <div className="d-flex flex-column align-items-end">
                 <BagIconForGuest bgBagIcon={bgBagIcon} />
-                <div className="d-flex col-12 justify-content-center">
+                <div className="d-flex col-12 justify-content-center mb-56px">
                     <div className="d-flex flex-column align-items-center col-4 shadow p-3 bg-body-tertiary rounded me-3">
                         <span className="text-center">{subcategory.name}</span>
                         <h3 className="text-center mb-4">{product.name}</h3>
@@ -37,6 +37,7 @@ const ProdCardForGuest = ({ bgBagIcon, btnInBagColor }) => {
                                 id={productId}
                                 products={product}
                                 btnInBagColor={btnInBagColor}
+                                btnColor={btnColor}
                             />
                         </div>
                     </div>
@@ -48,7 +49,8 @@ const ProdCardForGuest = ({ bgBagIcon, btnInBagColor }) => {
 
 ProdCardForGuest.propTypes = {
     bgBagIcon: PropTypes.string,
-    btnInBagColor: PropTypes.string
+    btnInBagColor: PropTypes.string,
+    btnColor: PropTypes.string
 };
 
 export default ProdCardForGuest;

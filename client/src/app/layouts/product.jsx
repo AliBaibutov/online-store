@@ -9,14 +9,19 @@ import { getIsLoggedIn } from "../store/users";
 const Product = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());
     const status = useSelector(getSwitchStatus());
-    const { btnInBagColor, bgBagIcon } = useTheme(status);
+    const { btnInBagColor, bgBagIcon, btnColor } = useTheme(status);
     return isLoggedIn ? (
         <ProdCardForAuthUser
             btnInBagColor={btnInBagColor}
             bgBagIcon={bgBagIcon}
+            btnColor={btnColor}
         />
     ) : (
-        <ProdCardForGuest btnInBagColor={btnInBagColor} bgBagIcon={bgBagIcon} />
+        <ProdCardForGuest
+            btnInBagColor={btnInBagColor}
+            bgBagIcon={bgBagIcon}
+            btnColor={btnColor}
+        />
     );
 };
 

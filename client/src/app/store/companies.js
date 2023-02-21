@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import API from "../api";
 import companyService from "../services/company.service";
 const companiesSlice = createSlice({
     name: "companies",

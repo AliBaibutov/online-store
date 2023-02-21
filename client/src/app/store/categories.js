@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import API from "../api";
 import categoryService from "../services/category.service";
 const categoriesSlice = createSlice({
     name: "categories",

@@ -6,7 +6,6 @@ import { getCurrentUserData } from "../store/users";
 
 const ProtectedRoute = ({ children }) => {
     const currentUser = useSelector(getCurrentUserData());
-    console.log(currentUser);
     if (!currentUser?.isAdmin) return <Navigate to={"/"} />;
     return children;
 };
