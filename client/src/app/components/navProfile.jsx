@@ -43,9 +43,7 @@ const NavProfile = ({ bgSwitch, btnColor }) => {
                         <i className="bi bi-person-circle"></i>
                     </h5>
                 </div>
-                <div
-                    className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}
-                >
+                <div className={"dropdown-menu exit" + (isOpen ? " show" : "")}>
                     <Link to="/logout" className="dropdown-item">
                         Выйти
                     </Link>

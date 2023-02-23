@@ -114,25 +114,25 @@ const Main = () => {
                 !subcategoriesLoadingStatus &&
                 !categoriesLoadingStatus && (
                     <>
-                        <div className="d-flex h-100 justify-content-center">
-                            <div className="d-flex flex-column pt-2 ps-2 me-1 col-3 card cursor shadow p-3 bg-body-tertiary rounded">
+                        <div className="d-flex flex-column flex-lg-row h-100 justify-content-center">
+                            <div className="d-flex flex-column align-items-center align-items-lg-start pt-2 ps-2 me-1 mb-2 mb-lg-0 col-12 col-lg-3 card cursor shadow p-3 bg-body-tertiary rounded">
                                 <h4>КАТЕГОРИИ</h4>
                                 {categories.map((c) => (
                                     <div
                                         key={c._id}
-                                        className="mb-2 cursor dropend"
+                                        className="mb-2 cursor dropdown"
                                     >
                                         <div
-                                            className="text-wrap category-hover"
+                                            className="category-hover"
                                             data-bs-toggle="dropdown"
                                         >
                                             {c.name}
                                         </div>
-                                        <div className="dropdown-menu opacity-75">
+                                        <div className="dropdown-menu">
                                             {filterSubcategories(c.name).map(
                                                 (s) => (
                                                     <div
-                                                        className="dropdown-item category-hover bg-transparent"
+                                                        className="dropdown-item text-wrap category-hover bg-transparent"
                                                         onClick={() =>
                                                             filterProducts(
                                                                 s._id
@@ -154,7 +154,7 @@ const Main = () => {
                                     Все товары
                                 </div>
                             </div>
-                            <div className="col-9 ps-3">
+                            <div className="col-12 col-lg-9 ps-lg-3">
                                 <form className="input-group mb-2">
                                     <input
                                         className="w-100 mx-auto form-control rounded"
@@ -168,10 +168,10 @@ const Main = () => {
                                 </form>
                                 <div>Сортировка по:</div>
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <div>
+                                    <div className="d-flex flex-column flex-sm-row">
                                         <button
                                             type="button"
-                                            className={`btn btn-outline-dark border sort-button btn-sm me-2`}
+                                            className={`btn btn-outline-dark mb-2 mb-sm-0 border sort-button btn-sm me-2`}
                                             onClick={() =>
                                                 handleSort("price", "desc")
                                             }
@@ -181,7 +181,7 @@ const Main = () => {
                                         </button>
                                         <button
                                             type="button"
-                                            className={`btn btn-outline-dark border sort-button btn-sm`}
+                                            className={`btn btn-outline-dark mb-2 mb-sm-0 border sort-button btn-sm`}
                                             onClick={() =>
                                                 handleSort("price", "asc")
                                             }
@@ -200,7 +200,7 @@ const Main = () => {
                                         />
                                     )}
                                 </div>
-                                <div className="d-flex flex-wrap align-items-strech p-0 mt-2 gap-4">
+                                <div className="d-flex flex-wrap justify-content-center justify-content-sm-start align-items-strech p-0 mt-2 gap-1 gap-md-4">
                                     {productCrop.map((p) => (
                                         <div
                                             key={p._id}

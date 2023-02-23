@@ -28,7 +28,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
             <div className="input-group has-validation">
                 <input
                     type={showPassword ? "text" : type}
-                    id={name}
+                    // id={name}
                     name={name}
                     value={value}
                     onChange={handleChange}

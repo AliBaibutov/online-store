@@ -65,44 +65,55 @@ const BagPageForAuthUser = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
                 bag.map((p) => (
                     <div
                         key={p._id}
-                        className="d-flex flex-column border-bottom"
+                        className="d-flex flex-column border-bottom mb-2 mb-md-0 pb-2 pb-md-0"
                     >
-                        <div className="d-flex justify-content-center gap-5 align-items-center">
-                            <Link className="nav-link" to={`/product/${p._id}`}>
-                                <div className="d-flex flex-column align-items-center justify-content-center img-wrapper text-center">
-                                    <img
-                                        src={p.image}
-                                        className="mx-auto img-list"
-                                        alt="..."
-                                    />
+                        <div className="d-flex justify-content-center">
+                            <div className="d-flex flex-column align-items-center flex-md-row">
+                                <div className="d-flex flex-column me-xl-5 flex-xl-row align-items-center">
+                                    <Link
+                                        className="nav-link"
+                                        to={`/product/${p._id}`}
+                                    >
+                                        <div className="d-flex flex-column align-items-center justify-content-center img-wrapper text-center">
+                                            <img
+                                                src={p.image}
+                                                className="mx-auto img-list"
+                                                alt="..."
+                                            />
+                                        </div>
+                                    </Link>
+                                    <div className="bag-product-name text-center text-xl-start">
+                                        <Link
+                                            className="nav-link"
+                                            to={`/product/${p._id}`}
+                                        >
+                                            <h5>{p.name}</h5>
+                                        </Link>
+                                    </div>
                                 </div>
-                            </Link>
-                            <div className="d-flex flex-column align-items-start bag-product-name">
-                                <Link
-                                    className="nav-link"
-                                    to={`/product/${p._id}`}
-                                >
-                                    <h5>{p.name}</h5>
-                                </Link>
+                                <IncDecBtns
+                                    onDecrement={handleDecrement}
+                                    onIncrement={handleIncrement}
+                                    productId={p._id}
+                                    total={p.total}
+                                    price={p.price}
+                                    btnOutlineColor={btnOutlineColor}
+                                />
                             </div>
-                            <IncDecBtns
-                                onDecrement={handleDecrement}
-                                onIncrement={handleIncrement}
-                                productId={p._id}
-                                total={p.total}
-                                price={p.price}
-                                btnOutlineColor={btnOutlineColor}
-                            />
-                            <div className="bag-product-price d-flex justify-content-center">
-                                <h5>{p.price * p.total} р.</h5>
-                            </div>
-                            <div>
-                                <button
-                                    className="btn btn-outline-danger rounded-3"
-                                    onClick={() => handleRemove(p._id)}
-                                >
-                                    <i className="bi bi-trash-fill"></i>
-                                </button>
+                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-end align-items-md-center gap-md-5">
+                                <div className="bag-product-price mt-50px d-flex justify-content-end">
+                                    <h5 className="border border-dark rounded-3 m-0 bag-price">
+                                        {p.price * p.total} р.
+                                    </h5>
+                                </div>
+                                <div className="mb-38px">
+                                    <button
+                                        className="btn btn-outline-danger rounded-3"
+                                        onClick={() => handleRemove(p._id)}
+                                    >
+                                        <i className="bi bi-trash-fill"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

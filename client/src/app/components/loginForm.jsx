@@ -10,7 +10,6 @@ const LoginForm = ({ btnColor }) => {
         email: "",
         password: ""
     });
-
     const loginError = useSelector(getAuthErrors());
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
@@ -21,6 +20,7 @@ const LoginForm = ({ btnColor }) => {
             [target.name]: target.value
         }));
     };
+
     const validatorConfig = {
         email: {
             isRequired: {
@@ -31,14 +31,17 @@ const LoginForm = ({ btnColor }) => {
             isRequired: { message: "Пароль обязателен для заполнения" }
         }
     };
+
     useEffect(() => {
         validate();
     }, [data]);
+
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
+
     const isValid = Object.keys(errors).length === 0;
 
     const handleSubmit = (e) => {

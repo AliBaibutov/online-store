@@ -40,7 +40,6 @@ code {
 }
 
 .wrapper {
-    min-height: 1000px;
     display: flex;
     flex-direction: column;
 }
@@ -67,10 +66,6 @@ code {
     height: 250px;
 }
 
-.footer-element {
-    min-width: 314px;
-}
-
 .footer-element-about {
     margin-top: 30px;
 }
@@ -81,9 +76,18 @@ code {
 
 .img-list {
     width: 250px;
+    height: 250px;
     max-width: 250px;
     max-height: 250px;
     object-fit: contain;
+}
+
+.mt-50px {
+    margin-top: 0px;
+}
+
+.mb-38px {
+    margin-bottom: 0px;
 }
 
 .product-name-wrapper {
@@ -103,8 +107,8 @@ code {
 }
 
 .card-img {
-    width: 500px;
-    height: 500px;
+    min-width: 250px;
+    min-height: 250px;
     object-fit: contain;
 }
 
@@ -114,7 +118,26 @@ code {
 }
 
 .card-total-bag {
-    min-width: 250px;
+    width: 25%;
+}
+
+@media (max-width: 1200px) {
+    .card-total-bag {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-total-bag {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1880px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 23.58%;
+    }
 }
 
 @media (max-width: 1880px) {
@@ -142,6 +165,59 @@ code {
     .card-width {
         min-width: 270px;
         flex: 0 1 48.02%;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header-container {
+        margin: 0 40px;
+        padding: 20px 0;
+        height: 200px;
+    }
+}
+
+@media (max-width: 991px) {
+    .footer-container {
+        margin: 0 40px;
+        height: 450px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .my-container {
+        margin: 0 40px;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .mt-50px {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .mb-38px {
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 575px) {
+    .img-list {
+        width: 160px;
+        height: 160px;
+        max-width: 250px;
+        max-height: 250px;
+        object-fit: contain;
     }
 }
 
@@ -208,8 +284,14 @@ a {
     width: 300px;
 }
 
+@media (max-width: 992px) {
+    .bag-product-name {
+        width: 150px;
+    }
+}
+
 .bag-product-price {
-    width: 130px;
+    min-width: 130px;
 }
 
 .mt-15px {
@@ -220,6 +302,10 @@ a {
     margin-bottom: 56px;
 }
 
-.btn-green {
-    background-color: #08d45a;
+.bag-price {
+    padding: 6px;
+}
+
+.exit {
+    min-width: 94px;
 }

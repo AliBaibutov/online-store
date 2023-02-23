@@ -16,14 +16,14 @@ const Footer = () => {
 
     return (
         <div className={`${bg} text-light mt-4`}>
-            <div className="footer-container d-flex justify-content-between">
-                <div className="d-flex flex-column justify-content-center footer-element">
+            <div className="footer-container d-flex flex-column flex-lg-row justify-content-between">
+                <div className="d-flex flex-column justify-content-center align-items-center me-xl-0">
                     <Link to="/">
                         <img src={logo} alt="logo" />
                     </Link>
                 </div>
-                <div className="d-flex flex-column justify-content-center gap-3 footer-element">
-                    <div className="d-flex flex-column">
+                <div className="d-flex flex-column justify-content-center align-items-center align-items-lg-start gap-3">
+                    <div className="d-flex flex-column align-items-center align-items-lg-start">
                         <h4>Мы в социальных сетях: </h4>
                         <div className="d-flex gap-2">
                             <a href="#">
@@ -44,7 +44,7 @@ const Footer = () => {
                     <h4>Акции</h4>
                     <h4>Новости</h4>
                 </div>
-                <div className="d-flex flex-column footer-element footer-element-about">
+                <div className="d-flex flex-column align-items-center align-items-lg-start footer-element-about">
                     <h4>О нас:</h4>
                     <span>История компании</span>
                     <span>Наш коллектив</span>

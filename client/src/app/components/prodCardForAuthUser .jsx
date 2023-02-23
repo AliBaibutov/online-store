@@ -16,8 +16,8 @@ const ProdCardForAuthUser = ({ bgBagIcon, btnInBagColor, btnColor }) => {
         <div className="my-container">
             <div className="d-flex flex-column align-items-end">
                 <BagIconForAuthUser bgBagIcon={bgBagIcon} />
-                <div className="d-flex col-12 justify-content-center mb-56px">
-                    <div className="d-flex flex-column align-items-center col-4 shadow p-3 bg-body-tertiary rounded me-3">
+                <div className="d-flex flex-column align-items-center align-items-lg-stretch flex-lg-row col-12 justify-content-lg-center mb-56px">
+                    <div className="d-flex flex-column align-items-center col-12 col-md-6 col-lg-4 shadow p-3 bg-body-tertiary rounded mt-4 mt-md-0 mb-4 mb-lg-0 me-lg-3">
                         <span className="text-center">{subcategory.name}</span>
                         <h3 className="text-center mb-4">{product.name}</h3>
                         <img
@@ -26,13 +26,15 @@ const ProdCardForAuthUser = ({ bgBagIcon, btnInBagColor, btnColor }) => {
                             alt="..."
                         />
                     </div>
-                    <div className="d-flex flex-column justify-content-between col-4 shadow p-3 bg-body-tertiary rounded">
+                    <div className="d-flex flex-column justify-content-between col-12 col-md-6 col-lg-4 shadow p-3 bg-body-tertiary rounded">
                         <div>
                             <h2>Описание товара</h2>
                             <p>{product.description}</p>
                         </div>
                         <div>
-                            <h3 className="price-text">{product.price} </h3>
+                            <h3 className="price-text mb-2">
+                                {product.price}{" "}
+                            </h3>
                             <ToBagBtnForAuthUser
                                 id={productId}
                                 products={product}

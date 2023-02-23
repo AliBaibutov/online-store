@@ -5,7 +5,7 @@ const OrderingCard = ({ total, bg, btnColor }) => {
     return (
         <div className="d-flex flex-row-reverse mt-3">
             <div
-                className={`card text-${bg} mb-3 d-flex w-25 shadow-lg border-0 card-total-bag`}
+                className={`card text-${bg} mb-3 d-flex shadow-lg border-0 card-total-bag`}
             >
                 <div className="card-header d-flex justify-content-around">
                     <h2>Итого:</h2>

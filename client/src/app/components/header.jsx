@@ -19,7 +19,7 @@ const Header = () => {
     return (
         <>
             <div className={`${bg} text-light mb-4 fix-header`}>
-                <div className="header-container d-flex justify-content-between align-items-center">
+                <div className="header-container d-flex flex-column flex-md-row justify-content-between align-items-center">
                     <Link to="/">
                         <img src={logo} alt="logo" />
                     </Link>
@@ -63,3 +63,49 @@ const Header = () => {
 };
 
 export default Header;
+
+// eslint-disable-next-line no-lone-blocks
+{
+    /* <>
+            <div className={`${bg} text-light mb-4 fix-header`}>
+                <div className="header-container d-flex justify-content-between align-items-center">
+                    <Link to="/">
+                        <img src={logo} alt="logo" />
+                    </Link>
+                    {isLoggedIn ? (
+                        <NavProfile bgSwitch={bgSwitch} btnColor={btnColor} />
+                    ) : (
+                        <div className="d-flex align-items-center">
+                            <Switch bgSwitch={bgSwitch} />
+                            <div>
+                                <button
+                                    className={`btn ${btnColor}`}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#registerModal"
+                                >
+                                    <div>
+                                        <i className="bi bi-journal-text"></i>
+                                    </div>
+                                    <div>Регистрация</div>
+                                </button>
+                            </div>
+                            <div>
+                                <button
+                                    className={`btn ${btnColor}`}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#loginModal"
+                                >
+                                    <div>
+                                        <i className="bi bi-person-circle"></i>
+                                    </div>
+                                    <div>Войти</div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <RegisterForm btnColor={btnColor} />
+            <LoginForm btnColor={btnColor} />
+        </> */
+}

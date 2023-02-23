@@ -16,7 +16,10 @@ const BagIconForGuest = ({ bgBagIcon }) => {
         : 0;
     return (
         <div>
-            <Link className="nav-link" to={"/bag"}>
+            <Link
+                className="d-flex flex-column align-items-end flex-md-row align-items-md-center justify-content-md-end nav-link mb-2"
+                to={"/bag"}
+            >
                 <button type="button" className="btn position-relative">
                     <h3>
                         <i className="bi bi-cart3"></i>
