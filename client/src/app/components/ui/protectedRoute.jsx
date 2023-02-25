@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import { getCurrentUserData } from "../store/users";
+import { getCurrentUserData } from "../../store/users";
 
 const ProtectedRoute = ({ children }) => {
     const currentUser = useSelector(getCurrentUserData());

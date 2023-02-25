@@ -14,6 +14,29 @@ const Pagination = ({
 }) => {
     const pageCount = Math.ceil(itemsCount / pageSize);
     const pages = _.range(1, pageCount + 1);
+
+    const pageItem = (page) => {
+        return (
+            <li
+                className={
+                    "border-end " + (page === currentPage ? `${bg}` : "")
+                }
+                key={"page_" + page}
+            >
+                <button
+                    className={
+                        "btn border border-white border-0 rounded-0 " +
+                        (page === currentPage ? `${btnColor}` : "")
+                    }
+                    href="#"
+                    onClick={() => onPageChange(page)}
+                >
+                    {page}
+                </button>
+            </li>
+        );
+    };
+
     if (pageCount <= 1) return null;
     return (
         <nav className="d-flex justify-content-center mt-3">
@@ -23,26 +46,7 @@ const Pagination = ({
                         Предыдущая
                     </button>
                 </li>
-                {pages.map((page) => (
-                    <li
-                        className={
-                            "border-end " +
-                            (page === currentPage ? `${bg}` : "")
-                        }
-                        key={"page_" + page}
-                    >
-                        <button
-                            className={
-                                "btn border border-white border-0 rounded-0 " +
-                                (page === currentPage ? `${btnColor}` : "")
-                            }
-                            href="#"
-                            onClick={() => onPageChange(page)}
-                        >
-                            {page}
-                        </button>
-                    </li>
-                ))}
+                {pages.map((page) => pageItem(page))}
                 <li className="">
                     <button
                         className="btn"

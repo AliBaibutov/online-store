@@ -1,9 +1,9 @@
 import React from "react";
 import { useRoutes } from "react-router";
-import AppLoader from "./components/appLoader";
-import Footer from "./components/footer";
-import Header from "./components/header";
-import Wrapper from "./components/wrapper";
+import AppLoader from "./components/ui/hoc/appLoader";
+import Footer from "./components/ui/footer";
+import Header from "./components/ui/header";
+import Wrapper from "./components/common/wrapper";
 import routes from "./routes";
 
 const App = () => {

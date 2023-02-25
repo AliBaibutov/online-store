@@ -7,15 +7,15 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
+
     const getInputClasses = () => {
-        return (
-            "form-control border-secondary-subtle" +
-            (error
-                ? " is-invalid"
-                : name === "surname" || name === "image"
-                ? ""
-                : " is-valid")
-        );
+        if (error) {
+            return "form-control border-secondary-subtle is-invalid";
+        } else if (name === "surname" || name === "image") {
+            return "form-control border-secondary-subtle";
+        } else {
+            return "form-control border-secondary-subtle is-valid";
+        }
     };
 
     const toggleShowPassword = () => {
@@ -28,7 +28,6 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
             <div className="input-group has-validation">
                 <input
                     type={showPassword ? "text" : type}
-                    // id={name}
                     name={name}
                     value={value}
                     onChange={handleChange}

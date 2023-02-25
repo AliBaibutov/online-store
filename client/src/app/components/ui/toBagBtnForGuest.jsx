@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { createBagProduct, getBagProducts } from "../store/bagProducts";
+import { createBagProduct, getBagProducts } from "../../store/bagProducts";
 
 const ToBagBtnForGuest = ({ id, products, btnColor, btnInBagColor }) => {
     const dispatch = useDispatch();
@@ -18,16 +18,30 @@ const ToBagBtnForGuest = ({ id, products, btnColor, btnInBagColor }) => {
         dispatch(createBagProduct({ ...product, total: 1 }));
     };
 
-    return productsInBag?.length > 0 ? (
-        productsInBag.find((bp) => bp._id === id) ? (
-            <button
-                className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
-                id={id}
-                disabled
-            >
-                В КОРЗИНЕ
-            </button>
-        ) : (
+    if (productsInBag?.length > 0) {
+        if (productsInBag?.find((bp) => bp._id === id)) {
+            return (
+                <button
+                    className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
+                    id={id}
+                    disabled
+                >
+                    В КОРЗИНЕ
+                </button>
+            );
+        } else {
+            return (
+                <button
+                    className={`btn ${btnColor} mb-3 rounded`}
+                    onClick={handleBtnName}
+                    id={id}
+                >
+                    В КОРЗИНУ
+                </button>
+            );
+        }
+    } else {
+        return (
             <button
                 className={`btn ${btnColor} mb-3 rounded`}
                 onClick={handleBtnName}
@@ -35,16 +49,8 @@ const ToBagBtnForGuest = ({ id, products, btnColor, btnInBagColor }) => {
             >
                 В КОРЗИНУ
             </button>
-        )
-    ) : (
-        <button
-            className={`btn ${btnColor} mb-3 rounded`}
-            onClick={handleBtnName}
-            id={id}
-        >
-            В КОРЗИНУ
-        </button>
-    );
+        );
+    }
 };
 
 ToBagBtnForGuest.propTypes = {

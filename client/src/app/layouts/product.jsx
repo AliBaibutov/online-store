@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import useTheme from "../components/hooks/useTheme";
-import ProdCardForAuthUser from "../components/prodCardForAuthUser ";
-import ProdCardForGuest from "../components/prodCardForGuest";
+import ProdCardForAuthUser from "../components/pages/prodCardForAuthUser ";
+import ProdCardForGuest from "../components/pages/prodCardForGuest";
 import { getSwitchStatus } from "../store/theme";
 import { getIsLoggedIn } from "../store/users";
 

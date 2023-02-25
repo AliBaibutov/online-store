@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { changeSwitchStatus } from "../store/theme";
+import { changeSwitchStatus } from "../../store/theme";
 
 const Switch = ({ bgSwitch }) => {
     const dispatch = useDispatch();

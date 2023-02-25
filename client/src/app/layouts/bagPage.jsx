@@ -2,8 +2,8 @@ import React from "react";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "../store/users";
-import BagPageForGuest from "../components/bagPageForGuest";
-import BagPageForAuthUser from "../components/bagPageForAuthUser";
+import BagPageForGuest from "../components/pages/bagPageForGuest";
+import BagPageForAuthUser from "../components/pages/bagPageForAuthUser";
 import { getSwitchStatus } from "../store/theme";
 import useTheme from "../components/hooks/useTheme";
 

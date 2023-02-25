@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { getBagProducts } from "../store/bagProducts";
 import _ from "lodash";
 import { Link } from "react-router-dom";
+import { getCurrentUserData } from "../../store/users";
 
-const BagIconForGuest = ({ bgBagIcon }) => {
-    const productsInBag = useSelector(getBagProducts());
-    const numberOfProducts = productsInBag ? productsInBag?.length : 0;
+const BagIconForAuthUser = ({ bgBagIcon }) => {
+    const currentUser = useSelector(getCurrentUserData());
+    const bag = currentUser?.bag;
+    const amountForAuth = bag?.length;
 
-    const totalPrice = productsInBag
-        ? productsInBag?.reduce((acc, p) => {
-              return (acc += p.price * p.total);
-          }, 0)
-        : 0;
+    const totalPriceForAuth = useMemo(
+        () =>
+            bag
+                ? bag?.reduce((acc, p) => {
+                      return (acc += p.price * p.total);
+                  }, 0)
+                : 0,
+        [bag]
+    );
+
     return (
         <div>
             <Link
@@ -27,18 +33,18 @@ const BagIconForGuest = ({ bgBagIcon }) => {
                     <span
                         className={`position-absolute top-0 start-100 translate-middle badge rounded-pill ${bgBagIcon}`}
                     >
-                        {numberOfProducts}
+                        {amountForAuth}
                         <span className="visually-hidden">unread messages</span>
                     </span>
                 </button>
-                <b>{totalPrice} р.</b>
+                <b>{totalPriceForAuth} р.</b>
             </Link>
         </div>
     );
 };
 
-BagIconForGuest.propTypes = {
+BagIconForAuthUser.propTypes = {
     bgBagIcon: PropTypes.string
 };
 
-export default BagIconForGuest;
+export default BagIconForAuthUser;

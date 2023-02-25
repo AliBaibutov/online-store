@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getAuthErrors, logIn } from "../store/users";
-import { validator } from "../utils/validator";
-import TextField from "./form/textField";
-import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../store/users";
+import { useDispatch } from "react-redux";
+import { validator } from "../../utils/validator";
+import TextField from "../common/form/textField";
+import { registerConfig } from "../../validator-configs/registerConfig";
 
-const LoginForm = ({ btnColor }) => {
-    const [data, setData] = useState({
-        email: "",
-        password: ""
-    });
-    const loginError = useSelector(getAuthErrors());
+const RegisterForm = ({ btnColor }) => {
     const dispatch = useDispatch();
+
+    const initState = {
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        isAdmin: false
+    };
+
+    const [data, setData] = useState(initState);
     const [errors, setErrors] = useState({});
 
     const handleChange = (target) => {
@@ -21,23 +27,12 @@ const LoginForm = ({ btnColor }) => {
         }));
     };
 
-    const validatorConfig = {
-        email: {
-            isRequired: {
-                message: "Электронная почта обязательна для заполнения"
-            }
-        },
-        password: {
-            isRequired: { message: "Пароль обязателен для заполнения" }
-        }
-    };
-
     useEffect(() => {
         validate();
     }, [data]);
 
     const validate = () => {
-        const errors = validator(data, validatorConfig);
+        const errors = validator(data, registerConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
@@ -48,21 +43,29 @@ const LoginForm = ({ btnColor }) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        dispatch(logIn({ payload: data }));
+        const newData = {
+            ...data
+        };
+
+        dispatch(signUp(newData));
     };
+
     return (
         <div
             className="modal fade"
-            id="loginModal"
+            id="registerModal"
             tabIndex="-1"
-            aria-labelledby="loginModalLabel"
+            aria-labelledby="registerModalLabel"
             aria-hidden="true"
         >
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="loginModalLabel">
-                            Вход
+                        <h1
+                            className="modal-title fs-5"
+                            id="registerModalLabel"
+                        >
+                            Регистрация
                         </h1>
                         <button
                             type="button"
@@ -73,6 +76,20 @@ const LoginForm = ({ btnColor }) => {
                     </div>
                     <div className="modal-body">
                         <form onSubmit={handleSubmit}>
+                            <TextField
+                                label="Имя"
+                                name="name"
+                                value={data.name}
+                                onChange={handleChange}
+                                error={errors.name}
+                            />
+                            <TextField
+                                label="Фамилия"
+                                name="surname"
+                                value={data.surname || ""}
+                                onChange={handleChange}
+                                error={errors.surname}
+                            />
                             <TextField
                                 label="Электронная почта"
                                 name="email"
@@ -88,9 +105,6 @@ const LoginForm = ({ btnColor }) => {
                                 onChange={handleChange}
                                 error={errors.password}
                             />
-                            {loginError && (
-                                <p className="text-danger">{loginError}</p>
-                            )}
                             <button
                                 type="submit"
                                 disabled={!isValid}
@@ -98,7 +112,7 @@ const LoginForm = ({ btnColor }) => {
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                             >
-                                Войти
+                                Зарегистрироваться
                             </button>
                         </form>
                     </div>
@@ -108,8 +122,8 @@ const LoginForm = ({ btnColor }) => {
     );
 };
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
     btnColor: PropTypes.string
 };
 
-export default LoginForm;
+export default RegisterForm;

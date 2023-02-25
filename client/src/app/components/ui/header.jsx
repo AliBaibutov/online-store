@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginForm from "./loginForm";
-import RegisterForm from "./registerForm";
-import logo from "../../imgs/logo.png";
+import LoginForm from "../ui/loginForm";
+import RegisterForm from "../ui/registerForm";
+import logo from "../../../imgs/logo.png";
 import { useSelector } from "react-redux";
-import { getIsLoggedIn } from "../store/users";
-import NavProfile from "./navProfile";
-import { getSwitchStatus } from "../store/theme";
-import useTheme from "./hooks/useTheme";
-import Switch from "./switch";
+import { getIsLoggedIn } from "../../store/users";
+import NavProfile from "../ui/navProfile";
+import { getSwitchStatus } from "../../store/theme";
+import useTheme from "../hooks/useTheme";
+import Switch from "../ui/switch";
 
 const Header = () => {
     const isLoggedIn = useSelector(getIsLoggedIn());

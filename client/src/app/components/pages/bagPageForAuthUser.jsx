@@ -1,38 +1,61 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    decrementTotalValue,
-    getBagProducts,
-    incrementTotalValue,
-    removeBagProduct
-} from "../store/bagProducts";
-import OrderingCard from "./orderingCard";
-import BagIconForGuest from "./bagIconForGuest";
-import IncDecBtns from "./incDecBtns";
+import { getCurrentUserData, updateUser } from "../../store/users";
+import OrderingCard from "../ui/orderingCard";
+import BagIconForAuthUser from "../ui/bagIconForAuthUser";
+import IncDecBtns from "../ui/incDecBtns";
 import { Link } from "react-router-dom";
 
-const BagPageForGuest = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
+const BagPageForAuthUser = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
     const dispatch = useDispatch();
-    const productsInBag = useSelector(getBagProducts());
+    const currentUser = useSelector(getCurrentUserData());
+    const bag = currentUser?.bag;
     const handleRemove = (id) => {
-        dispatch(removeBagProduct(id));
+        const updatedBag = bag?.filter((p) => p._id !== id);
+        dispatch(updateUser({ ...currentUser, bag: updatedBag }));
     };
 
     const handleIncrement = (id) => {
-        dispatch(incrementTotalValue(id));
+        const updatedProduct = bag.find((p) => p._id === id);
+        let { total } = updatedProduct;
+        const updatedUser = {
+            ...currentUser,
+            bag: bag.map((p) =>
+                p === updatedProduct
+                    ? { ...updatedProduct, total: (total += 1) }
+                    : p
+            )
+        };
+        dispatch(updateUser(updatedUser));
     };
 
     const handleDecrement = (id) => {
-        dispatch(decrementTotalValue(id));
+        const updatedProduct = bag.find((p) => p._id === id);
+        let { total } = updatedProduct;
+        const updatedUser = {
+            ...currentUser,
+            bag: bag.map((p) =>
+                p === updatedProduct
+                    ? total > 1
+                        ? { ...updatedProduct, total: (total -= 1) }
+                        : p
+                    : p
+            )
+        };
+        dispatch(updateUser(updatedUser));
     };
 
-    const totalPrice = productsInBag
-        ? productsInBag?.reduce((acc, p) => {
-              return (acc += p.price * p.total);
-          }, 0)
-        : 0;
+    const totalPriceForAuth = useMemo(
+        () =>
+            bag
+                ? bag?.reduce((acc, p) => {
+                      return (acc += p.price * p.total);
+                  }, 0)
+                : 0,
+        [bag]
+    );
 
     return (
         <div className="my-container">
@@ -40,10 +63,10 @@ const BagPageForGuest = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
                 <h1>Корзина</h1>
             </div>
             <div className="text-end">
-                <BagIconForGuest bgBagIcon={bgBagIcon} />
+                <BagIconForAuthUser bgBagIcon={bgBagIcon} />
             </div>
-            {productsInBag?.length ? (
-                productsInBag.map((p) => (
+            {bag?.length ? (
+                bag.map((p) => (
                     <div
                         key={p._id}
                         className="d-flex flex-column border-bottom mb-2 mb-md-0 pb-2 pb-md-0"
@@ -87,7 +110,6 @@ const BagPageForGuest = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
                                         {p.price * p.total} р.
                                     </h5>
                                 </div>
-
                                 <div className="mb-38px">
                                     <button
                                         className="btn btn-outline-danger rounded-3"
@@ -103,16 +125,20 @@ const BagPageForGuest = ({ bg, bgBagIcon, btnColor, btnOutlineColor }) => {
             ) : (
                 <h3 className="text-center">Корзина пуста</h3>
             )}
-            <OrderingCard total={totalPrice} bg={bg} btnColor={btnColor} />
+            <OrderingCard
+                total={totalPriceForAuth}
+                bg={bg}
+                btnColor={btnColor}
+            />
         </div>
     );
 };
 
-BagPageForGuest.propTypes = {
+BagPageForAuthUser.propTypes = {
     bg: PropTypes.string,
     bgBagIcon: PropTypes.string,
     btnColor: PropTypes.string,
     btnOutlineColor: PropTypes.string
 };
 
-export default BagPageForGuest;
+export default BagPageForAuthUser;

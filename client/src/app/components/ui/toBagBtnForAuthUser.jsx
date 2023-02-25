@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { addToBag, getCurrentUserData, updateUser } from "../store/users";
+import { addToBag, getCurrentUserData, updateUser } from "../../store/users";
 
 const ToBagBtnForAuthUser = ({ id, products, btnColor, btnInBagColor }) => {
     const dispatch = useDispatch();
@@ -18,16 +18,30 @@ const ToBagBtnForAuthUser = ({ id, products, btnColor, btnInBagColor }) => {
         dispatch(addToBag({ ...product, total: 1 })) && dispatch(updateUser());
     };
 
-    return currentUser?.bag.length > 0 ? (
-        currentUser?.bag.find((bp) => bp._id === id) ? (
-            <button
-                className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
-                id={id}
-                disabled
-            >
-                В КОРЗИНЕ
-            </button>
-        ) : (
+    if (currentUser?.bag.length > 0) {
+        if (currentUser?.bag.find((bp) => bp._id === id)) {
+            return (
+                <button
+                    className={`btn ${btnInBagColor} mb-3 rounded border border-secondary`}
+                    id={id}
+                    disabled
+                >
+                    В КОРЗИНЕ
+                </button>
+            );
+        } else {
+            return (
+                <button
+                    className={`btn ${btnColor} mb-3 rounded`}
+                    onClick={handleBtnName}
+                    id={id}
+                >
+                    В КОРЗИНУ
+                </button>
+            );
+        }
+    } else {
+        return (
             <button
                 className={`btn ${btnColor} mb-3 rounded`}
                 onClick={handleBtnName}
@@ -35,16 +49,8 @@ const ToBagBtnForAuthUser = ({ id, products, btnColor, btnInBagColor }) => {
             >
                 В КОРЗИНУ
             </button>
-        )
-    ) : (
-        <button
-            className={`btn ${btnColor} mb-3 rounded`}
-            onClick={handleBtnName}
-            id={id}
-        >
-            В КОРЗИНУ
-        </button>
-    );
+        );
+    }
 };
 
 ToBagBtnForAuthUser.propTypes = {

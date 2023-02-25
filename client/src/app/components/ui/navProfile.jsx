@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCurrentUserData, loadUsersList } from "../store/users";
-import Loader from "./loader";
-import Switch from "./switch";
+import { getCurrentUserData, loadUsersList } from "../../store/users";
+import Loader from "../common/loader";
+import Switch from "../ui/switch";
 
 const NavProfile = ({ bgSwitch, btnColor }) => {
     const dispatch = useDispatch();
@@ -13,10 +13,13 @@ const NavProfile = ({ bgSwitch, btnColor }) => {
     }, []);
     const currentUser = useSelector(getCurrentUserData());
     const [isOpen, setOpen] = useState(false);
+
     const toggleMenu = () => {
         setOpen((prevState) => !prevState);
     };
+
     if (!currentUser) return <Loader />;
+
     return (
         <div className="d-flex align-items-center">
             <Switch bgSwitch={bgSwitch} />

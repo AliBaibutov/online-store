@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../imgs/logo.png";
-import telegram from "../../imgs/telegram.png";
-import youtube from "../../imgs/youtube.png";
-import vk from "../../imgs/vk.png";
-import dzen from "../../imgs/dzen.png";
+import logo from "../../../imgs/logo.png";
+import telegram from "../../../imgs/telegram.png";
+import youtube from "../../../imgs/youtube.png";
+import vk from "../../../imgs/vk.png";
+import dzen from "../../../imgs/dzen.png";
 import { useSelector } from "react-redux";
-import { getSwitchStatus } from "../store/theme";
-import useTheme from "./hooks/useTheme";
+import { getSwitchStatus } from "../../store/theme";
+import useTheme from "../hooks/useTheme";
 
 const Footer = () => {
     const status = useSelector(getSwitchStatus());
