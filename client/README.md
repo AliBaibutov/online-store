@@ -5,4 +5,4 @@
 <img src="https://img.shields.io/github/issues-raw/AliBaibutov/online-store">
 </p>
 
-<img src="./src/imgs/logo.png" width="100%">
+<img src="./src/imgs/logo_readme.png" width="100%">
