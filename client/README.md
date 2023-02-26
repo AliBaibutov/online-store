@@ -9,36 +9,41 @@
 
 ## Описание проекта
 
-Данный проект представляет собой интернет-магазин музыкальных инструментов. Проект является адаптивным SPA web-приложением.
+Данный проект представляет собой интернет-магазин музыкальных инструментов. Проект является fullstack SPA web-приложением с адаптивной версткой.
 
 ## Из чего состоит?
 
 -   Главная страница
 <p align="center">
-<img src="./readme_assets/main.png">
+<img src="./readme_assets/main.gif">
 </p>
 
 -   Страница товара
 <p align="center">
-<img src="./readme_assets/product_page.png">
+<img src="./readme_assets/product.gif">
 </p>
 
 -   Корзина
 <p align="center">
-<img src="./readme_assets/bag.png">
+<img src="./readme_assets/bag.gif">
 </p>
 
 -   Страница администратора
 <p align="center">
-<img src="./readme_assets/admin.png">
+<img src="./readme_assets/admin.gif">
 </p>
 
 -   Модальное окно регистрации
 <p align="center">
-<img src="./readme_assets/register.png">
+<img src="./readme_assets/register.gif">
 </p>
 
 -   Модальное окно входа
 <p align="center">
-<img src="./readme_assets/login.png">
+<img src="./readme_assets/login.gif">
+</p>
+
+-   Также была реализована возможность смены темы
+<p align="center">
+<img src="./readme_assets/change_theme.gif">
 </p>

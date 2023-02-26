@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     height: 100%;
@@ -40,6 +44,7 @@ code {
 }
 
 .wrapper {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -107,8 +112,8 @@ code {
 }
 
 .card-img {
-    min-width: 250px;
-    min-height: 250px;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
 }
 
@@ -308,4 +313,8 @@ a {
 
 .exit {
     min-width: 94px;
+}
+
+.height-100 {
+    min-height: 100%;
 }
