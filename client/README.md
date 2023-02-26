@@ -15,12 +15,12 @@
 
 -   Главная страница
 <p align="center">
-<img src="./readme_assets/main.gif">
+<img src="./readme_assets/main_page.gif">
 </p>
 
 -   Страница товара
 <p align="center">
-<img src="./readme_assets/product.gif">
+<img src="./readme_assets/product.png">
 </p>
 
 -   Корзина
