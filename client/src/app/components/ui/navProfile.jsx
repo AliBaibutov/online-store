@@ -6,7 +6,7 @@ import { getCurrentUserData, loadUsersList } from "../../store/users";
 import Loader from "../common/loader";
 import Switch from "../ui/switch";
 
-const NavProfile = ({ bgSwitch, btnColor }) => {
+const NavProfile = ({ btnColor }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(loadUsersList());
@@ -22,7 +22,7 @@ const NavProfile = ({ bgSwitch, btnColor }) => {
 
     return (
         <div className="d-flex align-items-center">
-            <Switch bgSwitch={bgSwitch} />
+            <Switch />
             <div>
                 {currentUser.isAdmin ? (
                     <Link className="link" to={"/admin"}>

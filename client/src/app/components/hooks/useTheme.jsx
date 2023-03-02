@@ -2,7 +2,6 @@ const useTheme = (status) => {
     return status
         ? {
               bg: "bg-primary",
-              bgSwitch: "bg-dark",
               btnColor: "btn-primary",
               btnInBagColor: "btn-warning",
               bgBagIcon: "bg-warning",
@@ -10,7 +9,6 @@ const useTheme = (status) => {
           }
         : {
               bg: "bg-dark",
-              bgSwitch: "bg-white",
               btnColor: "btn-dark",
               btnInBagColor: "btn-success",
               bgBagIcon: "bg-success",

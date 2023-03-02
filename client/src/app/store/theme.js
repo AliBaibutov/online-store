@@ -6,10 +6,8 @@ const themeSlice = createSlice({
         switchStatus: false
     },
     reducers: {
-        statusChanged: (state) => {
-            !state.switchStatus
-                ? (state.switchStatus = true)
-                : (state.switchStatus = false);
+        statusChanged: (state, action) => {
+            state.switchStatus = action.payload;
         }
     }
 });
@@ -17,8 +15,8 @@ const themeSlice = createSlice({
 const { reducer: themeReducer, actions } = themeSlice;
 const { statusChanged } = actions;
 
-export const changeSwitchStatus = () => (dispatch) => {
-    dispatch(statusChanged());
+export const changeSwitchStatus = (payload) => (dispatch) => {
+    dispatch(statusChanged(payload));
 };
 
 export const getSwitchStatus = () => (state) => state.theme.switchStatus;

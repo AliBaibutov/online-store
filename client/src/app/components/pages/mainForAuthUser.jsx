@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import {
@@ -88,16 +88,22 @@ const MainForAuthUser = () => {
 
     const productCrop = paginate(sortedProducts, currentPage, pageSize);
 
-    const filterSubcategories = (catName) => {
-        return subcategories.filter((s) => catName === s.catName);
-    };
+    const filterSubcategories = useCallback(
+        (catName) => {
+            return subcategories.filter((s) => catName === s.catName);
+        },
+        [subcategories, subcategories?.length]
+    );
 
-    const filterProducts = (subcatId) => {
-        const filteredProducts = sortedProducts.filter(
-            (p) => p.subcategoryId === subcatId
-        );
-        setProductsList(filteredProducts);
-    };
+    const filterProducts = useCallback(
+        (subcatId) => {
+            const filteredProducts = sortedProducts.filter(
+                (p) => p.subcategoryId === subcatId
+            );
+            setProductsList(filteredProducts);
+        },
+        [sortedProducts, sortedProducts?.length]
+    );
 
     const getSubcategoryById = (subcatId) => {
         return subcategories.find((s) => subcatId === s._id);

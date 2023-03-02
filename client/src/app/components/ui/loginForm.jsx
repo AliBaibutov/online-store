@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
 import { getAuthErrors, logIn } from "../../store/users";
 import { validator } from "../../utils/validator";
@@ -13,7 +15,7 @@ const LoginForm = ({ btnColor }) => {
     };
 
     const [data, setData] = useState(initState);
-    const loginError = useSelector(getAuthErrors());
+
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
 
@@ -42,6 +44,12 @@ const LoginForm = ({ btnColor }) => {
         if (!isValid) return;
         dispatch(logIn({ payload: data }));
     };
+
+    const loginError = useSelector(getAuthErrors());
+
+    useEffect(() => {
+        toast.error(loginError);
+    }, [loginError]);
 
     return (
         <div
