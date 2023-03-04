@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
-// const { generateUserData } = require("../utils/helpers");
 const tokenService = require("../services/token.service");
 const router = express.Router({ mergeParams: true });
 
@@ -17,7 +16,7 @@ router.post("/signUp", [
           error: {
             message: "INVALID_DATA",
             code: 400,
-            // errors: errors.array(),
+            errors: errors.array(),
           },
         });
       }
@@ -38,7 +37,6 @@ router.post("/signUp", [
       const hashedPassword = await bcrypt.hash(password, 12);
 
       const newUser = await User.create({
-        // ...generateUserData(),
         ...req.body,
         password: hashedPassword,
       });
