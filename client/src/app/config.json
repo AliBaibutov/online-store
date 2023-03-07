@@ -1,4 +1,4 @@
 {
-    "apiEndpoint": "https://online-store-e4021-default-rtdb.europe-west1.firebasedatabase.app/",
-    "isFireBase": true
+    "apiEndpoint": "http://79.143.31.210/api",
+    "isFireBase": false
 }

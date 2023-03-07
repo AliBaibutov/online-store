@@ -31,6 +31,7 @@ module.exports = {
                 allowTemplateLiterals: true,
                 avoidEscape: true
             }
-        ]
+        ],
+        "no-unused-vars": ["error", { varsIgnorePattern: "_" }]
     }
 };

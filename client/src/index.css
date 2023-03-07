@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
+    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
@@ -10,4 +15,306 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+
+@media (min-width: 768px) {
+    .navbar-container {
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+        height: 100vh;
+    }
+    .navbar-container .navbar {
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        height: 100%;
+    }
+    .navbar-container .navbar-collapse {
+        align-items: flex-start;
+    }
+    .navbar-container .nav {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .navbar-container .navbar-nav {
+        flex-direction: column !important;
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-container {
+    margin: 0 80px;
+    flex-grow: 1;
+}
+
+.header-container {
+    margin: 0 80px;
+    padding: 20px 0;
+    height: 120px;
+}
+
+.fix-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.footer-container {
+    margin: 0 80px;
+    height: 250px;
+}
+
+.footer-element-about {
+    margin-top: 30px;
+}
+
+.img-wrapper {
+    height: 260px;
+}
+
+.img-list {
+    width: 250px;
+    height: 250px;
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: contain;
+}
+
+.mt-50px {
+    margin-top: 0px;
+}
+
+.mb-38px {
+    margin-bottom: 0px;
+}
+
+.product-name-wrapper {
+    height: 70px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.category-hover:hover {
+    font-weight: 600;
+}
+
+.card-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.card-width {
+    min-width: 270px;
+    flex: 0 1 23.6%;
+}
+
+.card-total-bag {
+    width: 25%;
+}
+
+@media (max-width: 1200px) {
+    .card-total-bag {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-total-bag {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1880px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 23.58%;
+    }
+}
+
+@media (max-width: 1880px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 23.58%;
+    }
+}
+
+@media (max-width: 1400px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 31.58%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 48.43%;
+    }
+}
+
+@media (max-width: 992px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 48.02%;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-width {
+        min-width: 270px;
+        flex: 0 1 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header-container {
+        margin: 0 40px;
+        padding: 20px 0;
+        height: 200px;
+    }
+}
+
+@media (max-width: 991px) {
+    .footer-container {
+        margin: 0 40px;
+        height: 450px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .my-container {
+        margin: 0 40px;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 575px) {
+    .mt-50px {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .mb-38px {
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 575px) {
+    .img-list {
+        width: 160px;
+        height: 160px;
+        max-width: 250px;
+        max-height: 250px;
+        object-fit: contain;
+    }
+}
+
+.subcat-main {
+    height: 50px;
+}
+
+.price-text {
+    color: #191970;
+    margin-bottom: 0;
+}
+
+.price-text:after {
+    content: "\20BD";
+}
+
+.price-text-bag:after {
+    content: "\20BD";
+}
+
+td {
+    overflow-wrap: break-word;
+}
+
+.td-img {
+    max-width: 100px;
+}
+
+.td-company {
+    max-width: 50px;
+}
+
+.td-price {
+    width: 100px;
+}
+
+.td-description {
+    width: 400px;
+}
+
+.sort-button {
+    border-color: #ced4da;
+}
+
+.amount-button {
+    min-width: 38px;
+}
+
+.link {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    color: #fff;
+}
+
+.bag-product-name {
+    width: 300px;
+}
+
+@media (max-width: 992px) {
+    .bag-product-name {
+        width: 150px;
+    }
+}
+
+.bag-product-price {
+    min-width: 130px;
+}
+
+.mt-15px {
+    margin-top: 15px;
+}
+
+.mb-56px {
+    margin-bottom: 56px;
+}
+
+.bag-price {
+    padding: 6px;
+}
+
+.exit {
+    min-width: 94px;
+}
+
+.height-100 {
+    min-height: 100%;
 }

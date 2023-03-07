@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+<h1 align="center">Enjoy Music</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+<img src="https://img.shields.io/github/languages/code-size/AliBaibutov/online-store">
+<img src="https://img.shields.io/github/issues-raw/AliBaibutov/online-store">
+</p>
 
-## Available Scripts
+<img src="./readme_assets/logo_readme.png" width="100%">
 
-In the project directory, you can run:
+## Описание проекта
 
-### `npm start`
+Данный проект представляет собой интернет-магазин музыкальных инструментов. Проект является fullstack SPA web-приложением с адаптивной версткой.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Из чего состоит?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   Главная страница
+<p align="center">
+<img src="./readme_assets/main_page.gif">
+</p>
 
-### `npm test`
+-   Страница товара
+<p align="center">
+<img src="./readme_assets/product.png">
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   Корзина
+<p align="center">
+<img src="./readme_assets/bag.gif">
+</p>
 
-### `npm run build`
+-   Страница администратора
+<p align="center">
+<img src="./readme_assets/admin.gif">
+</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   Модальное окно регистрации
+<p align="center">
+<img src="./readme_assets/register.gif">
+</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   Модальное окно входа
+<p align="center">
+<img src="./readme_assets/login.gif">
+</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   Также была реализована возможность смены темы
+<p align="center">
+<img src="./readme_assets/change_theme.gif">
+</p>
 
-### `npm run eject`
+-   Стек технологий, применяемых в проекте:
+<p align="center">
+<img src="https://img.shields.io/badge/html-333333?style=for-the-badge&logo=HTML5&logoColor=E34F26">
+<img src="https://img.shields.io/badge/css-333333?style=for-the-badge&logo=CSS3&logoColor=1572B6">
+<img src="https://img.shields.io/badge/JavaScript-333333?style=for-the-badge&logo=JavaScript&logoColor=F7DF1E">
+<img src="https://img.shields.io/badge/Node.js-333333?style=for-the-badge&logo=Node.js&logoColor=339933">
+<img src="https://img.shields.io/badge/MongoDB-333333?style=for-the-badge&logo=MongoDB&logoColor=47A248">
+<img src="https://img.shields.io/badge/React-333333?style=for-the-badge&logo=React&logoColor=61DAFB">
+<img src="https://img.shields.io/badge/Bootstrap-333333?style=for-the-badge&logo=Bootstrap&logoColor=7952B3">
+<img src="https://img.shields.io/badge/npm-333333?style=for-the-badge&logo=npm&logoColor=CB3837">
+<img src="https://img.shields.io/badge/Redux-333333?style=for-the-badge&logo=Redux&logoColor=764ABC">
+<img src="https://img.shields.io/badge/React Router-333333?style=for-the-badge&logo=React Router&logoColor=CA4245">
+<img src="https://img.shields.io/badge/Git-333333?style=for-the-badge&logo=Git&logoColor=F05032">
+<img src="https://img.shields.io/badge/GitHub-333333?style=for-the-badge&logo=GitHub&logoColor=white">
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Установка проекта
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Установка пакетов
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Запуск сервера
 
-## Learn More
+```
+npm run serve
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Запуск клиента
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm start
+```

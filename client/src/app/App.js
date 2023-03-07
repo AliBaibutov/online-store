@@ -1,44 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
-import httpService from "./services/http.service";
+import React from "react";
+import { useRoutes } from "react-router";
+import { ToastContainer } from "react-toastify";
+import AppLoader from "./components/ui/hoc/appLoader";
+import Footer from "./components/ui/footer";
+import Header from "./components/ui/header";
+import Wrapper from "./components/common/wrapper";
+import routes from "./routes";
 
 const App = () => {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        getProducts();
-    }, []);
-    const productsEndpoint = "/products";
-    console.log(nanoid());
-    console.log(nanoid());
-    console.log(nanoid());
-    console.log(nanoid());
-    console.log(nanoid());
-    const getProducts = async () => {
-        try {
-            const { data } = await httpService.get(productsEndpoint);
-            const { content } = data;
-            setProducts(content);
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+    const elements = useRoutes(routes);
     return (
         <>
-            <div className="d-flex flex-row bd-highlight mb-3">
-                {products.map(
-                    (p) =>
-                        p._id && (
-                            <div key={p._id} className="p-2 bd-highlight">
-                                <img
-                                    src={p.image}
-                                    className="mx-auto d-block"
-                                    height="200"
-                                />
-                                <div className="text-left">{p.name}</div>
-                            </div>
-                        )
-                )}
-            </div>
+            <AppLoader>
+                <Wrapper>
+                    <Header />
+                    {elements}
+                    <Footer />
+                </Wrapper>
+            </AppLoader>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 };
