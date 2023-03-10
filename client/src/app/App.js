@@ -11,13 +11,13 @@ const App = () => {
     const elements = useRoutes(routes);
     return (
         <>
-            <AppLoader>
-                <Wrapper>
+            <Wrapper>
+                <AppLoader>
                     <Header />
                     {elements}
                     <Footer />
-                </Wrapper>
-            </AppLoader>
+                </AppLoader>
+            </Wrapper>
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
