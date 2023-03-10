@@ -4,6 +4,8 @@ import configFile from "../config.json";
 import authService from "./auth.service";
 import localStorageService from "./localStorage.service";
 
+// const ENV = process.env.NODE_ENV === "development" ? "localhost:8080/api" : ""
+
 const http = axios.create({
     baseURL: configFile.apiEndpoint
 });
