@@ -84,7 +84,11 @@ const Admin = () => {
 
     const getEditableProduct = (id) => {
         const foundProduct = products.find((p) => p._id === id);
-        return foundProduct;
+        return {
+            ...foundProduct,
+            amount: String(data.amount),
+            price: String(data.price)
+        };
     };
 
     const handleRemoveProduct = (id) => {
@@ -93,6 +97,7 @@ const Admin = () => {
 
     const handleEditProduct = (id) => {
         const editableProduct = getEditableProduct(id);
+        console.log(editableProduct);
         localStorage.setItem("productId", id);
         window.scrollTo({
             top: 0,
@@ -146,6 +151,7 @@ const Admin = () => {
     };
 
     const validate = () => {
+        console.log(data);
         const errors = validator(data, adminConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;

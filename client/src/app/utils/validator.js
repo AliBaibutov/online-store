@@ -1,6 +1,7 @@
 export function validator(data, config) {
     const errors = {};
     function validate(validateMethod, data, config) {
+        console.log(data);
         let statusValidate;
         switch (validateMethod) {
             case "isRequired": {
@@ -36,7 +37,7 @@ export function validator(data, config) {
                 break;
             }
             case "isNotNullNumber": {
-                const numRegExp = /[0]+/g;
+                const numRegExp = /^0+/g;
                 statusValidate = numRegExp.test(data);
                 break;
             }

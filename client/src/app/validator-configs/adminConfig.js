@@ -38,6 +38,9 @@ export const adminConfig = {
         },
         isNotNullNumber: {
             message: "Введите число отличное от нуля"
+        },
+        isNumber: {
+            message: "Значение должно быть числом"
         }
     }
 };
