@@ -10,7 +10,7 @@ const SideBar = ({
     return (
         <div className="d-flex flex-column align-items-center align-items-lg-start pt-2 ps-2 me-1 mb-2 mb-lg-0 col-12 col-lg-3 card cursor shadow p-3 bg-body-tertiary rounded">
             <h4>КАТЕГОРИИ</h4>
-            {categories.map((c) => (
+            {categories?.map((c) => (
                 <div key={c._id} className="mb-2 cursor dropdown">
                     <div className="category-hover" data-bs-toggle="dropdown">
                         {c.name}
