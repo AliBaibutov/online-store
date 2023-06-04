@@ -13,42 +13,42 @@
 
 ## Из чего состоит?
 
--   Главная страница
+- Главная страница
 <p align="center">
 <img src="./readme_assets/main_page.gif">
 </p>
 
--   Страница товара
+- Страница товара
 <p align="center">
 <img src="./readme_assets/product.png">
 </p>
 
--   Корзина
+- Корзина
 <p align="center">
 <img src="./readme_assets/bag.gif">
 </p>
 
--   Страница администратора
+- Страница администратора
 <p align="center">
 <img src="./readme_assets/admin.gif">
 </p>
 
--   Модальное окно регистрации
+- Модальное окно регистрации
 <p align="center">
 <img src="./readme_assets/register.gif">
 </p>
 
--   Модальное окно входа
+- Модальное окно входа
 <p align="center">
 <img src="./readme_assets/login.gif">
 </p>
 
--   Также была реализована возможность смены темы
+- Также была реализована возможность смены темы
 <p align="center">
 <img src="./readme_assets/change_theme.gif">
 </p>
 
--   Стек технологий, применяемых в проекте:
+- Стек технологий, применяемых в проекте:
 <p align="center">
 <img src="https://img.shields.io/badge/html-333333?style=for-the-badge&logo=HTML5&logoColor=E34F26">
 <img src="https://img.shields.io/badge/css-333333?style=for-the-badge&logo=CSS3&logoColor=1572B6">
@@ -72,13 +72,13 @@
 npm install
 ```
 
-### Запуск сервера
+### Запуск сервера (запускать, находясь в папке "server")
 
 ```
 npm run serve
 ```
 
-### Запуск клиента
+### Запуск клиента (запускать, находясь в папке "client")
 
 ```
 npm start
