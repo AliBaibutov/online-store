@@ -1,4 +1,4 @@
 {
-    "apiEndpoint": "http://5.101.50.243/api",
+    "apiEndpoint": "http://localhost:8080/api",
     "isFireBase": false
 }
